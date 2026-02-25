@@ -127,7 +127,7 @@
         <span class="badge bg-blue-50 text-blue-700">Open Data</span>
         <span class="badge bg-green-50 text-green-700">Reproducible</span>
         <span class="badge bg-purple-50 text-purple-700">NVML 10Hz Sampling</span>
-        <span class="badge bg-amber-50 text-amber-700">Last updated: Feb 2026</span>
+        <span class="badge bg-amber-50 text-amber-700">Last updated: Feb 25, 2026</span>
       </div>
 
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
@@ -136,8 +136,8 @@
       </h1>
 
       <p class="mt-6 text-base sm:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-        Real GPU power measurements for INT8, NF4, and FP16 inference across 3 NVIDIA architectures.
-        Includes perplexity (accuracy) data. All raw data, scripts, and methodology are open source.
+        Real GPU power measurements for FP16, INT8, NF4 inference across 3 NVIDIA architectures (RTX 5090, RTX 4090D, T4).
+        Includes perplexity accuracy data for 3 models × 5 quantization configs. All raw data, scripts, and methodology are open source.
       </p>
 
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -163,14 +163,14 @@
           <div class="mt-1 text-[10px] text-slate-400">Blackwell / Ada / Turing</div>
         </div>
         <div class="card p-5 text-center">
-          <div class="text-3xl font-black text-brand-600">8</div>
+          <div class="text-3xl font-black text-brand-600">7</div>
           <div class="mt-1 text-xs font-medium text-slate-500">Models Tested</div>
           <div class="mt-1 text-[10px] text-slate-400">1.1B to 7B parameters</div>
         </div>
         <div class="card p-5 text-center">
-          <div class="text-3xl font-black text-brand-600">25+</div>
+          <div class="text-3xl font-black text-brand-600">40+</div>
           <div class="mt-1 text-xs font-medium text-slate-500">Configurations</div>
-          <div class="mt-1 text-[10px] text-slate-400">FP16 / INT8 / NF4</div>
+          <div class="mt-1 text-[10px] text-slate-400">FP16 / INT8 / INT8 Pure / NF4 / NF4 DQ</div>
         </div>
         <div class="card p-5 text-center">
           <div class="text-3xl font-black text-brand-600">n=10</div>
@@ -292,14 +292,14 @@
         </div>
       </div>
 
-      <!-- RTX 4090D INT8 -->
+      <!-- RTX 4090D — Full Benchmark (P0, Feb 25 2026) -->
       <div class="card mb-6">
         <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <span class="gpu-tag gpu-4090">RTX 4090D</span>
             <span class="text-sm font-semibold text-slate-700">NVIDIA GeForce RTX 4090D (Ada Lovelace, 24GB)</span>
           </div>
-          <span class="text-xs text-slate-400">INT8 quantization, batch size = 1</span>
+          <span class="text-xs text-slate-400">5 quant configs, batch size = 1, n=10, Feb 25 2026</span>
         </div>
         <div class="overflow-x-auto">
           <table class="data-table">
@@ -309,80 +309,149 @@
                 <th>Params</th>
                 <th>Precision</th>
                 <th>Energy (J/1k tok)</th>
-                <th>INT8 Config</th>
+                <th>Throughput (tok/s)</th>
+                <th>Power (W)</th>
                 <th>vs FP16</th>
+                <th>CV</th>
               </tr>
             </thead>
             <tbody>
+              <!-- TinyLlama-1.1B -->
               <tr>
-                <td class="font-medium">Yi-1.5-6B</td>
-                <td class="num">6B</td>
+                <td class="font-medium" rowspan="5">TinyLlama-1.1B</td>
+                <td class="num" rowspan="5">1.1B</td>
                 <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
-                <td class="num">4,716</td>
-                <td class="text-xs text-slate-400">-</td>
+                <td class="num font-semibold">1,802</td>
+                <td class="num">50.55</td>
+                <td class="num">91.1</td>
                 <td class="num">baseline</td>
+                <td class="num">0.43%</td>
               </tr>
               <tr>
-                <td class="font-medium">Yi-1.5-6B</td>
-                <td class="num">6B</td>
-                <td><span class="badge bg-orange-50 text-orange-700">INT8</span></td>
-                <td class="num">6,258</td>
-                <td class="text-xs">threshold=6.0 (default)</td>
-                <td class="num pos">+32.7%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">4,335</td>
+                <td class="num">16.01</td>
+                <td class="num">69.4</td>
+                <td class="num pos">+140.6%</td>
+                <td class="num">0.27%</td>
               </tr>
               <tr>
-                <td class="font-medium">Mistral-7B</td>
-                <td class="num">7B</td>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">3,121</td>
+                <td class="num">23.21</td>
+                <td class="num">72.4</td>
+                <td class="num pos">+73.2%</td>
+                <td class="num">0.94%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">2,423</td>
+                <td class="num">31.27</td>
+                <td class="num">75.8</td>
+                <td class="num pos">+34.4%</td>
+                <td class="num">0.80%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">2,857</td>
+                <td class="num">25.85</td>
+                <td class="num">73.8</td>
+                <td class="num pos">+58.6%</td>
+                <td class="num">0.52%</td>
+              </tr>
+
+              <!-- Qwen2.5-3B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Qwen2.5-3B</td>
+                <td class="num" rowspan="5">3B</td>
                 <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
-                <td class="num">5,661</td>
-                <td class="text-xs text-slate-400">-</td>
+                <td class="num font-semibold">3,515</td>
+                <td class="num">31.83</td>
+                <td class="num">111.9</td>
                 <td class="num">baseline</td>
+                <td class="num">0.64%</td>
               </tr>
               <tr>
-                <td class="font-medium">Mistral-7B</td>
-                <td class="num">7B</td>
-                <td><span class="badge bg-orange-50 text-orange-700">INT8</span></td>
-                <td class="num">7,401</td>
-                <td class="text-xs">threshold=6.0 (default)</td>
-                <td class="num pos">+30.7%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">9,207</td>
+                <td class="num">7.94</td>
+                <td class="num">73.1</td>
+                <td class="num pos">+161.9%</td>
+                <td class="num">0.99%</td>
               </tr>
               <tr>
-                <td class="font-medium">Phi-3-mini</td>
-                <td class="num">3.8B</td>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">5,310</td>
+                <td class="num">14.64</td>
+                <td class="num">77.7</td>
+                <td class="num pos">+51.1%</td>
+                <td class="num">0.54%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">4,411</td>
+                <td class="num">18.37</td>
+                <td class="num">81.0</td>
+                <td class="num pos">+25.5%</td>
+                <td class="num">0.92%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">5,109</td>
+                <td class="num">15.60</td>
+                <td class="num">79.7</td>
+                <td class="num pos">+45.3%</td>
+                <td class="num">0.74%</td>
+              </tr>
+
+              <!-- Yi-1.5-6B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Yi-1.5-6B</td>
+                <td class="num" rowspan="5">6B</td>
                 <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
-                <td class="num">3,003</td>
-                <td class="text-xs text-slate-400">-</td>
+                <td class="num font-semibold">5,208</td>
+                <td class="num">35.70</td>
+                <td class="num">185.9</td>
                 <td class="num">baseline</td>
+                <td class="num">0.41%</td>
               </tr>
               <tr>
-                <td class="font-medium">Phi-3-mini</td>
-                <td class="num">3.8B</td>
-                <td><span class="badge bg-orange-50 text-orange-700">INT8</span></td>
-                <td class="num">3,940</td>
-                <td class="text-xs">threshold=6.0 (default)</td>
-                <td class="num pos">+31.2%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">9,390</td>
+                <td class="num">8.55</td>
+                <td class="num">80.2</td>
+                <td class="num pos">+80.3%</td>
+                <td class="num">2.72%</td>
               </tr>
               <tr>
-                <td class="font-medium">Qwen2.5-7B</td>
-                <td class="num">7B</td>
-                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
-                <td class="num">5,217</td>
-                <td class="text-xs text-slate-400">-</td>
-                <td class="num">baseline</td>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">5,791</td>
+                <td class="num">15.90</td>
+                <td class="num">92.0</td>
+                <td class="num pos">+11.2%</td>
+                <td class="num">0.88%</td>
+              </tr>
+              <tr style="background:#f0fdf4">
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">4,932</td>
+                <td class="num">21.20</td>
+                <td class="num">104.5</td>
+                <td class="num neg">-5.3%</td>
+                <td class="num">1.19%</td>
               </tr>
               <tr>
-                <td class="font-medium">Qwen2.5-7B</td>
-                <td class="num">7B</td>
-                <td><span class="badge bg-orange-50 text-orange-700">INT8</span></td>
-                <td class="num">6,127</td>
-                <td class="text-xs">threshold=6.0 (default)</td>
-                <td class="num pos">+17.4%</td>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">5,652</td>
+                <td class="num">17.24</td>
+                <td class="num">97.4</td>
+                <td class="num pos">+8.5%</td>
+                <td class="num">2.88%</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-500">
-          Default INT8 (bitsandbytes <code>llm_int8_threshold=6.0</code>) consistently increases energy by 17-33% due to mixed-precision decomposition overhead. This is the cost of preserving accuracy.
+          <strong>Key insight:</strong> On RTX 4090D, all quantization methods increase energy for models &le;3B. NF4 begins saving energy at 6B parameters (Yi-1.5-6B: <strong>-5.3%</strong>). INT8 Default shows the largest overhead (+80% to +162%) due to mixed-precision decomposition. FP16 remains the most energy-efficient option when GPU memory allows.
         </div>
       </div>
 
@@ -503,60 +572,141 @@
         <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <span class="gpu-tag gpu-4090">RTX 4090D</span>
-            <span class="text-sm font-semibold text-slate-700">Yi-1.5-6B on WikiText-2 (50 samples, max_len=512)</span>
+            <span class="text-sm font-semibold text-slate-700">WikiText-2 test split (full, max_len=512)</span>
           </div>
-          <span class="text-xs text-slate-400">Feb 2026</span>
+          <span class="text-xs text-slate-400">3 models × 5 configs, Feb 25 2026</span>
         </div>
         <div class="overflow-x-auto">
           <table class="data-table">
             <thead>
               <tr>
-                <th>Configuration</th>
+                <th>Model</th>
                 <th>Precision</th>
-                <th>INT8 Threshold</th>
                 <th>Perplexity</th>
                 <th>PPL vs FP16</th>
                 <th>Energy vs FP16</th>
-                <th>Memory (GB)</th>
                 <th>Assessment</th>
               </tr>
             </thead>
             <tbody>
+              <!-- TinyLlama-1.1B -->
               <tr>
-                <td class="font-medium">FP16 (baseline)</td>
+                <td class="font-medium" rowspan="5">TinyLlama-1.1B</td>
                 <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
-                <td class="text-xs text-slate-400">-</td>
-                <td class="num font-semibold">11.16</td>
-                <td class="num">-</td>
-                <td class="num">-</td>
-                <td class="num">12.12</td>
+                <td class="num font-semibold">14.995</td>
+                <td class="num">—</td>
+                <td class="num">—</td>
                 <td><span class="badge bg-green-50 text-green-700">Baseline</span></td>
               </tr>
               <tr>
-                <td class="font-medium">INT8 Default</td>
-                <td><span class="badge bg-orange-50 text-orange-700">INT8</span></td>
-                <td class="num">6.0</td>
-                <td class="num font-semibold">11.20</td>
-                <td class="num pos">+0.33%</td>
-                <td class="num pos">+32.7%</td>
-                <td class="num">6.70</td>
-                <td><span class="badge bg-green-50 text-green-700">Negligible loss</span></td>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">15.168</td>
+                <td class="num pos">+1.15%</td>
+                <td class="num pos">+140.6%</td>
+                <td><span class="badge bg-green-50 text-green-700">Negligible</span></td>
               </tr>
               <tr>
-                <td class="font-medium">INT8 Pure</td>
-                <td><span class="badge bg-orange-50 text-orange-700">INT8</span></td>
-                <td class="num">0.0</td>
-                <td class="num font-semibold">14.00</td>
-                <td class="num pos">+25.38%</td>
-                <td class="num neg">-3.1%</td>
-                <td class="num">6.70</td>
-                <td><span class="badge bg-red-50 text-red-700">Significant loss</span></td>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">15.365</td>
+                <td class="num pos">+2.47%</td>
+                <td class="num pos">+73.2%</td>
+                <td><span class="badge bg-yellow-50 text-yellow-700">Minor</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">15.876</td>
+                <td class="num pos">+5.87%</td>
+                <td class="num pos">+34.4%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">15.873</td>
+                <td class="num pos">+5.85%</td>
+                <td class="num pos">+58.6%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
+              </tr>
+
+              <!-- Qwen2.5-3B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Qwen2.5-3B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">13.775</td>
+                <td class="num">—</td>
+                <td class="num">—</td>
+                <td><span class="badge bg-green-50 text-green-700">Baseline</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">14.048</td>
+                <td class="num pos">+1.98%</td>
+                <td class="num pos">+161.9%</td>
+                <td><span class="badge bg-green-50 text-green-700">Negligible</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">15.880</td>
+                <td class="num pos">+15.28%</td>
+                <td class="num pos">+51.1%</td>
+                <td><span class="badge bg-red-50 text-red-700">Significant</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">15.035</td>
+                <td class="num pos">+9.14%</td>
+                <td class="num pos">+25.5%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">15.048</td>
+                <td class="num pos">+9.24%</td>
+                <td class="num pos">+45.3%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
+              </tr>
+
+              <!-- Yi-1.5-6B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Yi-1.5-6B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">9.423</td>
+                <td class="num">—</td>
+                <td class="num">—</td>
+                <td><span class="badge bg-green-50 text-green-700">Baseline</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">9.485</td>
+                <td class="num pos">+0.66%</td>
+                <td class="num pos">+80.3%</td>
+                <td><span class="badge bg-green-50 text-green-700">Negligible</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">11.566</td>
+                <td class="num pos">+22.74%</td>
+                <td class="num pos">+11.2%</td>
+                <td><span class="badge bg-red-50 text-red-700">Significant</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">9.965</td>
+                <td class="num pos">+5.75%</td>
+                <td class="num neg">-5.3%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">9.973</td>
+                <td class="num pos">+5.84%</td>
+                <td class="num pos">+8.5%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-500">
-          Default INT8 preserves accuracy (+0.33% PPL) but costs +32.7% more energy. Pure INT8 (threshold=0.0) saves only 3.1% energy while losing 25% accuracy. <strong>This validates the bitsandbytes default design.</strong>
+          <strong>Consistent findings across 3 models:</strong> INT8 Default preserves accuracy well (+0.66% to +1.98% PPL) but at significant energy cost. INT8 Pure causes severe degradation (+2.5% to +22.7% PPL). NF4 causes moderate PPL increase (+5.7% to +9.1%). Larger models (6B) are more robust to quantization than smaller ones (1.1B-3B).
         </div>
       </div>
     </div>
@@ -572,23 +722,23 @@
       <div class="grid md:grid-cols-3 gap-5">
         <div class="card p-6">
           <div class="text-2xl mb-3">1</div>
-          <h3 class="font-bold text-base mb-2">INT8 Costs More Energy</h3>
+          <h3 class="font-bold text-base mb-2">INT8 Default: Massive Energy Overhead</h3>
           <p class="text-sm text-slate-500 leading-relaxed">
-            Default <code class="text-xs bg-slate-100 px-1 py-0.5 rounded">LLM.int8()</code> increases energy consumption by <strong>17-33%</strong> vs FP16 on consumer GPUs due to mixed-precision decomposition overhead. This is the cost of preserving accuracy.
+            Default <code class="text-xs bg-slate-100 px-1 py-0.5 rounded">LLM.int8()</code> increases energy by <strong>+80% to +162%</strong> vs FP16 on RTX 4090D due to mixed-precision decomposition overhead. Throughput drops 68-75%. Accuracy is preserved (+0.7% to +2% PPL), but the energy cost is extreme.
           </p>
         </div>
         <div class="card p-6">
           <div class="text-2xl mb-3">2</div>
-          <h3 class="font-bold text-base mb-2">NF4 Crossover at ~5B Params</h3>
+          <h3 class="font-bold text-base mb-2">NF4 Crossover at ~6B Params</h3>
           <p class="text-sm text-slate-500 leading-relaxed">
-            NF4 quantization saves energy only for models with <strong>&ge;5B parameters</strong>. For smaller models, the dequantization compute cost exceeds the memory bandwidth savings, <em>increasing</em> energy by 5-29%.
+            NF4 quantization saves energy only for models with <strong>&ge;6B parameters</strong> (Yi-1.5-6B: <strong>-5.3%</strong>). For smaller models (1.1B-3B), NF4 <em>increases</em> energy by 25-34%. FP16 remains the most efficient option when GPU memory allows.
           </p>
         </div>
         <div class="card p-6">
           <div class="text-2xl mb-3">3</div>
-          <h3 class="font-bold text-base mb-2">Pure INT8 Harms Accuracy</h3>
+          <h3 class="font-bold text-base mb-2">INT8 Pure: Energy Saved, Accuracy Lost</h3>
           <p class="text-sm text-slate-500 leading-relaxed">
-            Disabling mixed-precision decomposition (<code class="text-xs bg-slate-100 px-1 py-0.5 rounded">threshold=0.0</code>) causes <strong>+25% perplexity degradation</strong> while saving only 3% energy. The trade-off is not justified.
+            Disabling mixed-precision decomposition (<code class="text-xs bg-slate-100 px-1 py-0.5 rounded">threshold=0.0</code>) causes <strong>+2.5% to +22.7% PPL degradation</strong> across 3 models. Larger models suffer more (Qwen2.5-3B: +15.3%, Yi-1.5-6B: +22.7%). The energy savings do not justify the accuracy loss.
           </p>
         </div>
       </div>
