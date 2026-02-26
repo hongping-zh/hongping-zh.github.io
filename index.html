@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LLM Energy Benchmark — Real GPU Power Measurements for Quantized Inference</title>
-  <meta name="description" content="Open benchmark dataset: energy consumption of quantized LLM inference across RTX 5090, RTX 4090D, and T4. NVML power data, perplexity measurements, reproducible scripts." />
+  <meta name="description" content="Open benchmark dataset: energy consumption of quantized LLM inference across RTX 5090, RTX 4090D, A800, and T4. NVML power data, perplexity measurements, 7B-14B models, reproducible scripts." />
   <meta property="og:title" content="LLM Energy Benchmark — Quantization Energy-Accuracy Trade-offs" />
-  <meta property="og:description" content="Open dataset: real GPU power measurements for INT8, NF4, and FP16 inference across 3 NVIDIA architectures. Includes perplexity data." />
+  <meta property="og:description" content="Open dataset: real GPU power measurements for INT8, NF4, and FP16 inference across 4 NVIDIA architectures (1B-14B models). Includes perplexity data." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://hongping-zh.github.io/" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -555,6 +555,185 @@
         </div>
         <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-500">
           On T4, NF4 energy savings begin at ~3B parameters. Effect is more pronounced for 7B models (-13.8%).
+        </div>
+      </div>
+
+      <!-- A800 — Large Models (7B-14B, Feb 26 2026) -->
+      <div class="card mb-6">
+        <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="gpu-tag gpu-a800">A800-SXM4-80GB</span>
+            <span class="text-sm font-semibold text-slate-700">NVIDIA A800 80GB (Ampere, Large Models)</span>
+          </div>
+          <span class="text-xs text-slate-400">3 models × 5 configs, batch size = 1, n=10, Feb 26 2026</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Params</th>
+                <th>Precision</th>
+                <th>Energy (J/1k tok)</th>
+                <th>Throughput (tok/s)</th>
+                <th>Power (W)</th>
+                <th>PPL</th>
+                <th>vs FP16</th>
+                <th>CV</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Mistral-7B-v0.1 -->
+              <tr>
+                <td class="font-medium" rowspan="5">Mistral-7B-v0.1</td>
+                <td class="num" rowspan="5">7B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">4,402</td>
+                <td class="num">37.68</td>
+                <td class="num">169</td>
+                <td class="num">4.668</td>
+                <td class="num">baseline</td>
+                <td class="num">1.73%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">10,162</td>
+                <td class="num">10.24</td>
+                <td class="num">104</td>
+                <td class="num">4.679</td>
+                <td class="num pos">+130.8%</td>
+                <td class="num">0.64%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">6,528</td>
+                <td class="num">18.54</td>
+                <td class="num">121</td>
+                <td class="num">4.729</td>
+                <td class="num pos">+48.3%</td>
+                <td class="num">0.89%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">4,222</td>
+                <td class="num">27.15</td>
+                <td class="num">116</td>
+                <td class="num">4.781</td>
+                <td class="num neg">-4.1%</td>
+                <td class="num">1.60%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">4,797</td>
+                <td class="num">23.05</td>
+                <td class="num">112</td>
+                <td class="num">4.781</td>
+                <td class="num pos">+9.0%</td>
+                <td class="num">1.13%</td>
+              </tr>
+
+              <!-- Yi-1.5-9B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Yi-1.5-9B</td>
+                <td class="num" rowspan="5">9B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">5,445</td>
+                <td class="num">31.16</td>
+                <td class="num">171</td>
+                <td class="num">5.732</td>
+                <td class="num">baseline</td>
+                <td class="num">0.50%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">11,826</td>
+                <td class="num">7.41</td>
+                <td class="num">88</td>
+                <td class="num">4.943</td>
+                <td class="num pos">+117.2%</td>
+                <td class="num">0.48%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">8,504</td>
+                <td class="num">14.08</td>
+                <td class="num">120</td>
+                <td class="num">5.103</td>
+                <td class="num pos">+56.2%</td>
+                <td class="num">1.51%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">5,363</td>
+                <td class="num">21.84</td>
+                <td class="num">118</td>
+                <td class="num">5.091</td>
+                <td class="num neg">-1.5%</td>
+                <td class="num">0.91%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">6,146</td>
+                <td class="num">17.57</td>
+                <td class="num">109</td>
+                <td class="num">5.092</td>
+                <td class="num pos">+12.9%</td>
+                <td class="num">0.51%</td>
+              </tr>
+
+              <!-- Qwen2.5-14B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Qwen2.5-14B</td>
+                <td class="num" rowspan="5">14B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">7,360</td>
+                <td class="num">29.36</td>
+                <td class="num">219</td>
+                <td class="num">4.593</td>
+                <td class="num">baseline</td>
+                <td class="num">0.78%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">15,266</td>
+                <td class="num">7.47</td>
+                <td class="num">114</td>
+                <td class="num">4.656</td>
+                <td class="num pos">+107.5%</td>
+                <td class="num">1.03%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">9,807</td>
+                <td class="num">13.90</td>
+                <td class="num">137</td>
+                <td class="num">4.793</td>
+                <td class="num pos">+33.2%</td>
+                <td class="num">0.58%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">7,545</td>
+                <td class="num">20.56</td>
+                <td class="num">156</td>
+                <td class="num">4.898</td>
+                <td class="num pos">+2.5%</td>
+                <td class="num">1.12%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">8,756</td>
+                <td class="num">16.89</td>
+                <td class="num">149</td>
+                <td class="num">4.898</td>
+                <td class="num pos">+19.0%</td>
+                <td class="num">0.50%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-500">
+          <strong>Large Model Findings:</strong> NF4 achieves near-FP16 energy for 7B-9B models with minimal PPL degradation. INT8 Default shows 2-2.3× energy overhead. For 14B models, NF4 energy is comparable to FP16.
         </div>
       </div>
     </div>
