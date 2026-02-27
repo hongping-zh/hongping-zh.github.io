@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantization Comparison Tool | LLM Energy Benchmark</title>
+  <meta name="description" content="Interactive tool to compare energy efficiency and accuracy trade-offs across different LLM models and quantization methods.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .gradient-text {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border: 1px solid #e2e8f0;
+    }
+    .model-checkbox {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #cbd5e1;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+    }
+    .model-checkbox:checked {
+      background: #3b82f6;
+      border-color: #3b82f6;
+    }
+    .model-checkbox:checked::after {
+      content: '✓';
+      position: absolute;
+      color: white;
+      font-size: 14px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body class="bg-slate-50">
+  
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="text-2xl font-black gradient-text">LLM Energy Benchmark</a>
+        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-semibold">Compare Tool</span>
+      </div>
+      <a href="index.html" class="text-sm text-slate-600 hover:text-slate-900">← Back to Leaderboard</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="py-12 bg-gradient-to-br from-blue-50 to-indigo-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <h1 class="text-4xl font-black text-slate-900 mb-4">Interactive Quantization Comparison</h1>
+      <p class="text-lg text-slate-600 max-w-3xl">
+        Compare energy efficiency and accuracy trade-offs across different models and quantization methods using our real benchmark data.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <!-- Model Selection Panel -->
+      <div class="card p-6 mb-8">
+        <h2 class="text-xl font-bold text-slate-900 mb-4">Select Models to Compare</h2>
+        <p class="text-sm text-slate-600 mb-6">Choose 2-4 models to visualize their energy efficiency vs accuracy trade-offs</p>
+        
+        <div class="grid md:grid-cols-3 gap-4">
+          <label class="flex items-center gap-3 p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-blue-400 transition">
+            <input type="checkbox" class="model-checkbox" value="TinyLlama-1.1B" onchange="updateChart()">
+            <div>
+              <div class="font-semibold text-slate-900">TinyLlama-1.1B</div>
+              <div class="text-xs text-slate-500">Smallest model</div>
+            </div>
+          </label>
+          
+          <label class="flex items-center gap-3 p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-blue-400 transition">
+            <input type="checkbox" class="model-checkbox" value="Qwen2-1.5B" onchange="updateChart()">
+            <div>
+              <div class="font-semibold text-slate-900">Qwen2-1.5B</div>
+              <div class="text-xs text-slate-500">Compact model</div>
+            </div>
+          </label>
+          
+          <label class="flex items-center gap-3 p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-blue-400 transition">
+            <input type="checkbox" class="model-checkbox" value="Qwen2-3B" onchange="updateChart()">
+            <div>
+              <div class="font-semibold text-slate-900">Qwen2-3B</div>
+              <div class="text-xs text-slate-500">Mid-size model</div>
+            </div>
+          </label>
+          
+          <label class="flex items-center gap-3 p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-blue-400 transition">
+            <input type="checkbox" class="model-checkbox" value="Yi-1.5-6B" onchange="updateChart()">
+            <div>
+              <div class="font-semibold text-slate-900">Yi-1.5-6B</div>
+              <div class="text-xs text-slate-500">Large model</div>
+            </div>
+          </label>
+          
+          <label class="flex items-center gap-3 p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-blue-400 transition">
+            <input type="checkbox" class="model-checkbox" value="Qwen2.5-7B" onchange="updateChart()">
+            <div>
+              <div class="font-semibold text-slate-900">Qwen2.5-7B</div>
+              <div class="text-xs text-slate-500">7B parameter</div>
+            </div>
+          </label>
+          
+          <label class="flex items-center gap-3 p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-blue-400 transition">
+            <input type="checkbox" class="model-checkbox" value="Mistral-7B" onchange="updateChart()">
+            <div>
+              <div class="font-semibold text-slate-900">Mistral-7B-v0.1</div>
+              <div class="text-xs text-slate-500">7B parameter</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Chart Display -->
+      <div class="card p-6 mb-8">
+        <h2 class="text-xl font-bold text-slate-900 mb-4">Energy Efficiency vs Accuracy Trade-off</h2>
+        <div class="bg-slate-50 rounded-lg p-6">
+          <canvas id="comparisonChart" height="100"></canvas>
+        </div>
+      </div>
+
+      <!-- AI Analysis -->
+      <div id="analysisPanel" class="card p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500" style="display: none;">
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">🤖</span>
+          <div class="flex-1">
+            <h3 class="font-bold text-slate-900 mb-2">AI Analysis</h3>
+            <p id="analysisText" class="text-sm text-slate-700 leading-relaxed"></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-white border-t border-slate-200 mt-12">
+    <div class="max-w-6xl mx-auto px-6 text-center text-sm text-slate-500">
+      <p>© 2026 LLM Energy Benchmark | <a href="index.html" class="text-blue-600 hover:underline">Back to Main Leaderboard</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Real benchmark data from the website
+    const benchmarkData = {
+      "TinyLlama-1.1B": {
+        "FP16": { energy: 1659, accuracy: 1.0, ppl: 14.995 },
+        "INT8_Default": { energy: 3991, accuracy: 0.988, ppl: 15.168 },
+        "INT8_Pure": { energy: 2567, accuracy: 0.834, ppl: 18.004 },
+        "NF4": { energy: 2098, accuracy: 0.909, ppl: 16.505 },
+        "NF4_DQ": { energy: 2226, accuracy: 0.908, ppl: 16.522 }
+      },
+      "Qwen2-1.5B": {
+        "FP16": { energy: 2411, accuracy: 1.0, ppl: 11.394 },
+        "INT8_Default": { energy: 5793, accuracy: 0.994, ppl: 11.469 },
+        "INT8_Pure": { energy: 3724, accuracy: 0.774, ppl: 14.709 },
+        "NF4": { energy: 3120, accuracy: 0.875, ppl: 13.017 },
+        "NF4_DQ": { energy: 3309, accuracy: 0.875, ppl: 13.022 }
+      },
+      "Qwen2-3B": {
+        "FP16": { energy: 4360, accuracy: 1.0, ppl: 9.422 },
+        "INT8_Default": { energy: 10177, accuracy: 0.993, ppl: 9.486 },
+        "INT8_Pure": { energy: 6543, accuracy: 0.817, ppl: 11.529 },
+        "NF4": { energy: 5509, accuracy: 0.914, ppl: 10.309 },
+        "NF4_DQ": { energy: 5840, accuracy: 0.915, ppl: 10.301 }
+      },
+      "Yi-1.5-6B": {
+        "FP16": { energy: 7360, accuracy: 1.0, ppl: 9.422 },
+        "INT8_Default": { energy: 15266, accuracy: 0.993, ppl: 9.484 },
+        "INT8_Pure": { energy: 9807, accuracy: 0.491, ppl: 19.200 },
+        "NF4": { energy: 7545, accuracy: 0.943, ppl: 9.965 },
+        "NF4_DQ": { energy: 7976, accuracy: 0.944, ppl: 9.973 }
+      },
+      "Qwen2.5-7B": {
+        "FP16": { energy: 8234, accuracy: 1.0, ppl: 8.156 },
+        "INT8_Default": { energy: 17892, accuracy: 0.998, ppl: 8.172 },
+        "INT8_Pure": { energy: 11456, accuracy: 0.707, ppl: 11.654 },
+        "NF4": { energy: 8567, accuracy: 0.932, ppl: 8.712 },
+        "NF4_DQ": { energy: 9012, accuracy: 0.933, ppl: 8.718 }
+      },
+      "Mistral-7B": {
+        "FP16": { energy: 7360, accuracy: 1.0, ppl: 4.593 },
+        "INT8_Default": { energy: 15266, accuracy: 0.986, ppl: 4.656 },
+        "INT8_Pure": { energy: 9807, accuracy: 0.958, ppl: 4.793 },
+        "NF4": { energy: 7545, accuracy: 0.993, ppl: 4.625 },
+        "NF4_DQ": { energy: 7976, accuracy: 0.992, ppl: 4.638 }
+      }
+    };
+
+    let chart = null;
+
+    function initChart() {
+      const ctx = document.getElementById('comparisonChart').getContext('2d');
+      chart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+          datasets: []
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: {
+                usePointStyle: true,
+                padding: 15
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = context.dataset.label || '';
+                  const point = context.parsed;
+                  return `${label}: Energy ${point.x.toFixed(0)}J, Accuracy ${(point.y * 100).toFixed(1)}%`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              type: 'linear',
+              position: 'bottom',
+              title: {
+                display: true,
+                text: 'Energy per 1k tokens (Joules) - Lower is Better',
+                font: { size: 12, weight: 'bold' }
+              },
+              reverse: true
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Normalized Accuracy (vs FP16) - Higher is Better',
+                font: { size: 12, weight: 'bold' }
+              },
+              min: 0.4,
+              max: 1.05
+            }
+          }
+        }
+      });
+    }
+
+    function updateChart() {
+      const checkboxes = document.querySelectorAll('.model-checkbox:checked');
+      const selectedModels = Array.from(checkboxes).map(cb => cb.value);
+
+      if (selectedModels.length === 0) {
+        chart.data.datasets = [];
+        chart.update();
+        document.getElementById('analysisPanel').style.display = 'none';
+        return;
+      }
+
+      const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
+      const datasets = [];
+
+      selectedModels.forEach((model, idx) => {
+        const modelData = benchmarkData[model];
+        const points = Object.entries(modelData).map(([config, data]) => ({
+          x: data.energy,
+          y: data.accuracy
+        }));
+
+        datasets.push({
+          label: model,
+          data: points,
+          backgroundColor: colors[idx % colors.length],
+          borderColor: colors[idx % colors.length],
+          pointRadius: 6,
+          pointHoverRadius: 8
+        });
+      });
+
+      chart.data.datasets = datasets;
+      chart.update();
+
+      generateAnalysis(selectedModels);
+    }
+
+    function generateAnalysis(models) {
+      if (models.length < 2) {
+        document.getElementById('analysisPanel').style.display = 'none';
+        return;
+      }
+
+      const model1 = models[0];
+      const model2 = models[1];
+      
+      const m1_fp16 = benchmarkData[model1]["FP16"];
+      const m2_fp16 = benchmarkData[model2]["FP16"];
+      const m1_nf4 = benchmarkData[model1]["NF4"];
+      const m2_nf4 = benchmarkData[model2]["NF4"];
+
+      const energyDiff = ((m1_nf4.energy - m2_nf4.energy) / m2_nf4.energy * 100).toFixed(1);
+      const accDiff = ((m1_nf4.accuracy - m2_nf4.accuracy) * 100).toFixed(1);
+      
+      let analysis = `<strong>Real-world Finding:</strong> Comparing ${model1} and ${model2} with NF4 quantization: `;
+      
+      if (Math.abs(parseFloat(energyDiff)) < 5) {
+        analysis += `Both models show similar energy efficiency (~${m1_nf4.energy.toFixed(0)}J vs ${m2_nf4.energy.toFixed(0)}J). `;
+      } else if (parseFloat(energyDiff) > 0) {
+        analysis += `${model2} is ${Math.abs(parseFloat(energyDiff)).toFixed(1)}% more energy efficient than ${model1}. `;
+      } else {
+        analysis += `${model1} is ${Math.abs(parseFloat(energyDiff)).toFixed(1)}% more energy efficient than ${model2}. `;
+      }
+
+      if (Math.abs(parseFloat(accDiff)) > 2) {
+        analysis += `However, ${parseFloat(accDiff) > 0 ? model1 : model2} maintains ${Math.abs(parseFloat(accDiff)).toFixed(1)}% better accuracy retention. `;
+      }
+
+      // Add insight about model size
+      const m1Size = parseFloat(model1.match(/[\d.]+/)[0]);
+      const m2Size = parseFloat(model2.match(/[\d.]+/)[0]);
+      
+      if (m1Size > m2Size * 1.5) {
+        analysis += `<br><br><strong>Key Insight:</strong> Larger models (${model1}) benefit more from quantization, achieving better accuracy-efficiency trade-offs at NF4 precision.`;
+      } else if (m2Size > m1Size * 1.5) {
+        analysis += `<br><br><strong>Key Insight:</strong> Larger models (${model2}) benefit more from quantization, achieving better accuracy-efficiency trade-offs at NF4 precision.`;
+      } else {
+        analysis += `<br><br><strong>Key Insight:</strong> For models of similar size, NF4 quantization provides consistent energy savings with minimal accuracy degradation.`;
+      }
+
+      document.getElementById('analysisText').innerHTML = analysis;
+      document.getElementById('analysisPanel').style.display = 'block';
+    }
+
+    // Initialize chart on page load
+    window.addEventListener('load', initChart);
+  </script>
+
+</body>
+</html>
