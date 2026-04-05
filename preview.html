@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Preview Image Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .preview-container {
+            width: 1200px;
+            height: 630px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1d28 0%, #2a2d3a 100%);
+            color: #e8eaf0;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .header {
+            padding: 40px 60px 20px;
+        }
+        .title {
+            font-size: 42px;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            font-size: 24px;
+            color: #9ca0b0;
+            margin: 10px 0 0;
+            font-weight: 500;
+        }
+        .data-section {
+            padding: 20px 60px;
+            display: flex;
+            gap: 40px;
+        }
+        .key-findings {
+            flex: 1;
+        }
+        .chart-area {
+            flex: 1;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .finding-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+        .finding-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .icon-warning {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+        .icon-success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+        .icon-info {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .chart-label {
+            width: 120px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .chart-value {
+            flex: 1;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+        }
+        .bar-default-int8 {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+            width: 80%;
+        }
+        .bar-pure-int8 {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            width: 45%;
+        }
+        .bar-fp16 {
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            width: 50%;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 60px;
+            background: rgba(15, 17, 23, 0.8);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .badges {
+            display: flex;
+            gap: 12px;
+        }
+        .badge {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .url {
+            font-size: 16px;
+            color: #60a5fa;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container">
+        <div class="header">
+            <h1 class="title">LLM Energy Efficiency Research</h1>
+            <p class="subtitle">Why Default INT8 Increases Power Consumption by 17-33%</p>
+        </div>
+        
+        <div class="data-section">
+            <div class="key-findings">
+                <div class="finding-item">
+                    <div class="finding-icon icon-warning">⚠</div>
+                    <span>Default INT8: +17-33% energy vs FP16</span>
+                </div>
+                <div class="finding-item">
+                    <div class="finding-icon icon-success">✓</div>
+                    <span>Pure INT8: -3-8% energy vs FP16</span>
+                </div>
+                <div class="finding-item">
+                    <div class="finding-icon icon-info">🔧</div>
+                    <span>Root cause: Mixed-precision decomposition</span>
+                </div>
+                <div class="finding-item">
+                    <div class="finding-icon icon-success">🚀</div>
+                    <span>Fix: +79% throughput, -36% energy</span>
+                </div>
+            </div>
+            
+            <div class="chart-area">
+                <div style="font-weight: 600; margin-bottom: 16px; font-size: 16px;">Energy Consumption Comparison</div>
+                <div class="chart-bar">
+                    <div class="chart-label">Default INT8</div>
+                    <div class="chart-value bar-default-int8">+31.7% ⚠</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">Pure INT8</div>
+                    <div class="chart-value bar-pure-int8">-5.5% ✓</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">FP16</div>
+                    <div class="chart-value bar-fp16">Baseline</div>
+                </div>
+                <div style="margin-top: 16px; font-size: 12px; color: #9ca0b0;">
+                    93+ measurements | RTX 5090, 4090D, A800 | CV<2%
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="badges">
+                <div class="badge">🤗 HF Optimum</div>
+                <div class="badge">🏆 MLCommons #2558</div>
+                <div class="badge">📊 93+ Measurements</div>
+            </div>
+            <div class="url">hongping-zh.github.io</div>
+        </div>
+    </div>
+</body>
+</html>
