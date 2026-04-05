@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LLM Energy Efficiency Research | Why INT8 Increases Power Consumption | GPU Benchmarks</title>
-<meta name="description" content="Discover why INT8 quantization increases energy by 80-162%. Comprehensive GPU power measurements (RTX 5090, 4090D, A800) reveal when NF4 saves energy and why FP16 remains most efficient. 93+ measurements with full metadata.">
+<title>LLM Energy Efficiency Research | Why Default INT8 Increases Power by 17-33% | GPU Benchmarks</title>
+<meta name="description" content="Discover why bitsandbytes default INT8 increases energy by 17-33% due to mixed-precision decomposition. Pure INT8 saves 3-8% energy. Comprehensive GPU power measurements (RTX 5090, 4090D, A800) with 93+ measurements. Featured in HuggingFace Optimum & MLCommons.">
 <meta name="keywords" content="LLM energy efficiency, GPU power consumption, why INT8 increases energy consumption, quantization energy cost, NF4 vs FP16 energy, bitsandbytes power measurements, RTX 5090 LLM benchmarks, sustainable AI, model quantization dataset">
-<meta property="og:title" content="LLM Energy Efficiency Research | INT8 Quantization Paradox">
-<meta property="og:description" content="Why does INT8 increase energy by 80-162%? GPU power measurements reveal the truth about quantized LLM inference.">
+<meta property="og:title" content="LLM Energy Efficiency Research | bitsandbytes INT8 Paradox">
+<meta property="og:description" content="Default INT8 increases energy by 17-33% due to mixed-precision decomposition. Pure INT8 saves 3-8%. 93+ GPU measurements across RTX 5090, 4090D, A800.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://hongping-zh.github.io/">
 <meta property="og:image" content="https://hongping-zh.github.io/preview.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Why INT8 Quantization Increases LLM Energy Consumption">
-<meta name="twitter:description" content="93+ GPU power measurements reveal INT8 paradox and when NF4 actually saves energy">
+<meta name="twitter:title" content="Why bitsandbytes Default INT8 Wastes 17-33% More Energy">
+<meta name="twitter:description" content="93+ GPU power measurements reveal mixed-precision decomposition overhead. Pure INT8 actually saves 3-8% energy vs FP16. Featured in HF Optimum.">
 <meta name="author" content="Hongping Zhang">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="canonical" href="https://hongping-zh.github.io/">
@@ -657,18 +657,18 @@ td.model-cell{white-space:normal;min-width:200px;max-width:280px}
 <!-- ===== SEO SUMMARY ===== -->
 <section class="section" style="padding-top:32px;padding-bottom:32px;background:var(--bg-card);border-bottom:1px solid var(--border)">
   <div style="max-width:900px;margin:0 auto;padding:0 24px">
-    <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:16px;line-height:1.3">LLM Energy Efficiency Research: Why INT8 Quantization Increases Power Consumption</h2>
+    <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:16px;line-height:1.3">LLM Energy Efficiency Research: Why Default INT8 Increases Power Consumption by 17-33%</h2>
     
     <p style="font-size:1rem;line-height:1.7;color:var(--text-secondary);margin-bottom:14px">
-      Comprehensive GPU power measurements reveal surprising insights about quantized LLM inference. Our research answers the critical question: <strong style="color:var(--text-primary)">why does INT8 quantization increase energy consumption by 80-162%?</strong>
+      Comprehensive GPU power measurements reveal surprising insights about quantized LLM inference. Our research answers the critical question: <strong style="color:var(--text-primary)">why does bitsandbytes' default INT8 increase energy consumption by 17-33% (avg 31.7%) compared to FP16?</strong>
     </p>
     
     <p style="font-size:1rem;line-height:1.7;color:var(--text-secondary);margin-bottom:14px">
-      Through rigorous benchmarking across <strong style="color:var(--text-primary)">RTX 5090, RTX 4090D, and A800 GPUs</strong>, we discovered that bitsandbytes' default INT8 implementation uses mixed-precision decomposition, causing significant energy overhead. Meanwhile, NF4 quantization only saves energy (5.3%) for models ≥6B parameters, but costs 25-34% more energy for smaller models.
+      Through rigorous benchmarking across <strong style="color:var(--text-primary)">RTX 5090, RTX 4090D, and A800 GPUs</strong>, we discovered the root cause: <strong style="color:var(--text-primary)">mixed-precision decomposition</strong> (INT8↔FP16 conversion overhead), not INT8 compute itself. Disabling this pathway (<code style="background:var(--bg-root);padding:2px 6px;border-radius:4px;font-size:0.9em">threshold=0.0</code>) recovers <strong style="color:var(--green)">+79% throughput</strong> and <strong style="color:var(--green)">-36% energy</strong>. Meanwhile, NF4 quantization saves energy (-8% to -35%) for models ≥6B but costs +12-29% more for smaller models.
     </p>
     
     <p style="font-size:1rem;line-height:1.7;color:var(--text-secondary);margin-bottom:16px">
-      <strong style="color:var(--text-primary)">Key Finding:</strong> FP16 remains the most energy-efficient option when GPU memory allows. This dataset provides <strong style="color:var(--text-primary)">93+ measurements with complete metadata</strong>, enabling practitioners to make informed decisions about LLM deployment strategies.
+      <strong style="color:var(--text-primary)">Key Finding:</strong> Pure INT8 (without decomposition) is 3-8% more efficient than FP16. This dataset provides <strong style="color:var(--text-primary)">93+ measurements with complete metadata</strong> (n=10 per config, CV<2%), enabling practitioners to make informed decisions about LLM deployment strategies.
     </p>
     
     <div style="background:linear-gradient(135deg,var(--accent-soft),var(--green-bg));border-left:3px solid var(--accent);padding:14px 18px;border-radius:var(--radius-md);margin-bottom:12px">
