@@ -1,71 +1,1022 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI API Cost Comparison 2026 | EcoCompute - Compare GPT-4, Claude, Gemini, DeepSeek Pricing</title>
-    <meta name="description" content="Compare AI API costs across GPT-4, Claude, Gemini, DeepSeek, and Llama. Interactive calculator shows real-time pricing, carbon footprint, and potential savings. Find the cheapest AI model for your use case." />
-    <meta name="keywords" content="AI API cost comparison, GPT-4 pricing, Claude API cost, Gemini pricing, DeepSeek cost, LLM API comparison, AI model pricing calculator, cheapest AI API, OpenAI pricing, Anthropic pricing, Google AI pricing, AI cost optimization, LLM cost calculator, AI carbon footprint, model evaluation dashboard, emissions calculator, green AI" />
-    <meta property="og:title" content="AI API Cost Comparison 2026 | Compare GPT-4, Claude, Gemini Pricing" />
-    <meta property="og:description" content="Interactive AI API cost calculator. Compare pricing across 8+ models including GPT-4, Claude, Gemini, and DeepSeek. Save up to 95% on AI costs." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://hongping-zh.github.io/ecocompute-dynamic-eval/" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="EcoCompute - LLM Cost & Carbon Dashboard" />
-    <meta name="twitter:description" content="Compare model metrics, estimate cost and carbon impact, and visualize live monitoring." />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>" />
-    <link rel="canonical" href="https://hongping-zh.github.io/ecocompute-dynamic-eval/" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "EcoCompute",
-        "url": "https://hongping-zh.github.io/ecocompute-dynamic-eval/",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web",
-        "description": "A dashboard to compare AI model evaluation metrics, estimate cost and carbon impact, and visualize live monitoring."
-      }
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              eco: {
-                50: '#f0fdf4',
-                100: '#dcfce7',
-                200: '#bbf7d0',
-                300: '#86efac',
-                400: '#4ade80',
-                500: '#22c55e',
-                600: '#16a34a',
-                700: '#15803d',
-                800: '#166534',
-                900: '#14532d',
-              }
-            }
-          }
-        }
-      }
-    </script>
-  <script type="importmap">
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI API Cost Comparison 2026 | EcoCompute - Compare GPT-4, Claude, Gemini, DeepSeek Pricing</title>
+<meta name="description" content="Compare AI API costs across GPT-4, Claude, Gemini, DeepSeek, and Llama. Interactive calculator shows real-time pricing, carbon footprint, and potential savings.">
+<meta name="keywords" content="AI API cost comparison, GPT-4 pricing, Claude API cost, Gemini pricing, DeepSeek cost, LLM API comparison, AI model pricing calculator, cheapest AI API, AI carbon footprint, model evaluation dashboard, green AI">
+<meta property="og:title" content="AI API Cost Comparison 2026 | Compare GPT-4, Claude, Gemini Pricing">
+<meta property="og:description" content="Interactive AI API cost calculator. Compare pricing across 8+ models including GPT-4, Claude, Gemini, and DeepSeek. Save up to 95% on AI costs.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hongping-zh.github.io/ecocompute-dynamic-eval/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EcoCompute - LLM Cost & Carbon Dashboard">
+<meta name="twitter:description" content="Compare model metrics, estimate cost and carbon impact, and visualize live monitoring.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+<script type="application/ld+json">
 {
-  "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "recharts": "https://esm.sh/recharts@^3.7.0",
-    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4"
-  }
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "EcoCompute AI Model Benchmark Dataset",
+  "description": "Cost, carbon, and efficiency benchmarks for 39 AI models across multiple GPU platforms",
+  "url": "https://hongping-zh.github.io/ecocompute-dynamic-eval/",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": {"@type": "Organization", "name": "EcoCompute", "url": "https://github.com/hongping-zh/ecocompute-ai"},
+  "dateModified": "2026-02-15",
+  "variableMeasured": ["Accuracy", "Execution Time", "Cost per 1k tokens", "Carbon Emissions (gCO2)", "Energy Efficiency (Tokens/Watt)"]
 }
 </script>
-<link rel="stylesheet" href="./index.css">
+<!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & VARIABLES ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  /* Light theme */
+  --bg-root:#f6f7f9;--bg-card:#ffffff;--bg-card-hover:#fafbfc;
+  --bg-nav:#0f1117;--bg-nav-blur:rgba(15,17,23,.92);
+  --text-primary:#1a1d26;--text-secondary:#5c6070;--text-tertiary:#8b8fa3;
+  --border:#e2e4ea;--border-hover:#c8cad4;
+  --accent:#2563eb;--accent-soft:rgba(37,99,235,.08);--accent-hover:#1d4ed8;
+  --green:#059669;--green-bg:rgba(5,150,105,.08);--green-border:rgba(5,150,105,.2);
+  --yellow:#d97706;--yellow-bg:rgba(217,119,6,.08);--yellow-border:rgba(217,119,6,.2);
+  --orange:#dc2626;--orange-bg:rgba(220,38,38,.06);--orange-border:rgba(220,38,38,.15);
+  --purple:#7c3aed;--purple-bg:rgba(124,58,237,.07);--purple-border:rgba(124,58,237,.18);
+  --blue:#2563eb;--blue-bg:rgba(37,99,235,.07);--blue-border:rgba(37,99,235,.18);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.04);--shadow-md:0 2px 8px rgba(0,0,0,.06);
+  --shadow-lg:0 8px 30px rgba(0,0,0,.08);--shadow-xl:0 20px 60px rgba(0,0,0,.1);
+  --radius-sm:6px;--radius-md:10px;--radius-lg:16px;--radius-xl:20px;
+}
+[data-theme="dark"]{
+  --bg-root:#0f1117;--bg-card:#1a1d28;--bg-card-hover:#222532;
+  --text-primary:#e8eaf0;--text-secondary:#9ca0b0;--text-tertiary:#6b6f82;
+  --border:#2a2d3a;--border-hover:#3a3d4a;
+  --accent:#60a5fa;--accent-soft:rgba(96,165,250,.1);--accent-hover:#93c5fd;
+  --green-bg:rgba(5,150,105,.12);--yellow-bg:rgba(217,119,6,.12);
+  --orange-bg:rgba(220,38,38,.1);--purple-bg:rgba(124,58,237,.12);
+  --blue-bg:rgba(37,99,235,.12);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.2);--shadow-md:0 2px 8px rgba(0,0,0,.3);
+  --shadow-lg:0 8px 30px rgba(0,0,0,.4);--shadow-xl:0 20px 60px rgba(0,0,0,.5);
+}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{
+  font-family:var(--font-body);color:var(--text-primary);
+  background:var(--bg-root);line-height:1.6;
+  -webkit-font-smoothing:antialiased;transition:background .3s,color .3s;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ========== NAV ========== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:var(--bg-nav-blur);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  height:60px;display:flex;align-items:center;
+}
+.nav-inner{
+  max-width:1320px;margin:0 auto;width:100%;padding:0 24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:1.05rem;letter-spacing:-.02em}
+.nav-brand svg{width:26px;height:26px}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a{
+  color:rgba(255,255,255,.6);font-size:.835rem;font-weight:500;
+  padding:6px 14px;border-radius:var(--radius-sm);transition:all .2s;text-decoration:none;
+}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,.08)}
+.theme-toggle{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
+  color:#fff;width:36px;height:36px;border-radius:var(--radius-sm);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;font-size:1rem;
+}
+.theme-toggle:hover{background:rgba(255,255,255,.15)}
+.nav-mobile-btn{display:none;background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer}
+
+/* ========== HERO ========== */
+.hero{
+  margin-top:60px;padding:56px 24px 40px;
+  background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-root) 100%);
+  border-bottom:1px solid var(--border);position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-120px;right:-80px;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(37,99,235,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{max-width:1320px;margin:0 auto}
+.hero h1{
+  font-size:2.1rem;font-weight:700;letter-spacing:-.03em;
+  line-height:1.2;margin-bottom:10px;
+}
+.hero h1 span{
+  background:linear-gradient(135deg,var(--accent),#7c3aed);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-sub{color:var(--text-secondary);font-size:1.05rem;max-width:640px;margin-bottom:28px}
+.hero-stats{display:flex;gap:16px;flex-wrap:wrap}
+.hero-stat{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);
+  padding:14px 22px;display:flex;align-items:center;gap:12px;
+  box-shadow:var(--shadow-sm);
+}
+.hero-stat-num{font-size:1.55rem;font-weight:700;font-family:var(--font-mono);letter-spacing:-.03em}
+.hero-stat-label{font-size:.8rem;color:var(--text-secondary);line-height:1.3}
+
+/* ========== SECTION LAYOUT ========== */
+.section{max-width:1320px;margin:0 auto;padding:48px 24px}
+.section-header{margin-bottom:28px}
+.section-header h2{font-size:1.45rem;font-weight:700;letter-spacing:-.02em}
+.section-header p{color:var(--text-secondary);margin-top:4px;font-size:.92rem}
+
+/* ========== TOOLBAR ========== */
+.toolbar{
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  margin-bottom:16px;
+}
+.toolbar-group{display:flex;gap:8px;flex-wrap:wrap;flex:1;min-width:0}
+.filter-select,.search-input{
+  font-family:var(--font-body);font-size:.835rem;
+  background:var(--bg-card);color:var(--text-primary);
+  border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:8px 12px;outline:none;transition:border .2s;
+}
+.filter-select:focus,.search-input:focus{border-color:var(--accent)}
+.search-input{width:200px}
+.toolbar-actions{display:flex;gap:8px;align-items:center}
+.btn{
+  font-family:var(--font-body);font-size:.8rem;font-weight:600;
+  padding:8px 16px;border-radius:var(--radius-sm);border:none;
+  cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:6px;
+}
+.btn-outline{
+  background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border);
+}
+.btn-outline:hover{border-color:var(--border-hover);color:var(--text-primary)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.btn-sm{padding:6px 12px;font-size:.78rem}
+
+/* ========== TABLE ========== */
+.table-wrap{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);
+}
+.table-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+thead{background:var(--bg-root)}
+thead th{
+  padding:11px 14px;text-align:left;font-weight:600;font-size:.76rem;
+  text-transform:uppercase;letter-spacing:.04em;color:var(--text-tertiary);
+  border-bottom:1px solid var(--border);cursor:pointer;white-space:nowrap;
+  user-select:none;position:relative;
+}
+thead th:hover{color:var(--text-primary)}
+thead th .sort-icon{margin-left:4px;opacity:.3;font-size:.7rem}
+thead th.sorted .sort-icon{opacity:1;color:var(--accent)}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:var(--bg-card-hover)}
+tbody td{padding:10px 14px;white-space:nowrap}
+td.model-cell{white-space:normal;min-width:200px;max-width:280px}
+.model-name{font-weight:600;font-size:.86rem;color:var(--text-primary)}
+.model-vendor{font-size:.75rem;color:var(--text-tertiary);margin-top:1px}
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:.7rem;font-weight:600;padding:3px 8px;border-radius:99px;
+  letter-spacing:.01em;
+}
+.badge-measured{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.badge-estimated{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.badge-research{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)}
+.score-cell{font-family:var(--font-mono);font-weight:700;font-size:.92rem}
+.score-high{color:var(--green)}
+.score-mid{color:var(--yellow)}
+.score-low{color:var(--orange)}
+.metric-val{font-family:var(--font-mono);font-size:.82rem;font-weight:500}
+.checkbox-cell{width:36px;text-align:center}
+.checkbox-cell input{
+  width:16px;height:16px;accent-color:var(--accent);cursor:pointer;
+}
+.expand-btn{
+  background:none;border:none;color:var(--text-tertiary);cursor:pointer;
+  font-size:.9rem;padding:4px;border-radius:4px;transition:all .15s;
+}
+.expand-btn:hover{color:var(--text-primary);background:var(--accent-soft)}
+.expand-row{display:none}
+.expand-row.open{display:table-row}
+.expand-row td{
+  padding:14px 20px 18px 56px;background:var(--bg-root);
+  font-size:.82rem;color:var(--text-secondary);line-height:1.7;
+  border-bottom:1px solid var(--border);
+}
+.expand-row td a{font-size:.8rem}
+.table-footer{
+  padding:12px 16px;display:flex;justify-content:space-between;
+  align-items:center;font-size:.8rem;color:var(--text-tertiary);
+  border-top:1px solid var(--border);
+}
+
+/* ========== SCORING PANEL ========== */
+.scoring-panel{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:28px;margin-top:24px;
+  box-shadow:var(--shadow-sm);
+}
+.scoring-panel h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
+.scoring-panel .formula{
+  font-family:var(--font-mono);font-size:.82rem;
+  background:var(--bg-root);border:1px solid var(--border);
+  padding:12px 16px;border-radius:var(--radius-sm);margin:12px 0 18px;
+  color:var(--text-secondary);overflow-x:auto;
+}
+.weight-sliders{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.weight-slider label{display:flex;justify-content:space-between;font-size:.82rem;font-weight:500;margin-bottom:4px}
+.weight-slider label span{font-family:var(--font-mono);color:var(--accent);font-weight:600}
+.weight-slider input[type=range]{
+  width:100%;height:4px;-webkit-appearance:none;background:var(--border);
+  border-radius:99px;outline:none;
+}
+.weight-slider input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:16px;height:16px;border-radius:50%;
+  background:var(--accent);cursor:pointer;border:2px solid var(--bg-card);
+  box-shadow:0 1px 4px rgba(0,0,0,.15);
+}
+
+/* ========== COMPARE MODAL ========== */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,.5);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;padding:24px;
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:var(--bg-card);border-radius:var(--radius-xl);
+  max-width:920px;width:100%;max-height:85vh;overflow-y:auto;
+  box-shadow:var(--shadow-xl);
+}
+.modal-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 28px;border-bottom:1px solid var(--border);
+}
+.modal-head h3{font-size:1.1rem;font-weight:700}
+.modal-close{
+  background:none;border:none;font-size:1.3rem;cursor:pointer;
+  color:var(--text-tertiary);padding:4px;
+}
+.modal-body{padding:24px 28px 32px}
+.compare-grid{display:grid;gap:16px}
+.compare-card{
+  border:1px solid var(--border);border-radius:var(--radius-md);
+  padding:18px;background:var(--bg-root);
+}
+.compare-card h4{font-size:.9rem;font-weight:700;margin-bottom:10px}
+.compare-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.compare-metric{text-align:center}
+.compare-metric .val{font-family:var(--font-mono);font-weight:700;font-size:1.1rem}
+.compare-metric .lbl{font-size:.72rem;color:var(--text-tertiary);margin-top:2px}
+.radar-wrap{display:flex;justify-content:center;padding:20px 0}
+.radar-wrap canvas{max-width:420px;width:100%}
+
+/* ========== INSIGHTS ========== */
+.insight-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow-sm);
+  margin-bottom:20px;
+}
+.insight-card h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.insight-card p{color:var(--text-secondary);font-size:.88rem}
+.bar-chart{margin-top:18px;display:flex;flex-direction:column;gap:12px}
+.bar-row{display:flex;align-items:center;gap:12px}
+.bar-label{width:90px;font-size:.82rem;font-weight:600;text-align:right}
+.bar-track{flex:1;height:32px;background:var(--bg-root);border-radius:var(--radius-sm);overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:var(--radius-sm);display:flex;align-items:center;padding:0 12px;font-family:var(--font-mono);font-weight:600;font-size:.82rem;color:#fff;transition:width .8s ease}
+.bar-fill.fp16{background:linear-gradient(90deg,#059669,#10b981)}
+.bar-fill.nf4{background:linear-gradient(90deg,#d97706,#f59e0b)}
+
+/* ========== TEMPLATES ========== */
+.template-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.template-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-sm);
+  transition:all .2s;
+}
+.template-card:hover{box-shadow:var(--shadow-md);border-color:var(--border-hover)}
+.template-icon{font-size:1.4rem;margin-bottom:10px}
+.template-card h4{font-size:.95rem;font-weight:700;margin-bottom:6px}
+.template-card p{font-size:.82rem;color:var(--text-secondary);margin-bottom:14px;line-height:1.5}
+.template-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.template-tag{
+  font-size:.7rem;font-weight:600;padding:3px 8px;border-radius:99px;
+  background:var(--accent-soft);color:var(--accent);
+}
+
+/* ========== METHODOLOGY ========== */
+.method-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:20px}
+.method-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:24px;
+}
+.method-card h3{font-size:1rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.method-card ul{list-style:none;padding:0}
+.method-card li{
+  font-size:.84rem;color:var(--text-secondary);padding:5px 0;
+  padding-left:18px;position:relative;line-height:1.55;
+}
+.method-card li::before{content:'';position:absolute;left:0;top:12px;width:6px;height:6px;border-radius:50%;background:var(--border-hover)}
+
+/* ========== ABOUT ========== */
+.about-box{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:32px;text-align:center;
+  max-width:680px;margin:0 auto;
+}
+.about-box p{color:var(--text-secondary);font-size:.9rem;line-height:1.7;margin-bottom:16px}
+.gh-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-weight:600;font-size:.9rem;padding:10px 22px;
+  background:var(--text-primary);color:var(--bg-card);
+  border-radius:var(--radius-sm);transition:opacity .2s;
+}
+.gh-link:hover{opacity:.85;text-decoration:none}
+
+/* ========== FOOTER ========== */
+.footer{
+  border-top:1px solid var(--border);padding:28px 24px;
+  text-align:center;font-size:.78rem;color:var(--text-tertiary);
+}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:860px){
+  .nav-links{display:none}
+  .nav-links.open{
+    display:flex;flex-direction:column;position:absolute;
+    top:60px;left:0;right:0;background:var(--bg-nav);
+    padding:12px;border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .nav-mobile-btn{display:block}
+  .hero h1{font-size:1.55rem}
+  .hero-stats{gap:10px}
+  .hero-stat{padding:10px 16px}
+  .hero-stat-num{font-size:1.2rem}
+  .toolbar{flex-direction:column;align-items:stretch}
+  .toolbar-group{flex-direction:column}
+  .search-input{width:100%}
+  .table-scroll{display:none}
+  .card-list{display:flex !important}
+  .weight-sliders{grid-template-columns:1fr}
+  .compare-metrics{grid-template-columns:repeat(2,1fr)}
+  .template-grid{grid-template-columns:1fr}
+  .method-grid{grid-template-columns:1fr}
+}
+@media(min-width:861px){
+  .card-list{display:none !important}
+}
+
+/* ========== CARD LIST (MOBILE) ========== */
+.card-list{
+  display:none;flex-direction:column;gap:10px;padding:12px;
+}
+.card-item{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:16px;
+}
+.card-item-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.card-item-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.card-item-metric{text-align:center}
+.card-item-metric .v{font-family:var(--font-mono);font-weight:700;font-size:.9rem}
+.card-item-metric .l{font-size:.68rem;color:var(--text-tertiary)}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.animate-in{animation:fadeUp .4s ease forwards;opacity:0}
+.animate-in:nth-child(1){animation-delay:.05s}
+.animate-in:nth-child(2){animation-delay:.1s}
+.animate-in:nth-child(3){animation-delay:.15s}
+.animate-in:nth-child(4){animation-delay:.2s}
+</style>
 </head>
-  <body class="bg-slate-50 text-slate-900 antialiased">
-    <div id="root"></div>
-  <script type="module" src="./index.tsx"></script>
+<body>
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand" style="text-decoration:none">
+      <svg viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="12" stroke="#4ade80" stroke-width="2"/><path d="M13 6v7l5 3" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="13" r="3" fill="#4ade80" opacity=".3"/></svg>
+      EcoCompute
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#insights">Insights</a>
+      <a href="#templates">Templates</a>
+      <a href="#methodology">Methodology</a>
+      <a href="#about">About</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">☀</button>
+      <button class="nav-mobile-btn" id="navMobileBtn">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-inner">
+    <h1>The <span>Cost & Carbon</span> Benchmark<br>for AI Models</h1>
+    <p class="hero-sub">EcoCompute benchmarks AI models across accuracy, cost, carbon emissions, and energy efficiency — with real hardware measurements, not just estimates.</p>
+    <div class="hero-stats">
+      <div class="hero-stat animate-in"><div><div class="hero-stat-num">39</div><div class="hero-stat-label">Models Evaluated</div></div></div>
+      <div class="hero-stat animate-in"><div><div class="hero-stat-num">4</div><div class="hero-stat-label">GPU Platforms</div></div></div>
+      <div class="hero-stat animate-in"><div><div class="hero-stat-num">3</div><div class="hero-stat-label">Source Types</div></div></div>
+      <div class="hero-stat animate-in"><div><div class="hero-stat-num">20+</div><div class="hero-stat-label">Directly Measured</div></div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== LEADERBOARD ===== -->
+<section class="section" id="leaderboard">
+  <div class="section-header">
+    <h2>Model Leaderboard</h2>
+    <p>Sortable, filterable benchmark data across all evaluated models. Click any column header to sort.</p>
+  </div>
+
+  <div class="toolbar">
+    <div class="toolbar-group">
+      <select class="filter-select" id="filterGPU">
+        <option value="">All Platforms</option>
+        <option value="RTX 5090">RTX 5090</option>
+        <option value="RTX 4090D">RTX 4090D</option>
+        <option value="A800">A800</option>
+        <option value="API">API / Cloud</option>
+        <option value="Research">Research</option>
+      </select>
+      <select class="filter-select" id="filterQuant">
+        <option value="">All Quantization</option>
+        <option value="FP16">FP16</option>
+        <option value="INT8">INT8</option>
+        <option value="NF4">NF4</option>
+        <option value="N/A">N/A (API)</option>
+      </select>
+      <select class="filter-select" id="filterSource">
+        <option value="">All Sources</option>
+        <option value="Measured">Measured</option>
+        <option value="Estimated">Estimated</option>
+        <option value="Research">Research</option>
+      </select>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search models...">
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn btn-primary btn-sm" id="compareBtn" disabled>Compare Selected (0)</button>
+      <button class="btn btn-outline btn-sm" onclick="exportCSV()">Export CSV</button>
+      <button class="btn btn-outline btn-sm" onclick="exportJSON()">Export JSON</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-scroll">
+      <table id="mainTable">
+        <thead>
+          <tr>
+            <th class="checkbox-cell"><input type="checkbox" id="selectAll" title="Select all"></th>
+            <th data-col="rank" style="width:50px"># <span class="sort-icon">↕</span></th>
+            <th data-col="model">Model <span class="sort-icon">↕</span></th>
+            <th data-col="source">Source <span class="sort-icon">↕</span></th>
+            <th data-col="accuracy">Accuracy <span class="sort-icon">↕</span></th>
+            <th data-col="execTime">Exec Time (s) <span class="sort-icon">↕</span></th>
+            <th data-col="cost">Cost ($/1k) <span class="sort-icon">↕</span></th>
+            <th data-col="carbon">Carbon (gCO₂) <span class="sort-icon">↕</span></th>
+            <th data-col="efficiency">Efficiency (T/W) <span class="sort-icon">↕</span></th>
+            <th data-col="score" class="sorted">Score <span class="sort-icon">▼</span></th>
+            <th style="width:36px"></th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+    <!-- Mobile card list -->
+    <div class="card-list" id="cardList"></div>
+    <div class="table-footer">
+      <span id="rowCount">Showing 39 models</span>
+      <span>Scores recalculate with weight adjustments below</span>
+    </div>
+  </div>
+
+  <!-- Scoring Panel -->
+  <div class="scoring-panel" id="scoringPanel">
+    <h3>How Scoring Works</h3>
+    <p style="color:var(--text-secondary);font-size:.86rem;margin-bottom:4px">Composite score computed from weighted, normalized metrics. Adjust weights to reflect your priorities.</p>
+    <div class="formula">Score = w₁·Accuracy + w₂·(1/Cost) + w₃·(1/Carbon) + w₄·Efficiency + w₅·(1/ExecTime)</div>
+    <div class="weight-sliders" id="weightSliders">
+      <div class="weight-slider"><label>Accuracy <span id="wAccVal">30</span>%</label><input type="range" min="0" max="100" value="30" data-key="accuracy" oninput="updateWeights()"></div>
+      <div class="weight-slider"><label>Cost <span id="wCostVal">20</span>%</label><input type="range" min="0" max="100" value="20" data-key="cost" oninput="updateWeights()"></div>
+      <div class="weight-slider"><label>Carbon <span id="wCarbonVal">15</span>%</label><input type="range" min="0" max="100" value="15" data-key="carbon" oninput="updateWeights()"></div>
+      <div class="weight-slider"><label>Efficiency <span id="wEffVal">20</span>%</label><input type="range" min="0" max="100" value="20" data-key="efficiency" oninput="updateWeights()"></div>
+      <div class="weight-slider"><label>Exec Time <span id="wTimeVal">15</span>%</label><input type="range" min="0" max="100" value="15" data-key="execTime" oninput="updateWeights()"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSIGHTS ===== -->
+<section class="section" id="insights">
+  <div class="section-header">
+    <h2>Key Insights</h2>
+    <p>Counterintuitive findings from real hardware measurements.</p>
+  </div>
+  <div class="insight-card">
+    <h3>Paradox: NF4 is 22.9% LESS Efficient Than FP16 on RTX 5090 for 1.5B Models</h3>
+    <p>Measured via NVML 10Hz power sampling. On the RTX 5090, small models (1.5B parameters) show an unexpected efficiency inversion — NF4 quantization actually consumes more energy per token than full FP16 inference.</p>
+    <div class="bar-chart">
+      <div class="bar-row"><div class="bar-label">FP16</div><div class="bar-track"><div class="bar-fill fp16" style="width:100%">415 tok/W</div></div></div>
+      <div class="bar-row"><div class="bar-label">NF4</div><div class="bar-track"><div class="bar-fill nf4" style="width:77%">320 tok/W</div></div></div>
+    </div>
+  </div>
+  <div class="insight-card">
+    <h3>Batch Size Is the Biggest Energy Lever</h3>
+    <p>On A800 + Mistral-7B INT8, increasing batch size from 1 to 64 reduces energy per request by 95.7% (1,768 J → 76 J) while pushing GPU utilization to 91%. For throughput-oriented workloads, batch size optimization dwarfs quantization gains.</p>
+    <div class="bar-chart">
+      <div class="bar-row"><div class="bar-label">BS=1</div><div class="bar-track"><div class="bar-fill nf4" style="width:100%">1,768 J/req</div></div></div>
+      <div class="bar-row"><div class="bar-label">BS=64</div><div class="bar-track"><div class="bar-fill fp16" style="width:4.3%">76 J</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TEMPLATES ===== -->
+<section class="section" id="templates">
+  <div class="section-header">
+    <h2>Calculator Templates</h2>
+    <p>Industry-specific cost and carbon analysis starting points.</p>
+  </div>
+  <div class="template-grid">
+    <div class="template-card">
+      <div class="template-icon">&#9874;</div>
+      <h4>DeepSeek vs OpenAI Deep Cost Evaluation</h4>
+      <p>Enterprise AI infrastructure selection: 8×H100 cluster, 5M tokens/day, full-spectrum cost & carbon comparison.</p>
+      <div class="template-tags"><span class="template-tag">DeepSeek-V3</span><span class="template-tag">GPT-4o</span><span class="template-tag">H100</span><span class="template-tag">5M tok/day</span></div>
+      <button class="btn btn-outline btn-sm">Open in Calculator</button>
+    </div>
+    <div class="template-card">
+      <div class="template-icon">&#127758;</div>
+      <h4>Enterprise Carbon Quota Trading Forecast</h4>
+      <p>Large-scale GPU cluster carbon assessment: 16×A100 running 24/7, carbon tax penalty modeling & quota cost analysis.</p>
+      <div class="template-tags"><span class="template-tag">16×A100</span><span class="template-tag">Carbon Tax</span><span class="template-tag">PUE 1.4</span><span class="template-tag">10M tok/day</span></div>
+      <button class="btn btn-outline btn-sm">Open in Calculator</button>
+    </div>
+    <div class="template-card">
+      <div class="template-icon">&#128188;</div>
+      <h4>Freelancer Net Income Modeling</h4>
+      <p>Freelance developer AI tool cost analysis: Gemini Flash vs GPT-4o-mini, monthly net cost & ROI evaluation.</p>
+      <div class="template-tags"><span class="template-tag">Gemini 2.0</span><span class="template-tag">GPT-4o-mini</span><span class="template-tag">T4</span><span class="template-tag">100K tok/day</span></div>
+      <button class="btn btn-outline btn-sm">Open in Calculator</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== METHODOLOGY ===== -->
+<section class="section" id="methodology">
+  <div class="section-header">
+    <h2>Methodology</h2>
+    <p>How we measure, estimate, and score AI model efficiency.</p>
+  </div>
+  <div class="method-grid">
+    <div class="method-card">
+      <h3><span style="color:var(--green)">&#9679;</span> Direct Measurement</h3>
+      <ul>
+        <li>Hardware: RTX 5090, RTX 4090D, A800 GPUs via AutoDL Cloud</li>
+        <li>Software: PyTorch 2.4.1+cu121 / 2.10.0+cu128, bitsandbytes for quantization</li>
+        <li>Power Monitoring: NVML (nvidia-smi) at 10Hz sampling rate</li>
+        <li>Each config runs 10 iterations minimum; coefficient of variation &lt;1%</li>
+        <li>Metrics: wall-clock latency, GPU energy (Joules), tokens generated, GPU utilization</li>
+      </ul>
+    </div>
+    <div class="method-card">
+      <h3><span style="color:var(--blue)">&#9679;</span> API Estimation</h3>
+      <ul>
+        <li>Cost sourced from official published API pricing pages (Google, Anthropic, OpenAI)</li>
+        <li>Carbon estimated using average US grid intensity (0.4 kgCO₂/kWh) from IEA data</li>
+        <li>Assumed datacenter PUE of ~1.1 for major cloud providers</li>
+        <li>Inference power draw estimated from public MLPerf benchmarks</li>
+        <li>Not independently verified — marked with "~Estimated" badge</li>
+      </ul>
+    </div>
+    <div class="method-card">
+      <h3><span style="color:var(--purple)">&#9679;</span> Research Literature</h3>
+      <ul>
+        <li>Performance data from original papers (LLaMA, BERT, ResNet, Transformer)</li>
+        <li>Energy/carbon extrapolated from A100/V100 inference benchmarks in community repos</li>
+        <li>Key references: Strubell et al. 2019, Schwartz et al. 2020, He et al. 2015</li>
+        <li>Values scaled to comparable units for cross-model comparison</li>
+      </ul>
+    </div>
+    <div class="method-card">
+      <h3>&#9881; Scoring Formula</h3>
+      <ul>
+        <li>Each metric is min-max normalized to [0, 100] across the dataset</li>
+        <li>Cost, Carbon, and Exec Time are inverted (lower is better → higher normalized score)</li>
+        <li>Default weights: Accuracy 30%, Cost 20%, Carbon 15%, Efficiency 20%, Speed 15%</li>
+        <li>Weights are adjustable via the interactive sliders on the Leaderboard</li>
+        <li>Data verified as of Jan–Feb 2026; API pricing may have changed since</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section" id="about">
+  <div class="section-header" style="text-align:center">
+    <h2>About EcoCompute</h2>
+  </div>
+  <div class="about-box">
+    <p>EcoCompute is an open-source project that brings transparency to the real cost — financial and environmental — of running AI models. We believe that informed infrastructure decisions start with honest, reproducible benchmarks. Our data combines direct hardware measurements with clearly-labeled estimates, so you always know what you're looking at.</p>
+    <p style="margin-bottom:24px">Contributions, corrections, and new benchmark submissions are welcome.</p>
+    <a href="https://github.com/hongping-zh/ecocompute-ai" target="_blank" rel="noopener" class="gh-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <p>EcoCompute &copy; 2026. Data last updated February 2026. Open-source under MIT License.</p>
+</footer>
+
+<!-- ===== COMPARE MODAL ===== -->
+<div class="modal-overlay" id="compareModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Model Comparison</h3>
+      <button class="modal-close" onclick="closeCompare()">&times;</button>
+    </div>
+    <div class="modal-body" id="compareBody"></div>
+  </div>
+</div>
+<script>
+// ===== MODEL DATA =====
+const models=[
+{model:"Gemini 1.5 Pro",vendor:"Google",source:"Estimated",gpu:"API",quant:"N/A",accuracy:98.2,execTime:2.1,cost:.002,carbon:.45,efficiency:420,score:60,verified:"2026-01-20",ref:"https://ai.google.dev/pricing",note:"Cost from published API pricing. Carbon estimated using avg US grid intensity."},
+{model:"Claude 3.5 Sonnet",vendor:"Anthropic",source:"Estimated",gpu:"API",quant:"N/A",accuracy:98,execTime:2.4,cost:.003,carbon:.48,efficiency:400,score:53,verified:"2026-01-20",ref:"https://www.anthropic.com/pricing",note:"Cost from published API pricing. Carbon estimated using avg US grid intensity and assumed PUE ~1.1."},
+{model:"GPT-4o",vendor:"OpenAI",source:"Estimated",gpu:"API",quant:"N/A",accuracy:97.9,execTime:1.8,cost:.005,carbon:.52,efficiency:380,score:45,verified:"2026-01-20",ref:"https://openai.com/api/pricing/",note:"Cost from published API pricing. Carbon estimated using avg US grid intensity."},
+{model:"LLaMA-style 70B",vendor:"Meta Research",source:"Research",gpu:"Research",quant:"N/A",accuracy:96.8,execTime:4.5,cost:.004,carbon:.95,efficiency:180,score:29,ref:"https://arxiv.org/abs/2307.09288",note:"Performance from LLaMA 2 technical report. Energy/carbon extrapolated from A100/H100 benchmarks."},
+{model:"Gemini 1.5 Flash",vendor:"Google",source:"Estimated",gpu:"API",quant:"N/A",accuracy:96.4,execTime:.8,cost:.0005,carbon:.12,efficiency:850,score:79,verified:"2026-01-20",ref:"https://ai.google.dev/pricing",note:"Cost from published API pricing. Carbon estimated using avg US grid intensity."},
+{model:"LLaMA-style 13B",vendor:"Meta Research",source:"Research",gpu:"Research",quant:"N/A",accuracy:94.1,execTime:2.1,cost:.0012,carbon:.35,efficiency:500,score:62,ref:"https://arxiv.org/abs/2302.13971",note:"Performance from LLaMA technical report. Energy/carbon extrapolated from A100 benchmarks."},
+{model:"Qwen2.5-7B-Instruct FP16",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"FP16",accuracy:93.5,execTime:.03,cost:.0005,carbon:.207,efficiency:176,score:74,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"Direct measurement on RTX 4090D via PyTorch 2.4.1+cu121, AutoDL Cloud."},
+{model:"Mistral-7B-Instruct-v0.3 FP16",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"FP16",accuracy:92.8,execTime:.03,cost:.0006,carbon:.224,efficiency:160,score:73,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"Direct measurement on RTX 4090D via PyTorch 2.4.1+cu121, AutoDL Cloud."},
+{model:"Qwen2.5-7B-Instruct INT8",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"INT8",accuracy:92.7,execTime:.1,cost:.0006,carbon:.243,efficiency:126,score:72,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"INT8 uses 17.4% MORE energy than FP16."},
+{model:"LLaMA-style 7B",vendor:"Meta Research",source:"Research",gpu:"Research",quant:"N/A",accuracy:92.5,execTime:1.2,cost:.0006,carbon:.18,efficiency:750,score:71,ref:"https://arxiv.org/abs/2302.13971",note:"Performance from LLaMA technical report."},
+{model:"Mistral-7B INT8 BS=64",vendor:"A800 Batch Size",source:"Measured",gpu:"A800",quant:"INT8",accuracy:91.9,execTime:.004,cost:.00001,carbon:.003,efficiency:3354,score:93,verified:"2026-02-15",ref:"https://github.com/hongping-zh/ecocompute-dynamic-eval",note:"BS=64: 76 J/request (−95.7% vs BS=1), 91% GPU util. BEST throughput."},
+{model:"Mistral-7B INT8 BS=16",vendor:"A800 Batch Size",source:"Measured",gpu:"A800",quant:"INT8",accuracy:91.9,execTime:.007,cost:.00003,carbon:.008,efficiency:1002,score:82,verified:"2026-02-15",ref:"https://github.com/hongping-zh/ecocompute-dynamic-eval",note:"BS=16: 205 J/request (−88% vs BS=1). RECOMMENDED for interactive apps."},
+{model:"Mistral-7B INT8 BS=8",vendor:"A800 Batch Size",source:"Measured",gpu:"A800",quant:"INT8",accuracy:91.9,execTime:.01,cost:.00004,carbon:.011,efficiency:533,score:80,verified:"2026-02-15",ref:"https://github.com/hongping-zh/ecocompute-dynamic-eval",note:"BS=8: 284 J/request (−84% vs BS=1), 50.4% GPU util."},
+{model:"Mistral-7B INT8 BS=1",vendor:"A800 Batch Size",source:"Measured",gpu:"A800",quant:"INT8",accuracy:91.9,execTime:.05,cost:.0002,carbon:.07,efficiency:60,score:76,verified:"2026-02-15",ref:"https://github.com/hongping-zh/ecocompute-dynamic-eval",note:"BS=1: 1,768 J/request, 45.3% GPU util."},
+{model:"Mistral-7B-Instruct-v0.3 INT8",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"INT8",accuracy:91.9,execTime:.13,cost:.0007,carbon:.293,efficiency:105,score:69,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"INT8 uses 30.7% MORE energy than FP16."},
+{model:"ResNet-152 CNN",vendor:"Microsoft",source:"Research",gpu:"Research",quant:"N/A",accuracy:91.8,execTime:.55,cost:.0004,carbon:.11,efficiency:700,score:75,ref:"https://arxiv.org/abs/1512.03385",note:"Accuracy from original paper. Inference from MLPerf benchmarks."},
+{model:"Transformer XL 6.7B",vendor:"Research",source:"Research",gpu:"Research",quant:"N/A",accuracy:91.2,execTime:1.1,cost:.0008,carbon:.25,efficiency:600,score:67,ref:"https://arxiv.org/abs/1906.02243",note:"Values from published research on transformer energy consumption."},
+{model:"Qwen2.5-7B-Instruct NF4",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"NF4",accuracy:91.2,execTime:.05,cost:.0003,carbon:.139,efficiency:231,score:74,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"NF4 saves 32.7% energy vs FP16."},
+{model:"Qwen2-7B FP16",vendor:"RTX 5090 Benchmark",source:"Measured",gpu:"RTX 5090",quant:"FP16",accuracy:91.2,execTime:.01,cost:.0006,carbon:.218,efficiency:181,score:71,verified:"2026-01-15",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"Direct measurement on RTX 5090 via PyTorch 2.10.0+cu128."},
+{model:"Mistral-7B-Instruct-v0.3 NF4",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"NF4",accuracy:90.5,execTime:.06,cost:.0004,carbon:.147,efficiency:213,score:73,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"NF4 saves 34.5% energy vs FP16."},
+{model:"ResNet-50 CNN",vendor:"Microsoft",source:"Research",gpu:"Research",quant:"N/A",accuracy:89.5,execTime:.25,cost:.0002,carbon:.05,efficiency:1000,score:77,ref:"https://arxiv.org/abs/1512.03385",note:"Accuracy from original paper."},
+{model:"Qwen2-7B NF4",vendor:"RTX 5090 Benchmark",source:"Measured",gpu:"RTX 5090",quant:"NF4",accuracy:89.5,execTime:.02,cost:.0005,carbon:.193,efficiency:205,score:70,verified:"2026-01-15",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"4-bit NF4 quantization. 11.4% energy savings vs FP16."},
+{model:"BERT Large",vendor:"Google",source:"Research",gpu:"Research",quant:"N/A",accuracy:88.9,execTime:.35,cost:.0003,carbon:.08,efficiency:850,score:74,ref:"https://arxiv.org/abs/1810.04805",note:"Accuracy from BERT paper (GLUE benchmark)."},
+{model:"Yi-1.5-6B-Chat FP16",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"FP16",accuracy:88.5,execTime:.03,cost:.0005,carbon:.187,efficiency:192,score:69,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"Direct measurement, NVML power monitoring, 10 iterations."},
+{model:"Transformer Large 1.3B",vendor:"Research",source:"Research",gpu:"Research",quant:"N/A",accuracy:88.4,execTime:.45,cost:.0003,carbon:.09,efficiency:900,score:73,ref:"https://arxiv.org/abs/1906.02243",note:"Values from published research papers."},
+{model:"Yi-1.5-6B-Chat INT8",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"INT8",accuracy:87.8,execTime:.12,cost:.0006,carbon:.248,efficiency:120,score:66,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"INT8 uses 32.7% MORE energy than FP16."},
+{model:"Qwen2.5-3B FP16",vendor:"RTX 5090 Benchmark",source:"Measured",gpu:"RTX 5090",quant:"FP16",accuracy:86.7,execTime:.02,cost:.0003,carbon:.134,efficiency:295,score:69,verified:"2026-01-15",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"Direct measurement on RTX 5090."},
+{model:"Yi-1.5-6B-Chat NF4",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"NF4",accuracy:86.2,execTime:.05,cost:.0003,carbon:.131,efficiency:238,score:68,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"NF4: 30.2% energy savings vs FP16."},
+{model:"BERT Base",vendor:"Google",source:"Research",gpu:"Research",quant:"N/A",accuracy:85.2,execTime:.15,cost:.0001,carbon:.04,efficiency:1100,score:73,ref:"https://arxiv.org/abs/1810.04805",note:"Accuracy from BERT paper."},
+{model:"Phi-3-mini-4k FP16",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"FP16",accuracy:84.7,execTime:.03,cost:.0003,carbon:.119,efficiency:278,score:67,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"Direct measurement on RTX 4090D."},
+{model:"Qwen2.5-3B NF4",vendor:"RTX 5090 Benchmark",source:"Measured",gpu:"RTX 5090",quant:"NF4",accuracy:84.1,execTime:.03,cost:.0004,carbon:.15,efficiency:264,score:66,verified:"2026-01-15",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"4-bit NF4 quantization via bitsandbytes."},
+{model:"Phi-3-mini-4k INT8",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"INT8",accuracy:83.6,execTime:.08,cost:.0004,carbon:.156,efficiency:190,score:64,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"INT8 uses 31.2% MORE energy than FP16."},
+{model:"Phi-3-mini-4k NF4",vendor:"RTX 4090D Benchmark",source:"Measured",gpu:"RTX 4090D",quant:"NF4",accuracy:82.4,execTime:.05,cost:.0003,carbon:.109,efficiency:276,score:65,verified:"2026-02-12",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"NF4 saves 8.1% energy vs FP16."},
+{model:"Qwen2-1.5B FP16",vendor:"RTX 5090 Benchmark",source:"Measured",gpu:"RTX 5090",quant:"FP16",accuracy:82.3,execTime:.01,cost:.0002,carbon:.096,efficiency:415,score:66,verified:"2026-01-15",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"Direct measurement on RTX 5090."},
+{model:"Transformer Medium 350M",vendor:"Research",source:"Research",gpu:"Research",quant:"N/A",accuracy:82.1,execTime:.12,cost:.0001,carbon:.03,efficiency:1100,score:70,ref:"https://arxiv.org/abs/1906.02243",note:"Values from published research."},
+{model:"Qwen2-1.5B NF4",vendor:"RTX 5090 Benchmark",source:"Measured",gpu:"RTX 5090",quant:"NF4",accuracy:79.8,execTime:.02,cost:.0003,carbon:.124,efficiency:320,score:62,verified:"2026-01-15",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"4-bit NF4 quantization via bitsandbytes."},
+{model:"TinyLlama-1.1B FP16",vendor:"RTX 5090 Benchmark",source:"Measured",gpu:"RTX 5090",quant:"FP16",accuracy:78.5,execTime:.01,cost:.0002,carbon:.066,efficiency:602,score:63,verified:"2026-01-15",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"Throughput from token generation, energy from nvidia-smi polling."},
+{model:"Transformer Small 125M",vendor:"Research",source:"Research",gpu:"Research",quant:"N/A",accuracy:76.5,execTime:.05,cost:.0001,carbon:.01,efficiency:1500,score:66,ref:"https://arxiv.org/abs/1906.02243",note:"Values from published research."},
+{model:"TinyLlama-1.1B NF4",vendor:"RTX 5090 Benchmark",source:"Measured",gpu:"RTX 5090",quant:"NF4",accuracy:76.2,execTime:.02,cost:.0002,carbon:.083,efficiency:477,score:60,verified:"2026-01-15",ref:"https://github.com/hongping-zh/ecocompute-ai",note:"4-bit NF4 quantization via bitsandbytes."}
+];
+
+// ===== STATE =====
+let sortCol='score',sortDir='desc',selected=new Set(),openRows=new Set();
+const weights={accuracy:30,cost:20,carbon:15,efficiency:20,execTime:15};
+
+// ===== NORMALIZATION & SCORING =====
+function recalcScores(){
+  const mins={},maxs={};
+  ['accuracy','cost','carbon','efficiency','execTime'].forEach(k=>{
+    mins[k]=Math.min(...models.map(m=>m[k]));
+    maxs[k]=Math.max(...models.map(m=>m[k]));
+  });
+  const norm=(v,k)=>{const range=maxs[k]-mins[k];return range===0?50:(v-mins[k])/range*100};
+  const total=weights.accuracy+weights.cost+weights.carbon+weights.efficiency+weights.execTime||1;
+  models.forEach(m=>{
+    const nAcc=norm(m.accuracy,'accuracy');
+    const nCost=100-norm(m.cost,'cost');
+    const nCarbon=100-norm(m.carbon,'carbon');
+    const nEff=norm(m.efficiency,'efficiency');
+    const nTime=100-norm(m.execTime,'execTime');
+    m.score=Math.round(
+      (weights.accuracy*nAcc+weights.cost*nCost+weights.carbon*nCarbon+
+       weights.efficiency*nEff+weights.execTime*nTime)/total
+    );
+  });
+}
+
+// ===== FILTERING & SORTING =====
+function getFiltered(){
+  const gpu=document.getElementById('filterGPU').value;
+  const quant=document.getElementById('filterQuant').value;
+  const src=document.getElementById('filterSource').value;
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  let f=models.filter(m=>{
+    if(gpu&&m.gpu!==gpu)return false;
+    if(quant&&m.quant!==quant)return false;
+    if(src&&m.source!==src)return false;
+    if(q&&!(m.model.toLowerCase().includes(q)||m.vendor.toLowerCase().includes(q)))return false;
+    return true;
+  });
+  f.sort((a,b)=>{
+    let va=a[sortCol],vb=b[sortCol];
+    if(typeof va==='string'){va=va.toLowerCase();vb=vb.toLowerCase()}
+    if(va<vb)return sortDir==='asc'?-1:1;
+    if(va>vb)return sortDir==='asc'?1:-1;
+    return 0;
+  });
+  return f;
+}
+
+// ===== RENDER TABLE =====
+function render(){
+  const data=getFiltered();
+  const tbody=document.getElementById('tableBody');
+  const cardList=document.getElementById('cardList');
+  let html='';let cards='';
+  data.forEach((m,i)=>{
+    const rank=i+1;
+    const sc=m.score>=75?'score-high':m.score>=50?'score-mid':'score-low';
+    const badge=m.source==='Measured'?'badge-measured':m.source==='Estimated'?'badge-estimated':'badge-research';
+    const badgeIcon=m.source==='Measured'?'&#10003;':m.source==='Estimated'?'~':'&#9671;';
+    const chk=selected.has(m.model)?'checked':'';
+    const isOpen=openRows.has(m.model);
+    html+=`<tr>
+      <td class="checkbox-cell"><input type="checkbox" ${chk} onchange="toggleSelect('${m.model.replace(/'/g,"\\'")}')"></td>
+      <td class="metric-val" style="color:var(--text-tertiary)">${rank}</td>
+      <td class="model-cell"><div class="model-name">${m.model}</div><div class="model-vendor">${m.vendor}</div></td>
+      <td><span class="badge ${badge}">${badgeIcon} ${m.source}</span></td>
+      <td class="metric-val">${m.accuracy.toFixed(1)}</td>
+      <td class="metric-val">${m.execTime<0.01?'<0.01':m.execTime.toFixed(2)}</td>
+      <td class="metric-val">${m.cost<0.0001?'<0.0001':m.cost.toFixed(4)}</td>
+      <td class="metric-val">${m.carbon.toFixed(3)}</td>
+      <td class="metric-val">${m.efficiency.toLocaleString()}</td>
+      <td class="score-cell ${sc}">${m.score}</td>
+      <td><button class="expand-btn" onclick="toggleRow('${m.model.replace(/'/g,"\\'")}')">${isOpen?'&#9650;':'&#9660;'}</button></td>
+    </tr>`;
+    html+=`<tr class="expand-row ${isOpen?'open':''}" data-expand="${m.model}">
+      <td colspan="11">
+        <strong>GPU:</strong> ${m.gpu} &nbsp;|&nbsp; <strong>Quantization:</strong> ${m.quant}${m.verified?' &nbsp;|&nbsp; <strong>Verified:</strong> '+m.verified:''}
+        <br>${m.note}
+        ${m.ref?'<br><a href="'+m.ref+'" target="_blank" rel="noopener">'+m.ref+'</a>':''}
+      </td>
+    </tr>`;
+    // Mobile card
+    cards+=`<div class="card-item">
+      <div class="card-item-head">
+        <div><div class="model-name">${m.model}</div><div class="model-vendor">${m.vendor}</div></div>
+        <span class="badge ${badge}" style="flex-shrink:0">${badgeIcon} ${m.source}</span>
+      </div>
+      <div class="card-item-metrics">
+        <div class="card-item-metric"><div class="v ${sc}">${m.score}</div><div class="l">Score</div></div>
+        <div class="card-item-metric"><div class="v">${m.accuracy.toFixed(1)}</div><div class="l">Accuracy</div></div>
+        <div class="card-item-metric"><div class="v">${m.efficiency.toLocaleString()}</div><div class="l">Tok/W</div></div>
+        <div class="card-item-metric"><div class="v">${m.cost.toFixed(4)}</div><div class="l">$/1k</div></div>
+        <div class="card-item-metric"><div class="v">${m.carbon.toFixed(3)}</div><div class="l">gCO₂</div></div>
+        <div class="card-item-metric"><div class="v">${m.execTime<0.01?'<0.01':m.execTime.toFixed(2)}</div><div class="l">Time(s)</div></div>
+      </div>
+    </div>`;
+  });
+  tbody.innerHTML=html;
+  cardList.innerHTML=cards;
+  document.getElementById('rowCount').textContent=`Showing ${data.length} model${data.length!==1?'s':''}`;
+  updateCompareBtn();
+}
+
+// ===== SORT =====
+document.querySelectorAll('thead th[data-col]').forEach(th=>{
+  th.addEventListener('click',()=>{
+    const col=th.dataset.col;
+    if(col===sortCol)sortDir=sortDir==='asc'?'desc':'asc';
+    else{sortCol=col;sortDir=col==='model'||col==='source'?'asc':'desc'}
+    document.querySelectorAll('thead th').forEach(t=>{t.classList.remove('sorted');t.querySelector('.sort-icon')&&(t.querySelector('.sort-icon').textContent='↕')});
+    th.classList.add('sorted');
+    th.querySelector('.sort-icon').textContent=sortDir==='asc'?'▲':'▼';
+    render();
+  });
+});
+
+// ===== FILTERS =====
+['filterGPU','filterQuant','filterSource','searchInput'].forEach(id=>{
+  document.getElementById(id).addEventListener(id==='searchInput'?'input':'change',render);
+});
+
+// ===== SELECT / COMPARE =====
+function toggleSelect(name){
+  if(selected.has(name))selected.delete(name);
+  else if(selected.size<4)selected.add(name);
+  else{alert('Maximum 4 models for comparison.');render();return}
+  updateCompareBtn();
+}
+function updateCompareBtn(){
+  const btn=document.getElementById('compareBtn');
+  btn.textContent=`Compare Selected (${selected.size})`;
+  btn.disabled=selected.size<2;
+}
+document.getElementById('selectAll').addEventListener('change',function(){
+  const data=getFiltered();
+  if(this.checked){selected.clear();data.slice(0,4).forEach(m=>selected.add(m.model))}
+  else selected.clear();
+  render();
+});
+document.getElementById('compareBtn').addEventListener('click',openCompare);
+
+function openCompare(){
+  if(selected.size<2)return;
+  const sel=models.filter(m=>selected.has(m.model));
+  let html='<div class="compare-grid" style="grid-template-columns:repeat('+Math.min(sel.length,4)+',1fr)">';
+  sel.forEach(m=>{
+    const sc=m.score>=75?'score-high':m.score>=50?'score-mid':'score-low';
+    html+=`<div class="compare-card">
+      <h4>${m.model}</h4>
+      <div style="font-size:.78rem;color:var(--text-tertiary);margin-bottom:12px">${m.vendor} · ${m.gpu}</div>
+      <div class="compare-metrics">
+        <div class="compare-metric"><div class="val ${sc}">${m.score}</div><div class="lbl">Score</div></div>
+        <div class="compare-metric"><div class="val">${m.accuracy.toFixed(1)}</div><div class="lbl">Accuracy</div></div>
+        <div class="compare-metric"><div class="val">${m.efficiency.toLocaleString()}</div><div class="lbl">Tok/W</div></div>
+        <div class="compare-metric"><div class="val">$${m.cost.toFixed(4)}</div><div class="lbl">$/1k tok</div></div>
+        <div class="compare-metric"><div class="val">${m.carbon.toFixed(3)}</div><div class="lbl">gCO₂</div></div>
+        <div class="compare-metric"><div class="val">${m.execTime.toFixed(2)}s</div><div class="lbl">Latency</div></div>
+      </div>
+    </div>`;
+  });
+  html+='</div>';
+  // Radar chart via canvas
+  html+='<div class="radar-wrap"><canvas id="radarCanvas" width="420" height="420"></canvas></div>';
+  document.getElementById('compareBody').innerHTML=html;
+  document.getElementById('compareModal').classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>drawRadar(sel),50);
+}
+function closeCompare(){
+  document.getElementById('compareModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('compareModal').addEventListener('click',function(e){if(e.target===this)closeCompare()});
+
+// ===== RADAR CHART (pure canvas) =====
+function drawRadar(sel){
+  const canvas=document.getElementById('radarCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,R=150;
+  const labels=['Accuracy','1/Cost','1/Carbon','Efficiency','1/Latency'];
+  const colors=['#2563eb','#059669','#d97706','#7c3aed','#dc2626'];
+  // Normalize to 0-1
+  const allVals=sel.map(m=>[
+    m.accuracy/100,
+    Math.min(1,0.005/(m.cost+0.0001)),
+    Math.min(1,0.5/(m.carbon+0.001)),
+    Math.min(1,m.efficiency/3400),
+    Math.min(1,1/(m.execTime+0.01)/5)
+  ]);
+  ctx.clearRect(0,0,W,H);
+  const n=5;const step=Math.PI*2/n;
+  // Grid
+  for(let ring=1;ring<=4;ring++){
+    ctx.beginPath();
+    const r=R*ring/4;
+    for(let i=0;i<=n;i++){
+      const a=-Math.PI/2+step*i;
+      const x=cx+r*Math.cos(a),y=cy+r*Math.sin(a);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--border').trim();
+    ctx.lineWidth=1;ctx.stroke();
+  }
+  // Axes + labels
+  for(let i=0;i<n;i++){
+    const a=-Math.PI/2+step*i;
+    ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+R*Math.cos(a),cy+R*Math.sin(a));
+    ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--border').trim();
+    ctx.stroke();
+    const lx=cx+(R+24)*Math.cos(a),ly=cy+(R+24)*Math.sin(a);
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim();
+    ctx.font='12px DM Sans';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(labels[i],lx,ly);
+  }
+  // Data polygons
+  sel.forEach((m,mi)=>{
+    const vals=allVals[mi];
+    ctx.beginPath();
+    for(let i=0;i<=n;i++){
+      const idx=i%n;const a=-Math.PI/2+step*idx;
+      const r=R*vals[idx];
+      const x=cx+r*Math.cos(a),y=cy+r*Math.sin(a);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.fillStyle=colors[mi%colors.length]+'20';ctx.fill();
+    ctx.strokeStyle=colors[mi%colors.length];ctx.lineWidth=2;ctx.stroke();
+    // Dots
+    for(let i=0;i<n;i++){
+      const a=-Math.PI/2+step*i;const r=R*vals[i];
+      ctx.beginPath();ctx.arc(cx+r*Math.cos(a),cy+r*Math.sin(a),4,0,Math.PI*2);
+      ctx.fillStyle=colors[mi%colors.length];ctx.fill();
+    }
+  });
+  // Legend
+  let ly=H-10;
+  sel.forEach((m,mi)=>{
+    ctx.fillStyle=colors[mi%colors.length];
+    ctx.fillRect(10,ly-10,12,12);
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--text-primary').trim();
+    ctx.font='11px DM Sans';ctx.textAlign='left';
+    ctx.fillText(m.model,28,ly);
+    ly-=18;
+  });
+}
+
+// ===== EXPAND ROW =====
+function toggleRow(name){
+  if(openRows.has(name))openRows.delete(name);else openRows.add(name);
+  render();
+}
+
+// ===== WEIGHTS =====
+function updateWeights(){
+  document.querySelectorAll('#weightSliders input[type=range]').forEach(inp=>{
+    const k=inp.dataset.key;
+    weights[k]=parseInt(inp.value);
+    const ids={accuracy:'wAccVal',cost:'wCostVal',carbon:'wCarbonVal',efficiency:'wEffVal',execTime:'wTimeVal'};
+    document.getElementById(ids[k]).textContent=inp.value;
+  });
+  recalcScores();
+  render();
+}
+
+// ===== EXPORT =====
+function exportCSV(){
+  const data=getFiltered();
+  const header='Model,Vendor,Source,GPU,Quantization,Accuracy,ExecTime,Cost,Carbon,Efficiency,Score';
+  const rows=data.map(m=>`"${m.model}","${m.vendor}",${m.source},${m.gpu},${m.quant},${m.accuracy},${m.execTime},${m.cost},${m.carbon},${m.efficiency},${m.score}`);
+  download('ecocompute_data.csv','text/csv',header+'\n'+rows.join('\n'));
+}
+function exportJSON(){
+  const data=getFiltered();
+  download('ecocompute_data.json','application/json',JSON.stringify(data,null,2));
+}
+function download(name,type,content){
+  const blob=new Blob([content],{type});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=name;a.click();URL.revokeObjectURL(a.href);
+}
+
+// ===== THEME =====
+const toggle=document.getElementById('themeToggle');
+function setTheme(t){
+  document.documentElement.dataset.theme=t;
+  toggle.textContent=t==='dark'?'☾':'☀';
+  localStorage.setItem('eco-theme',t);
+}
+toggle.addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'));
+if(localStorage.getItem('eco-theme'))setTheme(localStorage.getItem('eco-theme'));
+else if(window.matchMedia('(prefers-color-scheme:dark)').matches)setTheme('dark');
+
+// ===== MOBILE NAV =====
+document.getElementById('navMobileBtn').addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));
+});
+
+// ===== ACTIVE NAV HIGHLIGHT =====
+const sections=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-100)current=s.id});
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+current);
+  });
+});
+
+// ===== INIT =====
+recalcScores();
+render();
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"75124c326cb447fe934cde04713ae013","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
