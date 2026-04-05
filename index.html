@@ -3,28 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI API Cost Comparison 2026 | EcoCompute - Compare GPT-4, Claude, Gemini, DeepSeek Pricing</title>
-<meta name="description" content="Compare AI API costs across GPT-4, Claude, Gemini, DeepSeek, and Llama. Interactive calculator shows real-time pricing, carbon footprint, and potential savings.">
-<meta name="keywords" content="AI API cost comparison, GPT-4 pricing, Claude API cost, Gemini pricing, DeepSeek cost, LLM API comparison, AI model pricing calculator, cheapest AI API, AI carbon footprint, model evaluation dashboard, green AI">
-<meta property="og:title" content="AI API Cost Comparison 2026 | Compare GPT-4, Claude, Gemini Pricing">
-<meta property="og:description" content="Interactive AI API cost calculator. Compare pricing across 8+ models including GPT-4, Claude, Gemini, and DeepSeek. Save up to 95% on AI costs.">
+<title>LLM Energy Efficiency Research | Why INT8 Increases Power Consumption | GPU Benchmarks</title>
+<meta name="description" content="Discover why INT8 quantization increases energy by 80-162%. Comprehensive GPU power measurements (RTX 5090, 4090D, A800) reveal when NF4 saves energy and why FP16 remains most efficient. 93+ measurements with full metadata.">
+<meta name="keywords" content="LLM energy efficiency, GPU power consumption, why INT8 increases energy consumption, quantization energy cost, NF4 vs FP16 energy, bitsandbytes power measurements, RTX 5090 LLM benchmarks, sustainable AI, model quantization dataset">
+<meta property="og:title" content="LLM Energy Efficiency Research | INT8 Quantization Paradox">
+<meta property="og:description" content="Why does INT8 increase energy by 80-162%? GPU power measurements reveal the truth about quantized LLM inference.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://hongping-zh.github.io/ecocompute-dynamic-eval/">
+<meta property="og:url" content="https://hongping-zh.github.io/">
+<meta property="og:image" content="https://hongping-zh.github.io/preview.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EcoCompute - LLM Cost & Carbon Dashboard">
-<meta name="twitter:description" content="Compare model metrics, estimate cost and carbon impact, and visualize live monitoring.">
+<meta name="twitter:title" content="Why INT8 Quantization Increases LLM Energy Consumption">
+<meta name="twitter:description" content="93+ GPU power measurements reveal INT8 paradox and when NF4 actually saves energy">
+<meta name="author" content="Hongping Zhang">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://hongping-zh.github.io/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Dataset",
-  "name": "EcoCompute AI Model Benchmark Dataset",
-  "description": "Cost, carbon, and efficiency benchmarks for 39 AI models across multiple GPU platforms",
-  "url": "https://hongping-zh.github.io/ecocompute-dynamic-eval/",
-  "license": "https://creativecommons.org/licenses/by/4.0/",
-  "creator": {"@type": "Organization", "name": "EcoCompute", "url": "https://github.com/hongping-zh/ecocompute-ai"},
-  "dateModified": "2026-02-15",
-  "variableMeasured": ["Accuracy", "Execution Time", "Cost per 1k tokens", "Carbon Emissions (gCO2)", "Energy Efficiency (Tokens/Watt)"]
+  "name": "LLM Quantization Energy Efficiency Benchmark Dataset",
+  "description": "Comprehensive GPU power measurements for quantized LLM inference across RTX 5090, RTX 4090D, and A800 GPUs. Includes 93+ measurements with complete metadata covering INT8, NF4, and FP16 quantization methods.",
+  "url": "https://hongping-zh.github.io/",
+  "keywords": [
+    "LLM energy efficiency",
+    "GPU power consumption",
+    "INT8 quantization",
+    "NF4 quantization",
+    "bitsandbytes benchmarks",
+    "sustainable AI"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "Hongping Zhang",
+    "email": "zhanghongping1982@gmail.com",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "Independent AI Researcher"
+    }
+  },
+  "distribution": {
+    "@type": "DataDownload",
+    "encodingFormat": "application/json",
+    "contentUrl": "https://github.com/hongping-zh/ecocompute-dynamic-eval"
+  },
+  "temporalCoverage": "2026",
+  "spatialCoverage": {
+    "@type": "Place",
+    "name": "Global"
+  },
+  "variableMeasured": [
+    "GPU Power Consumption (Watts)",
+    "Energy per 1000 tokens (Joules)",
+    "Inference Throughput (tokens/second)",
+    "Model Perplexity",
+    "GPU Memory Usage (GB)"
+  ],
+  "measurementTechnique": "NVIDIA NVML API direct power measurement",
+  "license": "https://opensource.org/licenses/MIT",
+  "dateModified": "2026-04-05"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://hongping-zh.github.io/"
+  }]
 }
 </script>
 <!-- FONTS -->
@@ -604,6 +653,46 @@ td.model-cell{white-space:normal;min-width:200px;max-width:280px}
     </div>
   </div>
 </header>
+
+<!-- ===== SEO SUMMARY ===== -->
+<section class="section" style="padding-top:32px;padding-bottom:32px;background:var(--bg-card);border-bottom:1px solid var(--border)">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px">
+    <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:16px;line-height:1.3">LLM Energy Efficiency Research: Why INT8 Quantization Increases Power Consumption</h2>
+    
+    <p style="font-size:1rem;line-height:1.7;color:var(--text-secondary);margin-bottom:14px">
+      Comprehensive GPU power measurements reveal surprising insights about quantized LLM inference. Our research answers the critical question: <strong style="color:var(--text-primary)">why does INT8 quantization increase energy consumption by 80-162%?</strong>
+    </p>
+    
+    <p style="font-size:1rem;line-height:1.7;color:var(--text-secondary);margin-bottom:14px">
+      Through rigorous benchmarking across <strong style="color:var(--text-primary)">RTX 5090, RTX 4090D, and A800 GPUs</strong>, we discovered that bitsandbytes' default INT8 implementation uses mixed-precision decomposition, causing significant energy overhead. Meanwhile, NF4 quantization only saves energy (5.3%) for models ≥6B parameters, but costs 25-34% more energy for smaller models.
+    </p>
+    
+    <p style="font-size:1rem;line-height:1.7;color:var(--text-secondary);margin-bottom:16px">
+      <strong style="color:var(--text-primary)">Key Finding:</strong> FP16 remains the most energy-efficient option when GPU memory allows. This dataset provides <strong style="color:var(--text-primary)">93+ measurements with complete metadata</strong>, enabling practitioners to make informed decisions about LLM deployment strategies.
+    </p>
+    
+    <div style="background:linear-gradient(135deg,var(--accent-soft),var(--green-bg));border-left:3px solid var(--accent);padding:14px 18px;border-radius:var(--radius-md);margin-bottom:12px">
+      <p style="font-size:0.9rem;line-height:1.6;color:var(--text-primary);margin:0">
+        <strong>🏆 Recognized by Industry Leaders:</strong> Our findings have been <strong>merged into Hugging Face Optimum official documentation</strong> and are actively discussed in <strong>MLCommons/MLPerf Inference #2558</strong> for adding energy metrics to the industry-standard AI benchmark.
+      </p>
+    </div>
+    
+    <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:0.85rem;color:var(--text-tertiary)">
+      <span><strong style="color:var(--text-primary)">Topics:</strong></span>
+      <span>LLM energy efficiency</span>
+      <span>•</span>
+      <span>GPU power consumption</span>
+      <span>•</span>
+      <span>INT8 quantization paradox</span>
+      <span>•</span>
+      <span>NF4 vs FP16 comparison</span>
+      <span>•</span>
+      <span>bitsandbytes optimization</span>
+      <span>•</span>
+      <span>sustainable AI</span>
+    </div>
+  </div>
+</section>
 
 <!-- ===== RECOGNITION ===== -->
 <section class="recognition-section" id="recognition">
