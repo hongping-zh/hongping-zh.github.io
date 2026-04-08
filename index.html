@@ -149,9 +149,45 @@ a:hover{text-decoration:underline}
 .theme-toggle:hover{background:rgba(255,255,255,.15)}
 .nav-mobile-btn{display:none;background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer}
 
+/* ========== TOP BANNER ========== */
+.top-banner{
+  margin-top:60px;
+  background:linear-gradient(135deg,#2563eb 0%,#7c3aed 100%);
+  border-bottom:2px solid rgba(255,255,255,.15);
+  padding:16px 24px;
+  position:relative;
+  overflow:hidden;
+}
+.top-banner::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.05) 50%,transparent 100%);
+  animation:shimmer 3s infinite;
+}
+@keyframes shimmer{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+.top-banner-inner{
+  max-width:1320px;margin:0 auto;position:relative;z-index:1;
+}
+.top-banner-main{text-align:center}
+.top-banner-title{
+  font-size:1.05rem;font-weight:700;color:#fff;
+  line-height:1.5;margin-bottom:8px;letter-spacing:-.01em;
+}
+.top-banner-audience{
+  font-size:.88rem;color:rgba(255,255,255,.85);
+  font-weight:500;margin:0;
+}
+[data-theme="dark"] .top-banner{
+  background:linear-gradient(135deg,#1e40af 0%,#6b21a8 100%);
+}
+@media(max-width:768px){
+  .top-banner{padding:14px 16px}
+  .top-banner-title{font-size:.92rem}
+  .top-banner-audience{font-size:.8rem}
+}
+
 /* ========== HERO ========== */
 .hero{
-  margin-top:60px;padding:56px 24px 40px;
+  margin-top:0;padding:56px 24px 40px;
   background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-root) 100%);
   border-bottom:1px solid var(--border);position:relative;overflow:hidden;
 }
@@ -639,6 +675,16 @@ td.model-cell{white-space:normal;min-width:200px;max-width:280px}
     </div>
   </div>
 </nav>
+
+<!-- ===== TOP BANNER ===== -->
+<div class="top-banner">
+  <div class="top-banner-inner">
+    <div class="top-banner-main">
+      <h2 class="top-banner-title">World's Most Comprehensive LLM Energy Efficiency Database · 93+ Model & GPU Power Comparisons · Adopted by Hugging Face & MLCommons Standards</h2>
+      <p class="top-banner-audience">For: LLM Deployment Engineers / Chip Vendors / AI Energy Efficiency Researchers</p>
+    </div>
+  </div>
+</div>
 
 <!-- ===== HERO ===== -->
 <header class="hero">
