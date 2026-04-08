@@ -982,12 +982,14 @@ td.model-cell{white-space:normal;min-width:200px;max-width:280px}
       <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--text-primary)">Researcher Identity & Citation</h3>
       
       <!-- ORCID Badge -->
-      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:16px;">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div style="width:40px;height:40px;background:linear-gradient(135deg,#a6ce39 0%,#4a8f3f 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:bold;">O</div>
-          <div>
-            <div style="font-family:var(--font-mono);font-size:.85rem;color:var(--text-primary);font-weight:600;">ORCID: 0009-0000-2529-4613</div>
-            <div style="font-size:.75rem;color:var(--text-tertiary);">Verified researcher identity</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:40px;height:40px;background:linear-gradient(135deg,#a6ce39 0%,#4a8f3f 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:bold;flex-shrink:0;">O</div>
+            <div>
+              <div style="font-family:var(--font-mono);font-size:.85rem;color:var(--text-primary);font-weight:600;">ORCID: 0009-0000-2529-4613</div>
+              <div style="font-size:.75rem;color:var(--text-tertiary);">Verified researcher identity</div>
+            </div>
           </div>
         </div>
         <a href="https://orcid.org/0009-0000-2529-4613" target="_blank" rel="noopener" onclick="trackORCIDVisit()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#a6ce39;color:#fff;border-radius:var(--radius-sm);text-decoration:none;font-size:.8rem;font-weight:600;transition:opacity .2s;">
