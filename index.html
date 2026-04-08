@@ -17,7 +17,11 @@
 <meta name="author" content="Hongping Zhang">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="canonical" href="https://hongping-zh.github.io/">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>??</text></svg>">
+
+<!-- Plausible Analytics -->
+<script defer data-domain="hongping-zh.github.io" src="https://plausible.io/js/script.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1226,15 +1230,26 @@ document.querySelectorAll('thead th[data-col]').forEach(th=>{
 });
 
 // ===== FILTERS =====
-['filterGPU','filterQuant','filterSource','searchInput'].forEach(id=>{
-  document.getElementById(id).addEventListener(id==='searchInput'?'input':'change',render);
+['filterGPU','filterQuant','filterSource'].forEach(id=>{
+  document.getElementById(id).addEventListener('change',function(){
+    trackFilterUsage(id.replace('filter', '').toLowerCase(), this.value);
+    render();
+  });
+});
+document.getElementById('searchInput').addEventListener('input',function(){
+  trackSearch(this.value);
+  render();
 });
 
 // ===== SELECT / COMPARE =====
 function toggleSelect(name){
+  const model = models.find(m => m.model === name);
   if(selected.has(name))selected.delete(name);
   else if(selected.size<4)selected.add(name);
   else{alert('Maximum 4 models for comparison.');render();return}
+  if(model) {
+    trackModelSelection(model.model, model.gpu, model.quantization || 'N/A');
+  }
   updateCompareBtn();
 }
 function updateCompareBtn(){
@@ -1248,7 +1263,10 @@ document.getElementById('selectAll').addEventListener('change',function(){
   else selected.clear();
   render();
 });
-document.getElementById('compareBtn').addEventListener('click',openCompare);
+document.getElementById('compareBtn').addEventListener('click',function(){
+  trackComparison(selected.size);
+  openCompare();
+});
 
 function openCompare(){
   if(selected.size<2)return;
@@ -1378,12 +1396,14 @@ function updateWeights(){
 
 // ===== EXPORT =====
 function exportCSV(){
+  trackDataDownload();
   const data=getFiltered();
   const header='Model,Vendor,Source,GPU,Quantization,Accuracy,ExecTime,Cost,Carbon,Efficiency,Score';
   const rows=data.map(m=>`"${m.model}","${m.vendor}",${m.source},${m.gpu},${m.quant},${m.accuracy},${m.execTime},${m.cost},${m.carbon},${m.efficiency},${m.score}`);
   download('ecocompute_data.csv','text/csv',header+'\n'+rows.join('\n'));
 }
 function exportJSON(){
+  trackDataDownload();
   const data=getFiltered();
   download('ecocompute_data.json','application/json',JSON.stringify(data,null,2));
 }
@@ -1459,6 +1479,7 @@ document.querySelectorAll('.hw-filter-btn').forEach(btn=>{
     document.querySelectorAll('.hw-filter-btn').forEach(b=>b.classList.remove('active'));
     this.classList.add('active');
     activeHW=this.dataset.hw;
+    trackFilterUsage('hardware_scenario', activeHW);
     render();
     renderScatter();
   });
@@ -1581,6 +1602,56 @@ function drawScatterPlot(canvasId,tipId,xKey,xLabel){
     }
   };
   canvas.onmouseleave=function(){tip.style.display='none'};
+}
+
+// ===== ANALYTICS TRACKING =====
+function trackEvent(eventName, properties = {}) {
+  if (window.plausible) {
+    window.plausible(eventName, { props: properties });
+  }
+}
+
+// Track page load
+document.addEventListener('DOMContentLoaded', () => {
+  trackEvent('pageview', { page: 'homepage' });
+});
+
+// Track filter usage
+function trackFilterUsage(filterType, value) {
+  trackEvent('filter_used', {
+    filter_type: filterType,
+    filter_value: value
+  });
+}
+
+// Track search queries
+function trackSearch(query) {
+  trackEvent('search_performed', {
+    search_query: query.length > 50 ? query.substring(0, 50) + '...' : query
+  });
+}
+
+// Track model selection
+function trackModelSelection(model, gpu, quantization) {
+  trackEvent('model_selected', {
+    model: model,
+    gpu: gpu,
+    quantization: quantization
+  });
+}
+
+// Track comparison usage
+function trackComparison(count) {
+  trackEvent('models_compared', {
+    model_count: count
+  });
+}
+
+// Track data download
+function trackDataDownload() {
+  trackEvent('data_downloaded', {
+    format: 'csv'
+  });
 }
 
 // ===== INIT =====
