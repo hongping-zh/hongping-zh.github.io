@@ -33,7 +33,15 @@
       "name": "LLM Energy Efficiency Benchmark Dataset",
       "description": "93+ LLM inference energy efficiency benchmarks. GPU power measurement, quantization efficiency, batch size optimization, carbon & cost analysis. Adopted by Hugging Face & MLCommons.",
       "url": "https://hongping-zh.github.io/",
-      "identifier": "https://doi.org/10.5281/zenodo.18900289",
+      "identifier": [
+        "https://doi.org/10.5281/zenodo.18900289",
+        "https://hongping-zh.github.io/"
+      ],
+      "sameAs": [
+        "https://zenodo.org/records/18900289",
+        "https://github.com/hongping-zh/ecocompute-dynamic-eval",
+        "https://huggingface.co/docs/optimum/concept_guides/quantization#energy-efficiency-in-practice"
+      ],
       "keywords": [
         "LLM energy efficiency",
         "GPU power consumption",
@@ -874,6 +882,30 @@ td.model-cell{white-space:normal;min-width:200px;max-width:280px}
       <h2>Impact & Recognition</h2>
       <span class="rh-badge">Research Contributions</span>
     </div>
+    
+    <!-- Zenodo Citation Badge -->
+    <div style="text-align:center;margin-bottom:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;">
+      <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--text-primary)">Academic Citation</h3>
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:1.2rem;">??</span>
+          <div>
+            <div style="font-family:var(--font-mono);font-size:.85rem;color:var(--text-primary);font-weight:600;">DOI: 10.5281/zenodo.18900289</div>
+            <div style="font-size:.75rem;color:var(--text-tertiary);">Cite this dataset in your research</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <a href="https://doi.org/10.5281/zenodo.18900289" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--accent);color:#fff;border-radius:var(--radius-sm);text-decoration:none;font-size:.8rem;font-weight:600;transition:opacity .2s;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            View on Zenodo
+          </a>
+          <button onclick="copyCitation()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border);border-radius:var(--radius-sm);text-decoration:none;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Citation
+          </button>
+        </div>
+      </div>
+    </div>
     <div class="recognition-grid">
       <!-- Card 1: MLPerf / MLCommons -->
       <div class="rec-card">
@@ -1011,7 +1043,14 @@ td.model-cell{white-space:normal;min-width:200px;max-width:280px}
     <div class="card-list" id="cardList"></div>
     <div class="table-footer">
       <span id="rowCount">Showing 39 models</span>
-      <span>Scores recalculate with weight adjustments below</span>
+      <span style="display:flex;align-items:center;gap:6px;">
+        <span>Scores recalculate with weight adjustments below</span>
+        <span style="font-size:.75rem;color:var(--text-tertiary);">|</span>
+        <a href="https://doi.org/10.5281/zenodo.18900289" target="_blank" rel="noopener" style="font-size:.75rem;color:var(--text-tertiary);text-decoration:none;display:flex;align-items:center;gap:4px;transition:color .2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Dataset v1.0 (Zenodo)
+        </a>
+      </span>
     </div>
   </div>
 
@@ -1774,6 +1813,35 @@ function trackComparison(count) {
 function trackDataDownload() {
   trackEvent('data_downloaded', {
     format: 'csv'
+  });
+}
+
+// Zenodo citation functionality
+function copyCitation() {
+  const citation = `Zhang, H. (2026). LLM Energy Efficiency Benchmark Dataset (93+ GPU Power Measurements). Zenodo. https://doi.org/10.5281/zenodo.18900289`;
+  
+  navigator.clipboard.writeText(citation).then(() => {
+    // Show success feedback
+    const btn = event.target.closest('button');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+    btn.style.background = 'var(--green-bg)';
+    btn.style.color = 'var(--green)';
+    btn.style.borderColor = 'var(--green-border)';
+    
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 2000);
+    
+    // Track citation copy
+    trackEvent('citation_copied', {
+      source: 'zenodo_doi'
+    });
+  }).catch(err => {
+    console.error('Failed to copy citation:', err);
   });
 }
 
