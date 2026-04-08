@@ -18,6 +18,8 @@
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="canonical" href="https://hongping-zh.github.io/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23059e69'/><path d='M50 20 Q30 40 30 60 Q30 80 50 80 Q70 80 70 60 Q70 40 50 20' fill='%23fff' opacity='0.9'/></svg>">
+<link rel="alternate" hreflang="en" href="https://hongping-zh.github.io/">
+<link rel="alternate" hreflang="x-default" href="https://hongping-zh.github.io/">
 
 <!-- Plausible Analytics -->
 <script defer data-domain="hongping-zh.github.io" src="https://plausible.io/js/script.js"></script>
@@ -25,47 +27,125 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Dataset",
-  "name": "LLM Quantization Energy Efficiency Benchmark Dataset",
-  "description": "Comprehensive GPU power measurements for quantized LLM inference across RTX 5090, RTX 4090D, and A800 GPUs. Includes 93+ measurements with complete metadata covering INT8, NF4, and FP16 quantization methods.",
-  "url": "https://hongping-zh.github.io/",
-  "keywords": [
-    "LLM energy efficiency",
-    "GPU power consumption",
-    "INT8 quantization",
-    "NF4 quantization",
-    "bitsandbytes benchmarks",
-    "sustainable AI"
-  ],
-  "creator": {
-    "@type": "Person",
-    "name": "Hongping Zhang",
-    "email": "zhanghongping1982@gmail.com",
-    "affiliation": {
-      "@type": "Organization",
-      "name": "Independent AI Researcher"
+  "@graph": [
+    {
+      "@type": "Dataset",
+      "name": "LLM Energy Efficiency Benchmark Dataset",
+      "description": "93+ LLM inference energy efficiency benchmarks. GPU power measurement, quantization efficiency, batch size optimization, carbon & cost analysis. Adopted by Hugging Face & MLCommons.",
+      "url": "https://hongping-zh.github.io/",
+      "identifier": "https://doi.org/10.5281/zenodo.18900289",
+      "keywords": [
+        "LLM energy efficiency",
+        "GPU power consumption",
+        "INT8 quantization",
+        "NF4 quantization",
+        "bitsandbytes benchmarks",
+        "sustainable AI",
+        "MLPerf Inference",
+        "Hugging Face Optimum"
+      ],
+      "creator": {
+        "@type": "Person",
+        "name": "Hongping Zhang",
+        "email": "zhanghongping1982@gmail.com",
+        "sameAs": "https://github.com/hongping-zh"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "EcoCompute",
+        "url": "https://hongping-zh.github.io/"
+      },
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://github.com/hongping-zh/ecocompute-dynamic-eval",
+          "name": "JSON Dataset"
+        },
+        {
+          "@type": "DataDownload",
+          "encodingFormat": "text/csv",
+          "contentUrl": "https://hongping-zh.github.io/",
+          "name": "CSV Export"
+        }
+      ],
+      "temporalCoverage": "2026",
+      "spatialCoverage": {
+        "@type": "Place",
+        "name": "Global"
+      },
+      "variableMeasured": [
+        {
+          "@type": "PropertyValue",
+          "name": "GPU Power Consumption",
+          "unitText": "Watts",
+          "description": "Real-time GPU power draw measured via NVML API"
+        },
+        {
+          "@type": "PropertyValue", 
+          "name": "Energy per 1000 tokens",
+          "unitText": "Joules",
+          "description": "Energy consumption per 1000 generated tokens"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Inference Throughput",
+          "unitText": "tokens/second",
+          "description": "Model inference speed"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Model Accuracy",
+          "unitText": "percent",
+          "description": "Model performance accuracy"
+        }
+      ],
+      "measurementTechnique": "NVIDIA NVML API direct power measurement at 10Hz sampling",
+      "license": "https://opensource.org/licenses/MIT",
+      "dateModified": "2026-04-08",
+      "datePublished": "2026-01-15",
+      "citation": "https://huggingface.co/docs/optimum/concept_guides/quantization#energy-efficiency-in-practice"
+    },
+    {
+      "@type": "WebSite",
+      "name": "EcoCompute - LLM Energy Efficiency Benchmark",
+      "url": "https://hongping-zh.github.io/",
+      "description": "Open LLM Energy Benchmark · 93+ GPU Power Measurements · Adopted by Hugging Face & MLCommons",
+      "author": {
+        "@type": "Person",
+        "name": "Hongping Zhang"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "EcoCompute"
+      },
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "GitHub Pages",
+        "url": "https://pages.github.com"
+      }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "name": "Energy Efficiency Analysis of Quantized LLM Inference: Why Default INT8 Increases Power Consumption",
+      "author": {
+        "@type": "Person",
+        "name": "Hongping Zhang"
+      },
+      "datePublished": "2026-01-15",
+      "about": [
+        "LLM quantization",
+        "Energy efficiency",
+        "GPU power measurement",
+        "INT8 optimization"
+      ],
+      "isPartOf": {
+        "@type": "PublicationIssue",
+        "name": "MLCommons/MLPerf Inference Discussion #2558"
+      }
     }
-  },
-  "distribution": {
-    "@type": "DataDownload",
-    "encodingFormat": "application/json",
-    "contentUrl": "https://github.com/hongping-zh/ecocompute-dynamic-eval"
-  },
-  "temporalCoverage": "2026",
-  "spatialCoverage": {
-    "@type": "Place",
-    "name": "Global"
-  },
-  "variableMeasured": [
-    "GPU Power Consumption (Watts)",
-    "Energy per 1000 tokens (Joules)",
-    "Inference Throughput (tokens/second)",
-    "Model Perplexity",
-    "GPU Memory Usage (GB)"
-  ],
-  "measurementTechnique": "NVIDIA NVML API direct power measurement",
-  "license": "https://opensource.org/licenses/MIT",
-  "dateModified": "2026-04-05"
+  ]
 }
 </script>
 <script type="application/ld+json">
@@ -187,6 +267,35 @@ a:hover{text-decoration:underline}
   .top-banner{padding:14px 16px}
   .top-banner-title{font-size:.92rem}
   .top-banner-audience{font-size:.8rem}
+}
+
+/* ========== BREADCRUMB ========== */
+.breadcrumb-nav{
+  background:var(--bg-card);border-bottom:1px solid var(--border);
+  padding:8px 0;
+}
+.breadcrumb-inner{
+  max-width:1320px;margin:0 auto;padding:0 24px;
+}
+.breadcrumb-list{
+  display:flex;align-items:center;gap:8px;
+  list-style:none;margin:0;padding:0;font-size:.82rem;
+}
+.breadcrumb-item{
+  color:var(--text-tertiary);
+}
+.breadcrumb-item a{
+  color:var(--text-secondary);text-decoration:none;
+  transition:color .2s;
+}
+.breadcrumb-item a:hover{
+  color:var(--accent);text-decoration:underline;
+}
+.breadcrumb-item.active{
+  color:var(--text-primary);font-weight:500;
+}
+.breadcrumb-item:not(:last-child)::after{
+  content:'/';margin-left:8px;color:var(--text-tertiary);
 }
 
 /* ========== HERO ========== */
@@ -689,6 +798,20 @@ td.model-cell{white-space:normal;min-width:200px;max-width:280px}
     </div>
   </div>
 </div>
+
+<!-- ===== BREADCRUMB ===== -->
+<nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <div class="breadcrumb-inner">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item">
+        <a href="/">Home</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        LLM Energy Benchmark
+      </li>
+    </ol>
+  </div>
+</nav>
 
 <!-- ===== HERO ===== -->
 <header class="hero">
