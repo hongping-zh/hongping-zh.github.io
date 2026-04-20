@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 message: "If you use this dataset or findings, please cite it as below."
-title: "Energy Efficiency of Quantized Large Language Model Inference: Evidence for Quantization Efficiency Paradoxes on NVIDIA Blackwell, Ada Lovelace, and Ampere Architectures"
-version: 1.0.0
-date-released: 2026-02-14
+title: "Energy Efficiency of Quantized Large Language Model Inference: Evidence for Quantization Efficiency Paradoxes on NVIDIA Blackwell, Ada Lovelace, Ampere, and Turing Architectures"
+version: 1.1.0
+date-released: 2026-04-19
 authors:
   - family-names: Zhang
     given-names: Hongping
@@ -15,6 +15,10 @@ url: "https://github.com/hongping-zh/ecocompute-dynamic-eval"
 repository-code: "https://github.com/hongping-zh/ecocompute-dynamic-eval"
 repository-artifact: "https://github.com/hongping-zh/ecocompute-dynamic-eval/tree/main/metadata"
 license: MIT
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.19647290
+    description: Zenodo DOI for dataset v1.1.0
 keywords:
   - large language models
   - quantization
@@ -27,15 +31,19 @@ keywords:
   - NVIDIA Blackwell
   - NVIDIA Ada Lovelace
   - NVIDIA Ampere
+  - NVIDIA Turing
+  - Tesla T4
+  - cross-architecture validation
   - reproducible research
-abstract: "We present empirical evidence of two quantization efficiency paradoxes in LLM inference across three NVIDIA GPU architectures. Through 32 rigorously-controlled measurements, we discovered that (1) default bitsandbytes INT8 increases energy by 17-147% due to mixed-precision decomposition overhead, and (2) NF4 exhibits a crossover threshold at approximately 5-6B parameters. Ablation experiments establish that disabling mixed-precision decomposition recovers +79-98% throughput and -35-41% energy. All data, metadata, and reproducibility artifacts are publicly available."
+abstract: "We present empirical evidence of quantization efficiency paradoxes in LLM inference across four NVIDIA GPU architectures (Blackwell, Ada Lovelace, Ampere, and Turing). Through 360+ rigorously-controlled measurements, we discovered that (1) default bitsandbytes INT8 increases energy by 17-147% due to mixed-precision decomposition overhead, (2) NF4 exhibits a crossover threshold at approximately 3.4B parameters that is architecture-independent, and (3) Tesla T4 (Turing) validates the crossover effect across generations. Ablation experiments establish that disabling mixed-precision decomposition recovers +79-98% throughput and -35-41% energy. All data, metadata, and reproducibility artifacts are publicly available via Zenodo DOI 10.5281/zenodo.19647290."
 preferred-citation:
   type: article
   authors:
     - family-names: Zhang
       given-names: Hongping
       email: zhanghongping1982@gmail.com
-  title: "Energy Efficiency of Quantized Large Language Model Inference: Evidence for Quantization Efficiency Paradoxes on NVIDIA Blackwell, Ada Lovelace, and Ampere Architectures"
+  title: "Energy Efficiency of Quantized Large Language Model Inference: Evidence for Quantization Efficiency Paradoxes on NVIDIA Blackwell, Ada Lovelace, Ampere, and Turing Architectures"
   year: 2026
   journal: "arXiv preprint"
-  notes: "32 measurements across RTX 5090 Blackwell, RTX 4090D Ada Lovelace, and A800 Ampere"
+  doi: 10.5281/zenodo.19647290
+  notes: "360+ measurements across RTX 5090 Blackwell, RTX 4090D Ada Lovelace, A800 Ampere, and Tesla T4 Turing"
