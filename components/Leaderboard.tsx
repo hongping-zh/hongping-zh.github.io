@@ -265,10 +265,23 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ apiConfig, onOpenTempl
           
           <button
             onClick={() => {
-              if (!rtx5090Only && !a800Only && !t4Only) { setRtx5090Only(true); setA800Only(false); setT4Only(false); }
-              else if (rtx5090Only) { setRtx5090Only(false); setA800Only(true); setT4Only(false); }
-              else if (a800Only) { setA800Only(false); setT4Only(true); }
-              else { setRtx5090Only(false); setA800Only(false); setT4Only(false); }
+              console.log('Filter button clicked', { rtx5090Only, a800Only, t4Only });
+              if (!rtx5090Only && !a800Only && !t4Only) {
+                console.log('Setting RTX 5090 Only');
+                setRtx5090Only(true); setA800Only(false); setT4Only(false);
+              }
+              else if (rtx5090Only) {
+                console.log('Setting A800 Only');
+                setRtx5090Only(false); setA800Only(true); setT4Only(false);
+              }
+              else if (a800Only) {
+                console.log('Setting T4 Only');
+                setA800Only(false); setT4Only(true);
+              }
+              else {
+                console.log('Setting All Models');
+                setRtx5090Only(false); setA800Only(false); setT4Only(false);
+              }
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition-all ${
               t4Only ? 'bg-purple-50 border-purple-300 text-purple-600' :
