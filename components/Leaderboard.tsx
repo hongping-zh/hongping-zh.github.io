@@ -294,6 +294,14 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ apiConfig, onOpenTempl
             {rtx5090Only ? 'RTX 5090 Only' : a800Only ? 'A800 Batch Size' : t4Only ? 'Tesla T4 Only' : 'All Models'}
           </button>
 
+          {/* Test button */}
+          <button
+            onClick={() => console.log('TEST BUTTON CLICKED!')}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-red-300 bg-red-50 text-red-600 text-sm font-medium hover:bg-red-100"
+          >
+            Test Click
+          </button>
+
           <button
             onClick={() => setShowWeights(v => !v)}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition-all ${showWeights ? 'bg-indigo-50 border-indigo-300 text-indigo-600' : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50'}`}
