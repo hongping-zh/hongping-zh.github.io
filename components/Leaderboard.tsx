@@ -80,6 +80,7 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ apiConfig, onOpenTempl
   const [isLive, setIsLive] = useState(false);
   const [rtx5090Only, setRtx5090Only] = useState(false);
   const [a800Only, setA800Only] = useState(false);
+  const [t4Only, setT4Only] = useState(false);
   const [showWeights, setShowWeights] = useState(false);
   const [selectedModel, setSelectedModel] = useState<ModelData | null>(null);
   const [weights, setWeights] = useState({
@@ -128,8 +129,9 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ apiConfig, onOpenTempl
   const visibleModels = useMemo(() => {
     if (rtx5090Only) return models.filter(m => m.tags.includes('rtx5090-verified'));
     if (a800Only) return models.filter(m => m.tags.includes('a800-verified'));
+    if (t4Only) return models.filter(m => m.tags.includes('t4-verified'));
     return models;
-  }, [models, rtx5090Only, a800Only]);
+  }, [models, rtx5090Only, a800Only, t4Only]);
 
   // Composite score: normalize each metric 0-1 then weighted sum
   const compositeScores = useMemo(() => {
@@ -263,18 +265,20 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ apiConfig, onOpenTempl
           
           <button
             onClick={() => {
-              if (!rtx5090Only && !a800Only) { setRtx5090Only(true); setA800Only(false); }
-              else if (rtx5090Only) { setRtx5090Only(false); setA800Only(true); }
-              else { setRtx5090Only(false); setA800Only(false); }
+              if (!rtx5090Only && !a800Only && !t4Only) { setRtx5090Only(true); setA800Only(false); setT4Only(false); }
+              else if (rtx5090Only) { setRtx5090Only(false); setA800Only(true); setT4Only(false); }
+              else if (a800Only) { setA800Only(false); setT4Only(true); }
+              else { setRtx5090Only(false); setA800Only(false); setT4Only(false); }
             }}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition-all ${
+              t4Only ? 'bg-purple-50 border-purple-300 text-purple-600' :
               a800Only ? 'bg-orange-50 border-orange-300 text-orange-600' :
               rtx5090Only ? 'bg-green-50 border-green-300 text-green-700' :
               'bg-white border-slate-300 text-slate-700 hover:bg-slate-50'
             }`}
           >
             <Filter className="w-4 h-4" />
-            {rtx5090Only ? 'RTX 5090 Only' : a800Only ? 'A800 Batch Size' : 'All Models'}
+            {rtx5090Only ? 'RTX 5090 Only' : a800Only ? 'A800 Batch Size' : t4Only ? 'Tesla T4 Only' : 'All Models'}
           </button>
 
           <button
