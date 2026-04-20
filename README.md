@@ -1,5 +1,7 @@
 # ⚡ EcoCompute Dynamic Eval
 
+<!-- Last updated: 2026-04-20 - Tesla T4 data included -->
+
 [![Paper](https://img.shields.io/badge/Paper-Draft-b31b1b.svg)](TECHNICAL_DOCUMENTATION.md)
 [![Dashboard](https://img.shields.io/badge/Dashboard-Live-brightgreen.svg)](https://hongping-zh.github.io/ecocompute-dynamic-eval/)
 [![Metadata](https://img.shields.io/badge/Metadata-Complete-blue.svg)](https://github.com/hongping-zh/ecocompute-dynamic-eval/tree/main/metadata)
