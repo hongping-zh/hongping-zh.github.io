@@ -72,6 +72,13 @@ interface LeaderboardProps {
 
 export const Leaderboard: React.FC<LeaderboardProps> = ({ apiConfig, onOpenTemplate }) => {
   const [models, setModels] = useState<ModelData[]>(INITIAL_MODELS);
+
+  // Log initial models
+  useEffect(() => {
+    console.log('INITIAL_MODELS count:', INITIAL_MODELS.length);
+    const t4Models = INITIAL_MODELS.filter(m => m.tags.includes('t4-verified'));
+    console.log('T4 models:', t4Models.map(m => m.name));
+  }, []);
   const [sortField, setSortField] = useState<SortField>('accuracy');
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
@@ -146,10 +153,12 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ apiConfig, onOpenTempl
   };
 
   const visibleModels = useMemo(() => {
-    if (rtx5090Only) return models.filter(m => m.tags.includes('rtx5090-verified'));
-    if (a800Only) return models.filter(m => m.tags.includes('a800-verified'));
-    if (t4Only) return models.filter(m => m.tags.includes('t4-verified'));
-    return models;
+    let filtered = models;
+    if (rtx5090Only) filtered = models.filter(m => m.tags.includes('rtx5090-verified'));
+    if (a800Only) filtered = models.filter(m => m.tags.includes('a800-verified'));
+    if (t4Only) filtered = models.filter(m => m.tags.includes('t4-verified'));
+    console.log('visibleModels:', filtered.map(m => m.name));
+    return filtered;
   }, [models, rtx5090Only, a800Only, t4Only]);
 
   // Composite score: normalize each metric 0-1 then weighted sum
