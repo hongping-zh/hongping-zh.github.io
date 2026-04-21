@@ -91,6 +91,25 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ apiConfig, onOpenTempl
     energyEfficiency: 15,
   });
 
+  // Support URL parameter for filtering
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const filterParam = params.get('filter');
+    if (filterParam === 't4') {
+      setT4Only(true);
+      setRtx5090Only(false);
+      setA800Only(false);
+    } else if (filterParam === 'rtx5090') {
+      setRtx5090Only(true);
+      setA800Only(false);
+      setT4Only(false);
+    } else if (filterParam === 'a800') {
+      setA800Only(true);
+      setRtx5090Only(false);
+      setT4Only(false);
+    }
+  }, []);
+
   // Dynamic Data Simulation
   useEffect(() => {
     if (!isLive) return;
