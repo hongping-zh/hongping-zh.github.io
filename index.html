@@ -1021,15 +1021,15 @@
   <section id="findings" class="py-12">
     <div class="max-w-6xl mx-auto px-6">
       <div class="mb-8">
-        <h2 class="text-2xl font-extrabold">Key Findings: Best Quantization Method for Energy Efficiency</h2>
+        <h2 class="text-2xl font-extrabold">Key Findings: Observed Energy-Accuracy Trade-offs</h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-5">
         <div class="card p-6">
           <div class="text-2xl mb-3">1</div>
-          <h3 class="font-bold text-base mb-2">INT8 Default: High Energy Cost vs FP16</h3>
+          <h3 class="font-bold text-base mb-2">INT8 Default: Higher Energy Use vs FP16 in Tested Setup</h3>
           <p class="text-sm text-slate-500 leading-relaxed">
-            Default <code class="text-xs bg-slate-100 px-1 py-0.5 rounded">LLM.int8()</code> increases energy by <strong>+80% to +162%</strong> vs FP16 on RTX 4090D due to mixed-precision decomposition overhead. Throughput drops 68-75%. Accuracy is preserved (+0.7% to +2% PPL), but the energy cost is extreme.
+            Default <code class="text-xs bg-slate-100 px-1 py-0.5 rounded">LLM.int8()</code> increases energy by <strong>+80% to +162%</strong> vs FP16 on RTX 4090D due to mixed-precision decomposition overhead. Throughput drops 68-75%. Accuracy is preserved (+0.7% to +2% PPL), while the energy overhead is substantial.
           </p>
         </div>
         <div class="card p-6">
@@ -1042,9 +1042,9 @@
         </div>
         <div class="card p-6">
           <div class="text-2xl mb-3">3</div>
-          <h3 class="font-bold text-base mb-2">INT8 Pure: Energy Saved, Accuracy Lost</h3>
+          <h3 class="font-bold text-base mb-2">INT8 Pure: Lower Energy with Accuracy Degradation</h3>
           <p class="text-sm text-slate-500 leading-relaxed">
-            Disabling mixed-precision decomposition (<code class="text-xs bg-slate-100 px-1 py-0.5 rounded">threshold=0.0</code>) causes <strong>+2.5% to +22.7% PPL degradation</strong> across 3 models. Larger models suffer more (Qwen2.5-3B: +15.3%, Yi-1.5-6B: +22.7%). The energy savings do not justify the accuracy loss.
+            Disabling mixed-precision decomposition (<code class="text-xs bg-slate-100 px-1 py-0.5 rounded">threshold=0.0</code>) causes <strong>+2.5% to +22.7% PPL degradation</strong> across 3 models. Larger models suffer more (Qwen2.5-3B: +15.3%, Yi-1.5-6B: +22.7%). Observed energy savings are accompanied by measurable accuracy degradation.
           </p>
         </div>
       </div>
@@ -1133,12 +1133,12 @@
   <section class="py-12">
     <div class="max-w-6xl mx-auto px-6">
       <div class="mb-8">
-        <h2 class="text-2xl font-extrabold">Community & Contributions</h2>
+        <h2 class="text-2xl font-extrabold">Community Discussions & Documentation Contributions</h2>
       </div>
       <div class="grid lg:grid-cols-2 gap-5">
         <article class="card p-6">
           <div class="flex items-center gap-2 mb-3">
-            <span class="badge bg-blue-100 text-blue-700">⚙️ Proposal To</span>
+            <span class="badge bg-blue-100 text-blue-700">⚙️ Discussion With</span>
             <span class="text-sm font-semibold text-slate-700">MLCommons / MLPerf Inference</span>
           </div>
           <span class="inline-flex items-center text-[11px] px-2 py-1 rounded-full bg-blue-50 text-blue-700 font-semibold mb-4">● Active Discussion</span>
@@ -1172,8 +1172,8 @@
           <span class="inline-flex items-center text-[11px] px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 font-semibold mb-4">● PR Accepted &amp; Merged</span>
           <h3 class="font-extrabold text-xl text-slate-900 mb-3">Energy Efficiency in Practice - Official Quantization Documentation</h3>
           <p class="text-sm text-slate-600 leading-relaxed mb-4">
-            Our systematic benchmarking findings were accepted into Hugging Face's official Optimum library
-            documentation - the canonical reference for model optimization used by millions of ML practitioners worldwide.
+            Selected benchmarking findings were integrated into Hugging Face Optimum documentation
+            as practitioner-facing guidance for quantization-related energy considerations.
           </p>
           <div class="grid grid-cols-4 gap-2 bg-slate-50 border border-slate-200 rounded-xl p-3 mb-4 text-center">
             <div><div class="text-xl font-black text-slate-800">39</div><div class="text-[10px] text-slate-500">Models Benchmarked</div></div>
@@ -1191,7 +1191,7 @@
           </a>
         </article>
       </div>
-      <p class="mt-4 text-xs text-slate-400 text-center">Research-to-standard impact: open benchmark findings progressing from community proposal to official deployment guidance.</p>
+      <p class="mt-4 text-xs text-slate-400 text-center">Research-to-practice path: open benchmark findings under standards discussion and reflected in deployment documentation.</p>
     </div>
   </section>
 
