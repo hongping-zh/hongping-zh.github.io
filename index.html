@@ -1110,32 +1110,63 @@
       <div class="mb-8">
         <h2 class="text-2xl font-extrabold">Community & Contributions</h2>
       </div>
-      <div class="grid md:grid-cols-3 gap-5">
-        <a href="https://huggingface.co/docs/optimum/concept_guides/quantization" target="_blank" class="card p-6 hover:border-brand-300 transition group">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="badge bg-amber-50 text-amber-700">🤗 Official Docs</span>
+      <div class="grid lg:grid-cols-2 gap-5">
+        <article class="card p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="badge bg-blue-100 text-blue-700">⚙️ Proposal To</span>
+            <span class="text-sm font-semibold text-slate-700">MLCommons / MLPerf Inference</span>
           </div>
-          <h3 class="font-bold text-sm group-hover:text-brand-600 transition">Integrated into Hugging Face Optimum Official Documentation</h3>
-          <p class="mt-1 text-xs text-slate-500">Our energy efficiency findings are part of the Optimum Quantization Guide — the canonical reference for quantization best practices in the Hugging Face ecosystem.</p>
-        </a>
-        <a href="https://github.com/bitsandbytes-foundation/bitsandbytes/pull/1882" target="_blank" class="card p-6 hover:border-brand-300 transition group">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="badge bg-green-50 text-green-700">Open PR</span>
-            <span class="text-xs text-slate-400">#1882</span>
+          <span class="inline-flex items-center text-[11px] px-2 py-1 rounded-full bg-blue-50 text-blue-700 font-semibold mb-4">● Active Discussion</span>
+          <h3 class="font-extrabold text-xl text-slate-900 mb-3">Adding Energy Consumption Metrics to MLPerf Inference Benchmark</h3>
+          <p class="text-sm text-slate-600 leading-relaxed mb-4">
+            We proposed adding energy efficiency metrics (energy per query/token, average power, tokens/Joule)
+            to the MLPerf Inference Benchmark. Current benchmarks only report throughput and latency,
+            making energy trade-offs invisible to practitioners.
+          </p>
+          <div class="grid grid-cols-4 gap-2 bg-slate-50 border border-slate-200 rounded-xl p-3 mb-4 text-center">
+            <div><div class="text-xl font-black text-slate-800">270</div><div class="text-[10px] text-slate-500">Configurations Tested</div></div>
+            <div><div class="text-xl font-black text-slate-800">3</div><div class="text-[10px] text-slate-500">GPU Architectures</div></div>
+            <div><div class="text-xl font-black text-slate-800">10 Hz</div><div class="text-[10px] text-slate-500">NVML Sampling</div></div>
+            <div><div class="text-xl font-black text-slate-800">200+</div><div class="text-[10px] text-slate-500">Measurements</div></div>
           </div>
-          <h3 class="font-bold text-sm group-hover:text-brand-600 transition">Quantization Performance Guide for bitsandbytes</h3>
-          <p class="mt-1 text-xs text-slate-500">Documentation PR adding energy-accuracy trade-off analysis to official bitsandbytes docs.</p>
-        </a>
-        <a href="https://github.com/bitsandbytes-foundation/bitsandbytes/issues/1867" target="_blank" class="card p-6 hover:border-brand-300 transition group">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="badge bg-blue-50 text-blue-700">Discussion</span>
-            <span class="text-xs text-slate-400">#1867</span>
+          <ul class="text-sm text-slate-600 space-y-2 mb-4">
+            <li>- Proposed 3 new metrics: Energy/query (J), Avg power (W), Efficiency ratio (tok/J)</li>
+            <li>- Quantization energy trade-offs remain invisible to existing throughput/latency metrics</li>
+            <li>- Invited to collaborate with MLCommons Power Working Group</li>
+          </ul>
+          <a href="https://github.com/mlcommons/inference/issues/2558" target="_blank" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-semibold text-sm transition-colors">
+            <span>↗ View Discussion #2558</span>
+          </a>
+        </article>
+
+        <article class="card p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="badge bg-amber-100 text-amber-800">🤗 Merged Into</span>
+            <span class="text-sm font-semibold text-slate-700">Hugging Face Optimum Docs</span>
           </div>
-          <h3 class="font-bold text-sm group-hover:text-brand-600 transition">INT8 Energy Overhead Discussion with Tim Dettmers</h3>
-          <p class="mt-1 text-xs text-slate-500">Discussion with the bitsandbytes core author on the energy implications of mixed-precision decomposition.</p>
-        </a>
+          <span class="inline-flex items-center text-[11px] px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 font-semibold mb-4">● PR Accepted &amp; Merged</span>
+          <h3 class="font-extrabold text-xl text-slate-900 mb-3">Energy Efficiency in Practice - Official Quantization Documentation</h3>
+          <p class="text-sm text-slate-600 leading-relaxed mb-4">
+            Our systematic benchmarking findings were accepted into Hugging Face's official Optimum library
+            documentation - the canonical reference for model optimization used by millions of ML practitioners worldwide.
+          </p>
+          <div class="grid grid-cols-4 gap-2 bg-slate-50 border border-slate-200 rounded-xl p-3 mb-4 text-center">
+            <div><div class="text-xl font-black text-slate-800">39</div><div class="text-[10px] text-slate-500">Models Benchmarked</div></div>
+            <div><div class="text-xl font-black text-slate-800">4</div><div class="text-[10px] text-slate-500">GPU Platforms</div></div>
+            <div><div class="text-xl font-black text-slate-800">3</div><div class="text-[10px] text-slate-500">Quant Methods</div></div>
+            <div><div class="text-xl font-black text-slate-800">2</div><div class="text-[10px] text-slate-500">HW Generations</div></div>
+          </div>
+          <ul class="text-sm text-slate-600 space-y-2 mb-4">
+            <li>- Large models (&gt;5B): NF4 achieves near-FP16 energy with major memory savings</li>
+            <li>- Small models (&lt;3B): NF4 can increase energy by 25-56%</li>
+            <li>- Batch size optimization reduces per-token energy by up to 96%</li>
+          </ul>
+          <a href="https://huggingface.co/docs/optimum/concept_guides/quantization#energy-efficiency-in-practice" target="_blank" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-4 py-2.5 rounded-lg font-semibold text-sm transition-colors">
+            <span>↗ Read in HF Docs</span>
+          </a>
+        </article>
       </div>
-      <p class="mt-4 text-xs text-slate-400 text-center">Our research is recognized by industry leaders — from Hugging Face official documentation to open-source maintainer engagement.</p>
+      <p class="mt-4 text-xs text-slate-400 text-center">Research-to-standard impact: open benchmark findings progressing from community proposal to official deployment guidance.</p>
     </div>
   </section>
 
