@@ -229,7 +229,7 @@
         <span class="badge bg-blue-50 text-blue-700">Open Data</span>
         <span class="badge bg-green-50 text-green-700">Reproducible</span>
         <span class="badge bg-teal-50 text-teal-700">NVML 10Hz Sampling</span>
-        <span class="badge bg-amber-50 text-amber-700">Last updated: Feb 25, 2026</span>
+        <span class="badge bg-amber-50 text-amber-700">Last updated: Apr 18, 2026</span>
       </div>
 
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
@@ -238,8 +238,8 @@
       </h1>
 
       <p class="mt-6 text-base sm:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-        Real GPU power measurements for FP16, INT8, NF4 inference across 3 NVIDIA architectures (RTX 5090, RTX 4090D, T4).
-        Includes perplexity accuracy data for 3 models × 5 quantization configs. All raw data, scripts, and methodology are open source.
+        Real GPU power measurements for FP16, INT8, NF4 inference across 4 NVIDIA architectures (RTX 5090, RTX 4090D, T4, A800).
+        Includes perplexity accuracy data and benchmark coverage from 1.1B to 14B parameters. All raw data, scripts, and methodology are open source.
       </p>
 
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -282,17 +282,17 @@
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div class="card p-5 text-center">
-          <div class="text-3xl font-black text-brand-600">3</div>
+          <div class="text-3xl font-black text-brand-600">4</div>
           <div class="mt-1 text-xs font-medium text-slate-500">GPU Architectures</div>
-          <div class="mt-1 text-[10px] text-slate-400">Blackwell / Ada / Turing</div>
+          <div class="mt-1 text-[10px] text-slate-400">Blackwell / Ada / Turing / Ampere</div>
         </div>
         <div class="card p-5 text-center">
           <div class="text-3xl font-black text-brand-600">7</div>
           <div class="mt-1 text-xs font-medium text-slate-500">Models Tested</div>
-          <div class="mt-1 text-[10px] text-slate-400">1.1B to 7B parameters</div>
+          <div class="mt-1 text-[10px] text-slate-400">1.1B to 14B parameters</div>
         </div>
         <div class="card p-5 text-center">
-          <div class="text-3xl font-black text-brand-600">40+</div>
+          <div class="text-3xl font-black text-brand-600">360+</div>
           <div class="mt-1 text-xs font-medium text-slate-500">Configurations</div>
           <div class="mt-1 text-[10px] text-slate-400">FP16 / INT8 / INT8 Pure / NF4 / NF4 DQ</div>
         </div>
@@ -311,6 +311,7 @@
       <div class="mb-8">
         <h2 class="text-2xl font-extrabold">GPU Power Consumption Comparison: Quantization Energy Efficiency Leaderboard</h2>
         <p class="mt-2 text-sm text-slate-500">Energy per 1,000 generated tokens (Joules). Lower is better. Compare INT8 vs NF4 vs FP16 energy efficiency across NVIDIA GPUs.</p>
+        <p class="mt-2 text-sm text-slate-500">Four GPU architectures covering 1.1B to 14B parameters, from edge (T4, 70W) to datacenter (A800, 300W).</p>
       </div>
 
       <!-- RTX 5090 -->
@@ -678,7 +679,8 @@
           </table>
         </div>
         <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-500">
-          On T4, NF4 energy savings begin at ~3B parameters. Effect is more pronounced for 7B models (-13.8%).
+          On T4, NF4 crossover starts around the 3B regime and becomes clearer for larger models (for example, 7B: -13.8%).
+          INT8 rows are not shown in this cross-model table because model-level support is inconsistent on T4; see the 2026-04-18 supplemental page for failed Qwen2.5-3B INT8 runs.
         </div>
       </div>
 
@@ -1032,9 +1034,10 @@
         </div>
         <div class="card p-6">
           <div class="text-2xl mb-3">2</div>
-          <h3 class="font-bold text-base mb-2">NF4 Crossover at ~6B Params</h3>
+          <h3 class="font-bold text-base mb-2">NF4 Crossover at ~3-6B Params (Architecture-Dependent)</h3>
           <p class="text-sm text-slate-500 leading-relaxed">
-            NF4 quantization saves energy only for models with <strong>&ge;6B parameters</strong> (Yi-1.5-6B: <strong>-5.3%</strong>). For smaller models (1.1B-3B), NF4 <em>increases</em> energy by 25-34%. FP16 remains the most efficient option when GPU memory allows.
+            Across measured platforms, NF4 crossover appears in the <strong>~3.2B to ~5.2B</strong> range rather than a single fixed point.
+            For smaller models (roughly 1.1B-3B), NF4 often <em>increases</em> energy, while mid/large models can begin to benefit depending on GPU architecture and memory subsystem behavior.
           </p>
         </div>
         <div class="card p-6">
@@ -1056,7 +1059,7 @@
                 <h3 class="text-xl font-bold text-slate-900">Interactive Model Comparison Tool</h3>
               </div>
               <p class="text-sm text-slate-700 leading-relaxed mb-4">
-                Compare energy efficiency and accuracy trade-offs across different models and quantization methods. Select any 2-4 models from our benchmark data and get <strong>AI-powered insights</strong> on their performance characteristics.
+                Compare energy efficiency and accuracy trade-offs across different models and quantization methods. Select any 2-4 models from our benchmark data and view side-by-side benchmark analysis of their performance characteristics.
               </p>
               <a href="compare.html" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors shadow-md hover:shadow-lg">
                 <span>Launch Comparison Tool</span>
@@ -1141,20 +1144,20 @@
           <span class="inline-flex items-center text-[11px] px-2 py-1 rounded-full bg-blue-50 text-blue-700 font-semibold mb-4">● Active Discussion</span>
           <h3 class="font-extrabold text-xl text-slate-900 mb-3">Adding Energy Consumption Metrics to MLPerf Inference Benchmark</h3>
           <p class="text-sm text-slate-600 leading-relaxed mb-4">
-            We proposed adding energy efficiency metrics (energy per query/token, average power, tokens/Joule)
-            to the MLPerf Inference Benchmark. Current benchmarks only report throughput and latency,
-            making energy trade-offs invisible to practitioners.
+            Active collaboration with MLCommons Power WG on energy metrics schema design,
+            including 6 rounds of technical discussion and schema evolution from 7 fields to 16 fields.
+            This work focuses on improving how inference energy evidence is represented for reproducible benchmark reporting.
           </p>
           <div class="grid grid-cols-4 gap-2 bg-slate-50 border border-slate-200 rounded-xl p-3 mb-4 text-center">
-            <div><div class="text-xl font-black text-slate-800">270</div><div class="text-[10px] text-slate-500">Configurations Tested</div></div>
-            <div><div class="text-xl font-black text-slate-800">3</div><div class="text-[10px] text-slate-500">GPU Architectures</div></div>
+            <div><div class="text-xl font-black text-slate-800">360+</div><div class="text-[10px] text-slate-500">Configurations Tested</div></div>
+            <div><div class="text-xl font-black text-slate-800">4</div><div class="text-[10px] text-slate-500">GPU Architectures</div></div>
             <div><div class="text-xl font-black text-slate-800">10 Hz</div><div class="text-[10px] text-slate-500">NVML Sampling</div></div>
-            <div><div class="text-xl font-black text-slate-800">200+</div><div class="text-[10px] text-slate-500">Measurements</div></div>
+            <div><div class="text-xl font-black text-slate-800">6</div><div class="text-[10px] text-slate-500">Tech Rounds</div></div>
           </div>
           <ul class="text-sm text-slate-600 space-y-2 mb-4">
-            <li>- Proposed 3 new metrics: Energy/query (J), Avg power (W), Efficiency ratio (tok/J)</li>
-            <li>- Quantization energy trade-offs remain invisible to existing throughput/latency metrics</li>
-            <li>- Invited to collaborate with MLCommons Power Working Group</li>
+            <li>- Ongoing schema co-design discussion with MLCommons Power WG (active discussion state)</li>
+            <li>- Reporting scope expanded from 7 to 16 schema fields during iterative technical review</li>
+            <li>- Focus: reproducible energy evidence alongside throughput/latency benchmark outputs</li>
           </ul>
           <a href="https://github.com/mlcommons/inference/issues/2558" target="_blank" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-semibold text-sm transition-colors">
             <span>↗ View Discussion #2558</span>
@@ -1203,8 +1206,9 @@
   author    = {Zhang, Hongping},
   title     = {LLM Energy Benchmark: Real GPU Power Measurements for Quantized Inference},
   year      = {2026},
-  url       = {https://github.com/hongping-zh/ecocompute-ai},
-  note      = {NVML power monitoring, 3 GPU architectures, includes perplexity data}
+  doi       = {10.5281/zenodo.18900289},
+  url       = {https://doi.org/10.5281/zenodo.18900289},
+  note      = {NVML power monitoring, 4 GPU architectures, 360+ configurations, includes perplexity data}
 }</pre>
       </div>
     </div>
