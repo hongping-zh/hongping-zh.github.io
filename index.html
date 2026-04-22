@@ -1,58 +1,1184 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LLM Energy Efficiency Benchmark | GPU Power Measurement | EcoCompute</title>
-<meta name="description" content="93+ LLM inference energy efficiency benchmarks. GPU power measurement, quantization efficiency, batch size optimization, carbon & cost analysis. Adopted by Hugging Face & MLCommons.">
-<meta name="keywords" content="LLM energy efficiency, GPU power consumption, quantization energy cost, NF4 vs FP16 energy, bitsandbytes power measurements, RTX 5090 LLM benchmarks, sustainable AI, AI API cost comparison, carbon footprint calculator">
-<meta property="og:title" content="LLM Energy Efficiency Benchmark | GPU Power Measurement | EcoCompute">
-<meta property="og:description" content="93+ LLM inference energy efficiency benchmarks. GPU power measurement, quantization efficiency, batch size optimization, carbon & cost analysis. Adopted by Hugging Face & MLCommons.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://hongping-zh.github.io/">
-<meta property="og:image" content="https://hongping-zh.github.io/preview.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Open LLM Energy Benchmark · 93+ GPU Power Measurements · Adopted by HF & MLCommons">
-<meta name="twitter:description" content="93+ LLM inference energy efficiency benchmarks. GPU power measurement, quantization efficiency, carbon & cost analysis.">
-<meta name="author" content="Hongping Zhang">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-<link rel="canonical" href="https://hongping-zh.github.io/">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLM Energy Benchmark — Real GPU Power Measurements for Quantized Inference</title>
+  <meta name="description" content="Open benchmark: GPU power measurements for INT8, NF4, FP16 LLM inference. RTX 5090/4090D/A800/T4 data. Energy efficiency vs accuracy trade-offs. 1B-14B models." />
+  <meta property="og:title" content="LLM Energy Benchmark — Quantization Energy-Accuracy Trade-offs" />
+  <meta property="og:description" content="Open dataset: real GPU power measurements for INT8, NF4, and FP16 inference across 4 NVIDIA architectures (1B-14B models). Includes perplexity data." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hongping-zh.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LLM Energy Benchmark — Real GPU Power Data" />
+  <meta name="twitter:description" content="Open benchmark: energy cost of INT8/NF4/FP16 quantization across RTX 5090, 4090D, T4. NVML measurements, perplexity included." />
+  <meta name="keywords" content="LLM energy benchmark, GPU power measurement, quantization energy consumption, INT8 vs NF4 energy, LLM quantization efficiency, quantized LLM power consumption comparison, best quantization method, NF4 vs FP16 energy, INT8 energy cost, bitsandbytes, NVML, perplexity, RTX 5090, RTX 4090D, A800, green AI, inference efficiency, LLM inference energy cost" />
+  <meta name="author" content="Hongping Zhang" />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
+  <link rel="canonical" href="https://hongping-zh.github.io/" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ebf8f6', 100: '#d6f3ef', 200: '#aee5dd',
+              300: '#7dd3c8', 400: '#4bb9ab', 500: '#2c9f90',
+              600: '#1f7f73', 700: '#1a675d', 800: '#184f49', 900: '#163f3b',
+            }
+          },
+          fontFamily: {
+            sans: ['Sora', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Performance Optimization: Resource Hints -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+  <link rel="dns-prefetch" href="//cdn.tailwindcss.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-<!-- ORCID verification and metadata -->
-<meta name="citation_author" content="Hongping Zhang">
-<meta name="citation_author_orcid" content="0009-0000-2529-4613">
-<meta name="citation_title" content="LLM Energy Efficiency Benchmark Dataset">
-<meta name="citation_doi" content="10.5281/zenodo.18900289">
-<meta name="citation_publication_date" content="2026/01/15">
-<link rel="me" href="https://orcid.org/0009-0000-2529-4613" type="text/html">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "LLM Energy Benchmark",
+    "description": "Open benchmark dataset measuring energy consumption of quantized LLM inference (INT8, NF4, FP16) across multiple NVIDIA GPU architectures, with perplexity accuracy measurements.",
+    "url": "https://hongping-zh.github.io/",
+    "license": "https://opensource.org/licenses/MIT",
+    "creator": {
+      "@type": "Person",
+      "name": "Hongping Zhang",
+      "url": "https://github.com/hongping-zh"
+    },
+    "distribution": {
+      "@type": "DataDownload",
+      "encodingFormat": "CSV",
+      "contentUrl": "https://github.com/hongping-zh/ecocompute-ai/tree/main/data"
+    },
+    "measurementTechnique": "NVML power monitoring at 10 Hz sampling rate",
+    "variableMeasured": [
+      "Energy per 1000 tokens (Joules)",
+      "GPU power draw (Watts)",
+      "Inference throughput (tokens/second)",
+      "Perplexity (PPL)"
+    ],
+    "temporalCoverage": "2026-02",
+    "keywords": ["LLM energy efficiency", "quantization power consumption", "INT8 vs NF4", "GPU benchmark", "inference energy cost"]
+  }
+  </script>
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23059e69'/><path d='M50 20 Q30 40 30 60 Q30 80 50 80 Q70 80 70 60 Q70 40 50 20' fill='%23fff' opacity='0.9'/></svg>">
-<link rel="alternate" hreflang="en" href="https://hongping-zh.github.io/">
+  <!-- Table Structured Data for Leaderboard -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Table",
+    "about": "LLM Quantization Energy Efficiency Comparison",
+    "description": "Energy consumption and perplexity measurements for INT8, NF4, and FP16 quantization methods across NVIDIA GPUs (RTX 5090, RTX 4090D, A800, T4)"
+  }
+  </script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": ["Dataset", "WebSite"],
-  "name": "LLM Energy Efficiency Benchmark Dataset",
-  "description": "Comprehensive benchmark dataset measuring energy consumption of LLM inference across different quantization methods and GPU architectures.",
-  "url": "https://hongping-zh.github.io/",
-  "identifier": [
-    "https://doi.org/10.5281/zenodo.18900289",
-    "https://orcid.org/0009-0000-2529-4613"
-  ],
-  "creator": {
-    "@type": "Person",
-    "name": "Hongping Zhang",
-    "url": "https://github.com/hongping-zh",
-    "identifier": "https://orcid.org/0009-0000-2529-4613"
-  },
-  "license": "https://opensource.org/licenses/MIT",
-  "keywords": ["LLM energy efficiency", "GPU power measurement", "quantization energy impact", "NF4 quantization", "INT8 quantization", "sustainable AI"]
-}
-</script>
-  <script type="module" crossorigin src="/assets/index-B2peJixu.js"></script>
+  <!-- FAQPage Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which quantization method is most energy efficient for LLMs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "NF4 quantization achieves near-FP16 energy efficiency for 7B+ models with minimal accuracy loss (PPL degradation < 0.3). For smaller models (1B-3B), FP16 is often more energy efficient than quantized versions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much energy does INT8 quantization consume compared to FP16?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "INT8 Default quantization typically consumes 2-2.3× more energy than FP16 across all model sizes. INT8 Pure (threshold=0.0) is 35-40% more efficient than INT8 Default but still higher than FP16/NF4."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best GPU for energy-efficient LLM inference?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "RTX 5090 shows the best energy efficiency for 7B models with NF4 quantization. T4 is most efficient for smaller models (1B-3B). A800 provides good energy efficiency for large models (14B+) with NF4."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    :root {
+      --bg-main: #f3f7f6;
+      --bg-soft: #ffffff;
+      --ink-strong: #0f172a;
+      --ink-mid: #475569;
+      --ring-soft: rgba(18, 70, 61, 0.12);
+    }
+    body {
+      font-family: 'Sora', system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -15%, rgba(44,159,144,0.14), transparent 60%),
+        radial-gradient(1000px 500px at 95% -25%, rgba(15,23,42,0.11), transparent 62%),
+        var(--bg-main);
+      color: var(--ink-strong);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #166c62 0%, #2c9f90 50%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-gradient {
+      position: relative;
+      background:
+        radial-gradient(ellipse 70% 55% at 20% -15%, rgba(44,159,144,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 60% at 85% -25%, rgba(245,158,11,0.13) 0%, transparent 70%);
+    }
+    .hero-gradient::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, transparent 45%);
+    }
+    .data-table { border-collapse: collapse; width: 100%; font-size: 0.8125rem; }
+    .data-table th { background: #f7faf9; font-weight: 600; text-align: left; padding: 10px 14px; border-bottom: 2px solid #dbe8e3; color: #36555a; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid #e8f0ed; }
+    .data-table tbody tr:hover { background: #f4f9f7; }
+    .data-table .num { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; }
+    .data-table .pos { color: #dc2626; }
+    .data-table .neg { color: #16a34a; }
+    .gpu-tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 0.6875rem; font-weight: 600; }
+    .gpu-5090 { background: #fef3c7; color: #92400e; }
+    .gpu-4090 { background: #dbeafe; color: #1e40af; }
+    .gpu-t4 { background: #e0e7ff; color: #3730a3; }
+    .gpu-a800 { background: #d1fae5; color: #065f46; }
+    .card {
+      background: rgba(255,255,255,0.88);
+      border: 1px solid #dbe8e3;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px -24px rgba(15, 23, 42, 0.7), 0 1px 0 rgba(255,255,255,0.8) inset;
+      backdrop-filter: blur(6px);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px -24px rgba(15, 23, 42, 0.9), 0 1px 0 rgba(255,255,255,0.9) inset;
+      border-color: #c7ddd5;
+    }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
+    nav {
+      background: rgba(255,255,255,0.74) !important;
+      border-bottom-color: #dbe8e3 !important;
+      box-shadow: 0 8px 30px -30px rgba(15, 23, 42, 0.8);
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1, h2, .card { animation: fade-up .55s ease both; }
+    @media (max-width: 640px) {
+      .card { border-radius: 14px; }
+      .data-table { font-size: 0.75rem; }
+    }
+  </style>
 </head>
-<body>
-  <div id="root"></div>
+<body class="text-slate-900 antialiased">
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-200">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
+      <a href="#" class="flex items-center gap-2 font-bold text-lg">
+        <span class="text-xl">📊</span>
+        <span class="gradient-text">LLM Energy Benchmark</span>
+      </a>
+      <div class="flex items-center gap-6">
+        <a href="#leaderboard" class="hidden sm:inline text-sm text-slate-500 hover:text-slate-900 transition">Leaderboard</a>
+        <a href="#accuracy" class="hidden sm:inline text-sm text-slate-500 hover:text-slate-900 transition">Accuracy</a>
+        <a href="#findings" class="hidden sm:inline text-sm text-slate-500 hover:text-slate-900 transition">Key Findings</a>
+        <a href="#methodology" class="hidden sm:inline text-sm text-slate-500 hover:text-slate-900 transition">Methodology</a>
+        <a href="https://github.com/hongping-zh/ecocompute-ai" target="_blank"
+           class="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 text-white text-sm font-semibold rounded-lg hover:bg-slate-900 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          Data &amp; Code
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero-gradient pt-28 pb-12 sm:pt-36 sm:pb-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <div class="flex items-center justify-center gap-3 mb-6 flex-wrap">
+        <span class="badge bg-blue-50 text-blue-700">Open Data</span>
+        <span class="badge bg-green-50 text-green-700">Reproducible</span>
+        <span class="badge bg-teal-50 text-teal-700">NVML 10Hz Sampling</span>
+        <span class="badge bg-amber-50 text-amber-700">Last updated: Feb 25, 2026</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+        How Much Energy Does<br/>
+        <span class="gradient-text">LLM Quantization</span> Actually Cost?
+      </h1>
+
+      <p class="mt-6 text-base sm:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+        Real GPU power measurements for FP16, INT8, NF4 inference across 3 NVIDIA architectures (RTX 5090, RTX 4090D, T4).
+        Includes perplexity accuracy data for 3 models × 5 quantization configs. All raw data, scripts, and methodology are open source.
+      </p>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="#leaderboard" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 transition">
+          View Leaderboard
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+        <a href="https://github.com/hongping-zh/ecocompute-ai/tree/main/data" target="_blank"
+           class="inline-flex items-center gap-2 px-6 py-3 text-slate-600 font-medium hover:text-slate-900 border border-slate-300 rounded-lg hover:border-slate-400 transition">
+          Download CSV / JSON
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS ===================== -->
+  <section class="py-10">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="card p-5 text-center">
+          <div class="text-3xl font-black text-brand-600">3</div>
+          <div class="mt-1 text-xs font-medium text-slate-500">GPU Architectures</div>
+          <div class="mt-1 text-[10px] text-slate-400">Blackwell / Ada / Turing</div>
+        </div>
+        <div class="card p-5 text-center">
+          <div class="text-3xl font-black text-brand-600">7</div>
+          <div class="mt-1 text-xs font-medium text-slate-500">Models Tested</div>
+          <div class="mt-1 text-[10px] text-slate-400">1.1B to 7B parameters</div>
+        </div>
+        <div class="card p-5 text-center">
+          <div class="text-3xl font-black text-brand-600">40+</div>
+          <div class="mt-1 text-xs font-medium text-slate-500">Configurations</div>
+          <div class="mt-1 text-[10px] text-slate-400">FP16 / INT8 / INT8 Pure / NF4 / NF4 DQ</div>
+        </div>
+        <div class="card p-5 text-center">
+          <div class="text-3xl font-black text-brand-600">n=10</div>
+          <div class="mt-1 text-xs font-medium text-slate-500">Runs per Config</div>
+          <div class="mt-1 text-[10px] text-slate-400">CV &lt; 3%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LEADERBOARD: RTX 5090 ===================== -->
+  <section id="leaderboard" class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-8">
+        <h2 class="text-2xl font-extrabold">GPU Power Consumption Comparison: Quantization Energy Efficiency Leaderboard</h2>
+        <p class="mt-2 text-sm text-slate-500">Energy per 1,000 generated tokens (Joules). Lower is better. Compare INT8 vs NF4 vs FP16 energy efficiency across NVIDIA GPUs.</p>
+      </div>
+
+      <!-- RTX 5090 -->
+      <div class="card mb-6">
+        <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="gpu-tag gpu-5090">RTX 5090</span>
+            <span class="text-sm font-semibold text-slate-700">NVIDIA GeForce RTX 5090 (Blackwell, 32GB)</span>
+          </div>
+          <span class="text-xs text-slate-400">Batch size = 1, seq_len = 512</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Params</th>
+                <th>Precision</th>
+                <th>Energy (J/1k tok)</th>
+                <th>Throughput (tok/s)</th>
+                <th>Power (W)</th>
+                <th>vs FP16</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-medium">TinyLlama-1.1B</td>
+                <td class="num">1.1B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num">1,659</td>
+                <td class="num">94.87</td>
+                <td class="num">157.5</td>
+                <td class="num">baseline</td>
+              </tr>
+              <tr>
+                <td class="font-medium">TinyLlama-1.1B</td>
+                <td class="num">1.1B</td>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">2,098</td>
+                <td class="num">55.79</td>
+                <td class="num">117.0</td>
+                <td class="num pos">+26.5%</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Qwen2-1.5B</td>
+                <td class="num">1.5B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num">2,411</td>
+                <td class="num">71.45</td>
+                <td class="num">172.3</td>
+                <td class="num">baseline</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Qwen2-1.5B</td>
+                <td class="num">1.5B</td>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">3,120</td>
+                <td class="num">41.57</td>
+                <td class="num">129.8</td>
+                <td class="num pos">+29.4%</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Qwen2.5-3B</td>
+                <td class="num">3B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num">3,383</td>
+                <td class="num">54.77</td>
+                <td class="num">185.6</td>
+                <td class="num">baseline</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Qwen2.5-3B</td>
+                <td class="num">3B</td>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">3,780</td>
+                <td class="num">31.85</td>
+                <td class="num">120.5</td>
+                <td class="num pos">+11.7%</td>
+              </tr>
+              <tr style="background:#f0fdf4">
+                <td class="font-medium">Qwen2-7B</td>
+                <td class="num">7B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num">5,509</td>
+                <td class="num">70.47</td>
+                <td class="num">388.3</td>
+                <td class="num">baseline</td>
+              </tr>
+              <tr style="background:#f0fdf4">
+                <td class="font-medium">Qwen2-7B</td>
+                <td class="num">7B</td>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">4,878</td>
+                <td class="num">41.40</td>
+                <td class="num">201.9</td>
+                <td class="num neg">-11.4%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-500">
+          NF4 saves energy only for 7B+ models on RTX 5090. For smaller models, NF4 <em>increases</em> energy by 12-29%.
+        </div>
+      </div>
+
+      <!-- RTX 4090D — Full Benchmark (P0, Feb 25 2026) -->
+      <div class="card mb-6">
+        <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="gpu-tag gpu-4090">RTX 4090D</span>
+            <span class="text-sm font-semibold text-slate-700">NVIDIA GeForce RTX 4090D (Ada Lovelace, 24GB)</span>
+          </div>
+          <span class="text-xs text-slate-400">5 quant configs, batch size = 1, n=10, Feb 25 2026</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Params</th>
+                <th>Precision</th>
+                <th>Energy (J/1k tok)</th>
+                <th>Throughput (tok/s)</th>
+                <th>Power (W)</th>
+                <th>vs FP16</th>
+                <th>CV</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- TinyLlama-1.1B -->
+              <tr>
+                <td class="font-medium" rowspan="5">TinyLlama-1.1B</td>
+                <td class="num" rowspan="5">1.1B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">1,802</td>
+                <td class="num">50.55</td>
+                <td class="num">91.1</td>
+                <td class="num">baseline</td>
+                <td class="num">0.43%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">4,335</td>
+                <td class="num">16.01</td>
+                <td class="num">69.4</td>
+                <td class="num pos">+140.6%</td>
+                <td class="num">0.27%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">3,121</td>
+                <td class="num">23.21</td>
+                <td class="num">72.4</td>
+                <td class="num pos">+73.2%</td>
+                <td class="num">0.94%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">2,423</td>
+                <td class="num">31.27</td>
+                <td class="num">75.8</td>
+                <td class="num pos">+34.4%</td>
+                <td class="num">0.80%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">2,857</td>
+                <td class="num">25.85</td>
+                <td class="num">73.8</td>
+                <td class="num pos">+58.6%</td>
+                <td class="num">0.52%</td>
+              </tr>
+
+              <!-- Qwen2.5-3B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Qwen2.5-3B</td>
+                <td class="num" rowspan="5">3B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">3,515</td>
+                <td class="num">31.83</td>
+                <td class="num">111.9</td>
+                <td class="num">baseline</td>
+                <td class="num">0.64%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">9,207</td>
+                <td class="num">7.94</td>
+                <td class="num">73.1</td>
+                <td class="num pos">+161.9%</td>
+                <td class="num">0.99%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">5,310</td>
+                <td class="num">14.64</td>
+                <td class="num">77.7</td>
+                <td class="num pos">+51.1%</td>
+                <td class="num">0.54%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">4,411</td>
+                <td class="num">18.37</td>
+                <td class="num">81.0</td>
+                <td class="num pos">+25.5%</td>
+                <td class="num">0.92%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">5,109</td>
+                <td class="num">15.60</td>
+                <td class="num">79.7</td>
+                <td class="num pos">+45.3%</td>
+                <td class="num">0.74%</td>
+              </tr>
+
+              <!-- Yi-1.5-6B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Yi-1.5-6B</td>
+                <td class="num" rowspan="5">6B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">5,208</td>
+                <td class="num">35.70</td>
+                <td class="num">185.9</td>
+                <td class="num">baseline</td>
+                <td class="num">0.41%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">9,390</td>
+                <td class="num">8.55</td>
+                <td class="num">80.2</td>
+                <td class="num pos">+80.3%</td>
+                <td class="num">2.72%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">5,791</td>
+                <td class="num">15.90</td>
+                <td class="num">92.0</td>
+                <td class="num pos">+11.2%</td>
+                <td class="num">0.88%</td>
+              </tr>
+              <tr style="background:#f0fdf4">
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">4,932</td>
+                <td class="num">21.20</td>
+                <td class="num">104.5</td>
+                <td class="num neg">-5.3%</td>
+                <td class="num">1.19%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">5,652</td>
+                <td class="num">17.24</td>
+                <td class="num">97.4</td>
+                <td class="num pos">+8.5%</td>
+                <td class="num">2.88%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-500">
+          <strong>Key insight:</strong> On RTX 4090D, all quantization methods increase energy for models &le;3B. NF4 begins saving energy at 6B parameters (Yi-1.5-6B: <strong>-5.3%</strong>). INT8 Default shows the largest overhead (+80% to +162%) due to mixed-precision decomposition. FP16 remains the most energy-efficient option when GPU memory allows.
+        </div>
+      </div>
+
+      <!-- T4 -->
+      <div class="card mb-6">
+        <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="gpu-tag gpu-t4">T4</span>
+            <span class="text-sm font-semibold text-slate-700">NVIDIA Tesla T4 (Turing, 16GB)</span>
+          </div>
+          <span class="text-xs text-slate-400">Batch size = 1, seq_len = 512</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Params</th>
+                <th>Precision</th>
+                <th>Energy (J/1k tok)</th>
+                <th>Throughput (tok/s)</th>
+                <th>Power (W)</th>
+                <th>vs FP16</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-medium">TinyLlama-1.1B</td>
+                <td class="num">1.1B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num">4,251</td>
+                <td class="num">12.34</td>
+                <td class="num">52.5</td>
+                <td class="num">baseline</td>
+              </tr>
+              <tr>
+                <td class="font-medium">TinyLlama-1.1B</td>
+                <td class="num">1.1B</td>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">4,445</td>
+                <td class="num">10.87</td>
+                <td class="num">48.3</td>
+                <td class="num pos">+4.6%</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Qwen2-1.5B</td>
+                <td class="num">1.5B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num">5,732</td>
+                <td class="num">9.56</td>
+                <td class="num">54.8</td>
+                <td class="num">baseline</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Qwen2-1.5B</td>
+                <td class="num">1.5B</td>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">5,744</td>
+                <td class="num">8.92</td>
+                <td class="num">51.2</td>
+                <td class="num pos">+0.2%</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Qwen2.5-3B</td>
+                <td class="num">3B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num">11,268</td>
+                <td class="num">5.23</td>
+                <td class="num">58.9</td>
+                <td class="num">baseline</td>
+              </tr>
+              <tr>
+                <td class="font-medium">Qwen2.5-3B</td>
+                <td class="num">3B</td>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">11,112</td>
+                <td class="num">5.01</td>
+                <td class="num">55.7</td>
+                <td class="num neg">-1.4%</td>
+              </tr>
+              <tr style="background:#f0fdf4">
+                <td class="font-medium">Qwen2-7B</td>
+                <td class="num">7B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num">21,723</td>
+                <td class="num">2.87</td>
+                <td class="num">62.3</td>
+                <td class="num">baseline</td>
+              </tr>
+              <tr style="background:#f0fdf4">
+                <td class="font-medium">Qwen2-7B</td>
+                <td class="num">7B</td>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">18,735</td>
+                <td class="num">3.12</td>
+                <td class="num">58.5</td>
+                <td class="num neg">-13.8%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-500">
+          On T4, NF4 energy savings begin at ~3B parameters. Effect is more pronounced for 7B models (-13.8%).
+        </div>
+      </div>
+
+      <!-- A800 — Large Models (7B-14B, Feb 26 2026) -->
+      <div class="card mb-6">
+        <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="gpu-tag gpu-a800">A800-SXM4-80GB</span>
+            <span class="text-sm font-semibold text-slate-700">NVIDIA A800 80GB (Ampere, Large Models)</span>
+          </div>
+          <span class="text-xs text-slate-400">3 models × 5 configs, batch size = 1, n=10, Feb 26 2026</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Params</th>
+                <th>Precision</th>
+                <th>Energy (J/1k tok)</th>
+                <th>Throughput (tok/s)</th>
+                <th>Power (W)</th>
+                <th>PPL</th>
+                <th>vs FP16</th>
+                <th>CV</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Mistral-7B-v0.1 -->
+              <tr>
+                <td class="font-medium" rowspan="5">Mistral-7B-v0.1</td>
+                <td class="num" rowspan="5">7B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">4,402</td>
+                <td class="num">37.68</td>
+                <td class="num">169</td>
+                <td class="num">4.668</td>
+                <td class="num">baseline</td>
+                <td class="num">1.73%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">10,162</td>
+                <td class="num">10.24</td>
+                <td class="num">104</td>
+                <td class="num">4.679</td>
+                <td class="num pos">+130.8%</td>
+                <td class="num">0.64%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">6,528</td>
+                <td class="num">18.54</td>
+                <td class="num">121</td>
+                <td class="num">4.729</td>
+                <td class="num pos">+48.3%</td>
+                <td class="num">0.89%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">4,222</td>
+                <td class="num">27.15</td>
+                <td class="num">116</td>
+                <td class="num">4.781</td>
+                <td class="num neg">-4.1%</td>
+                <td class="num">1.60%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">4,797</td>
+                <td class="num">23.05</td>
+                <td class="num">112</td>
+                <td class="num">4.781</td>
+                <td class="num pos">+9.0%</td>
+                <td class="num">1.13%</td>
+              </tr>
+
+              <!-- Yi-1.5-9B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Yi-1.5-9B</td>
+                <td class="num" rowspan="5">9B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">5,445</td>
+                <td class="num">31.16</td>
+                <td class="num">171</td>
+                <td class="num">5.732</td>
+                <td class="num">baseline</td>
+                <td class="num">0.50%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">11,826</td>
+                <td class="num">7.41</td>
+                <td class="num">88</td>
+                <td class="num">4.943</td>
+                <td class="num pos">+117.2%</td>
+                <td class="num">0.48%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">8,504</td>
+                <td class="num">14.08</td>
+                <td class="num">120</td>
+                <td class="num">5.103</td>
+                <td class="num pos">+56.2%</td>
+                <td class="num">1.51%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">5,363</td>
+                <td class="num">21.84</td>
+                <td class="num">118</td>
+                <td class="num">5.091</td>
+                <td class="num neg">-1.5%</td>
+                <td class="num">0.91%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">6,146</td>
+                <td class="num">17.57</td>
+                <td class="num">109</td>
+                <td class="num">5.092</td>
+                <td class="num pos">+12.9%</td>
+                <td class="num">0.51%</td>
+              </tr>
+
+              <!-- Qwen2.5-14B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Qwen2.5-14B</td>
+                <td class="num" rowspan="5">14B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">7,360</td>
+                <td class="num">29.36</td>
+                <td class="num">219</td>
+                <td class="num">4.593</td>
+                <td class="num">baseline</td>
+                <td class="num">0.78%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">15,266</td>
+                <td class="num">7.47</td>
+                <td class="num">114</td>
+                <td class="num">4.656</td>
+                <td class="num pos">+107.5%</td>
+                <td class="num">1.03%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">9,807</td>
+                <td class="num">13.90</td>
+                <td class="num">137</td>
+                <td class="num">4.793</td>
+                <td class="num pos">+33.2%</td>
+                <td class="num">0.58%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">7,545</td>
+                <td class="num">20.56</td>
+                <td class="num">156</td>
+                <td class="num">4.898</td>
+                <td class="num pos">+2.5%</td>
+                <td class="num">1.12%</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">8,756</td>
+                <td class="num">16.89</td>
+                <td class="num">149</td>
+                <td class="num">4.898</td>
+                <td class="num pos">+19.0%</td>
+                <td class="num">0.50%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-500">
+          <strong>Large Model Findings:</strong> NF4 achieves near-FP16 energy for 7B-9B models with minimal PPL degradation. INT8 Default shows 2-2.3× energy overhead. For 14B models, NF4 energy is comparable to FP16.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ACCURACY (PPL) ===================== -->
+  <section id="accuracy" class="py-12 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-8">
+        <h2 class="text-2xl font-extrabold">Quantization Accuracy Trade-offs: Perplexity Analysis</h2>
+        <p class="mt-2 text-sm text-slate-500">Perplexity (PPL) on WikiText-2 test set. Lower is better. Energy efficiency vs accuracy comparison for INT8, NF4, and FP16 quantization.</p>
+      </div>
+
+      <div class="card">
+        <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="gpu-tag gpu-4090">RTX 4090D</span>
+            <span class="text-sm font-semibold text-slate-700">WikiText-2 test split (full, max_len=512)</span>
+          </div>
+          <span class="text-xs text-slate-400">3 models × 5 configs, Feb 25 2026</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Precision</th>
+                <th>Perplexity</th>
+                <th>PPL vs FP16</th>
+                <th>Energy vs FP16</th>
+                <th>Assessment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- TinyLlama-1.1B -->
+              <tr>
+                <td class="font-medium" rowspan="5">TinyLlama-1.1B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">14.995</td>
+                <td class="num">—</td>
+                <td class="num">—</td>
+                <td><span class="badge bg-green-50 text-green-700">Baseline</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">15.168</td>
+                <td class="num pos">+1.15%</td>
+                <td class="num pos">+140.6%</td>
+                <td><span class="badge bg-green-50 text-green-700">Negligible</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">15.365</td>
+                <td class="num pos">+2.47%</td>
+                <td class="num pos">+73.2%</td>
+                <td><span class="badge bg-yellow-50 text-yellow-700">Minor</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">15.876</td>
+                <td class="num pos">+5.87%</td>
+                <td class="num pos">+34.4%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">15.873</td>
+                <td class="num pos">+5.85%</td>
+                <td class="num pos">+58.6%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
+              </tr>
+
+              <!-- Qwen2.5-3B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Qwen2.5-3B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">13.775</td>
+                <td class="num">—</td>
+                <td class="num">—</td>
+                <td><span class="badge bg-green-50 text-green-700">Baseline</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">14.048</td>
+                <td class="num pos">+1.98%</td>
+                <td class="num pos">+161.9%</td>
+                <td><span class="badge bg-green-50 text-green-700">Negligible</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">15.880</td>
+                <td class="num pos">+15.28%</td>
+                <td class="num pos">+51.1%</td>
+                <td><span class="badge bg-red-50 text-red-700">Significant</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">15.035</td>
+                <td class="num pos">+9.14%</td>
+                <td class="num pos">+25.5%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">15.048</td>
+                <td class="num pos">+9.24%</td>
+                <td class="num pos">+45.3%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
+              </tr>
+
+              <!-- Yi-1.5-6B -->
+              <tr class="border-t-2 border-slate-200">
+                <td class="font-medium" rowspan="5">Yi-1.5-6B</td>
+                <td><span class="badge bg-blue-50 text-blue-700">FP16</span></td>
+                <td class="num font-semibold">9.423</td>
+                <td class="num">—</td>
+                <td class="num">—</td>
+                <td><span class="badge bg-green-50 text-green-700">Baseline</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-orange-50 text-orange-700">INT8 Default</span></td>
+                <td class="num">9.485</td>
+                <td class="num pos">+0.66%</td>
+                <td class="num pos">+80.3%</td>
+                <td><span class="badge bg-green-50 text-green-700">Negligible</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-yellow-50 text-yellow-700">INT8 Pure</span></td>
+                <td class="num">11.566</td>
+                <td class="num pos">+22.74%</td>
+                <td class="num pos">+11.2%</td>
+                <td><span class="badge bg-red-50 text-red-700">Significant</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-purple-50 text-purple-700">NF4</span></td>
+                <td class="num">9.965</td>
+                <td class="num pos">+5.75%</td>
+                <td class="num neg">-5.3%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-violet-50 text-violet-700">NF4 DQ</span></td>
+                <td class="num">9.973</td>
+                <td class="num pos">+5.84%</td>
+                <td class="num pos">+8.5%</td>
+                <td><span class="badge bg-orange-50 text-orange-700">Moderate</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-5 py-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-500">
+          <strong>Consistent findings across 3 models:</strong> INT8 Default preserves accuracy well (+0.66% to +1.98% PPL) but at significant energy cost. INT8 Pure causes severe degradation (+2.5% to +22.7% PPL). NF4 causes moderate PPL increase (+5.7% to +9.1%). Larger models (6B) are more robust to quantization than smaller ones (1.1B-3B).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== KEY FINDINGS ===================== -->
+  <section id="findings" class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-8">
+        <h2 class="text-2xl font-extrabold">Key Findings: Best Quantization Method for Energy Efficiency</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="card p-6">
+          <div class="text-2xl mb-3">1</div>
+          <h3 class="font-bold text-base mb-2">INT8 Default: High Energy Cost vs FP16</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">
+            Default <code class="text-xs bg-slate-100 px-1 py-0.5 rounded">LLM.int8()</code> increases energy by <strong>+80% to +162%</strong> vs FP16 on RTX 4090D due to mixed-precision decomposition overhead. Throughput drops 68-75%. Accuracy is preserved (+0.7% to +2% PPL), but the energy cost is extreme.
+          </p>
+        </div>
+        <div class="card p-6">
+          <div class="text-2xl mb-3">2</div>
+          <h3 class="font-bold text-base mb-2">NF4 Crossover at ~6B Params</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">
+            NF4 quantization saves energy only for models with <strong>&ge;6B parameters</strong> (Yi-1.5-6B: <strong>-5.3%</strong>). For smaller models (1.1B-3B), NF4 <em>increases</em> energy by 25-34%. FP16 remains the most efficient option when GPU memory allows.
+          </p>
+        </div>
+        <div class="card p-6">
+          <div class="text-2xl mb-3">3</div>
+          <h3 class="font-bold text-base mb-2">INT8 Pure: Energy Saved, Accuracy Lost</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">
+            Disabling mixed-precision decomposition (<code class="text-xs bg-slate-100 px-1 py-0.5 rounded">threshold=0.0</code>) causes <strong>+2.5% to +22.7% PPL degradation</strong> across 3 models. Larger models suffer more (Qwen2.5-3B: +15.3%, Yi-1.5-6B: +22.7%). The energy savings do not justify the accuracy loss.
+          </p>
+        </div>
+      </div>
+
+      <!-- Interactive Comparison Tool CTA -->
+      <div class="mt-8 card overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 border-l-4 border-blue-500">
+          <div class="flex items-start justify-between gap-6">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-3xl">📊</span>
+                <h3 class="text-xl font-bold text-slate-900">Interactive Model Comparison Tool</h3>
+              </div>
+              <p class="text-sm text-slate-700 leading-relaxed mb-4">
+                Compare energy efficiency and accuracy trade-offs across different models and quantization methods. Select any 2-4 models from our benchmark data and get <strong>AI-powered insights</strong> on their performance characteristics.
+              </p>
+              <a href="compare.html" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors shadow-md hover:shadow-lg">
+                <span>Launch Comparison Tool</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+              </a>
+            </div>
+            <div class="hidden md:block">
+              <div class="bg-white rounded-lg p-4 shadow-md border border-blue-200">
+                <div class="text-xs text-slate-500 mb-1">Models Available</div>
+                <div class="text-3xl font-black text-blue-600">6</div>
+                <div class="text-xs text-slate-600 mt-1">Real benchmark data</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== METHODOLOGY ===================== -->
+  <section id="methodology" class="py-12 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-8">
+        <h2 class="text-2xl font-extrabold">Methodology</h2>
+        <p class="mt-2 text-sm text-slate-500">Full reproducibility details. All scripts available in the repository.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="card p-6">
+          <h3 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">Hardware Platforms</h3>
+          <table class="text-sm w-full">
+            <tbody>
+              <tr class="border-b border-slate-100">
+                <td class="py-2 font-medium"><span class="gpu-tag gpu-5090">RTX 5090</span></td>
+                <td class="py-2 text-slate-500">Blackwell, 32GB GDDR7, 575W TDP</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="py-2 font-medium"><span class="gpu-tag gpu-4090">RTX 4090D</span></td>
+                <td class="py-2 text-slate-500">Ada Lovelace, 24GB GDDR6X, 425W TDP</td>
+              </tr>
+              <tr class="border-b border-slate-100">
+                <td class="py-2 font-medium"><span class="gpu-tag gpu-t4">T4</span></td>
+                <td class="py-2 text-slate-500">Turing, 16GB GDDR6, 70W TDP</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-medium"><span class="gpu-tag gpu-a800">A800</span></td>
+                <td class="py-2 text-slate-500">Ampere, 80GB HBM2e, 300W TDP</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-bold text-sm text-slate-700 mb-3 uppercase tracking-wide">Measurement Protocol</h3>
+          <ul class="space-y-2 text-sm text-slate-500">
+            <li class="flex items-start gap-2"><span class="text-brand-500 mt-0.5 font-bold shrink-0">-</span>Power sampling: <strong>NVML at 10 Hz</strong></li>
+            <li class="flex items-start gap-2"><span class="text-brand-500 mt-0.5 font-bold shrink-0">-</span>Repetitions: <strong>n=10</strong> per configuration</li>
+            <li class="flex items-start gap-2"><span class="text-brand-500 mt-0.5 font-bold shrink-0">-</span>Coefficient of variation: <strong>&lt; 3%</strong></li>
+            <li class="flex items-start gap-2"><span class="text-brand-500 mt-0.5 font-bold shrink-0">-</span>Warmup: 3 runs discarded before measurement</li>
+            <li class="flex items-start gap-2"><span class="text-brand-500 mt-0.5 font-bold shrink-0">-</span>Perplexity: WikiText-2 test split, cross-entropy loss</li>
+            <li class="flex items-start gap-2"><span class="text-brand-500 mt-0.5 font-bold shrink-0">-</span>Software: PyTorch 2.4+, bitsandbytes, transformers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMMUNITY ===================== -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-8">
+        <h2 class="text-2xl font-extrabold">Community & Contributions</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        <a href="https://huggingface.co/docs/optimum/concept_guides/quantization" target="_blank" class="card p-6 hover:border-brand-300 transition group">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge bg-amber-50 text-amber-700">🤗 Official Docs</span>
+          </div>
+          <h3 class="font-bold text-sm group-hover:text-brand-600 transition">Integrated into Hugging Face Optimum Official Documentation</h3>
+          <p class="mt-1 text-xs text-slate-500">Our energy efficiency findings are part of the Optimum Quantization Guide — the canonical reference for quantization best practices in the Hugging Face ecosystem.</p>
+        </a>
+        <a href="https://github.com/bitsandbytes-foundation/bitsandbytes/pull/1882" target="_blank" class="card p-6 hover:border-brand-300 transition group">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge bg-green-50 text-green-700">Open PR</span>
+            <span class="text-xs text-slate-400">#1882</span>
+          </div>
+          <h3 class="font-bold text-sm group-hover:text-brand-600 transition">Quantization Performance Guide for bitsandbytes</h3>
+          <p class="mt-1 text-xs text-slate-500">Documentation PR adding energy-accuracy trade-off analysis to official bitsandbytes docs.</p>
+        </a>
+        <a href="https://github.com/bitsandbytes-foundation/bitsandbytes/issues/1867" target="_blank" class="card p-6 hover:border-brand-300 transition group">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge bg-blue-50 text-blue-700">Discussion</span>
+            <span class="text-xs text-slate-400">#1867</span>
+          </div>
+          <h3 class="font-bold text-sm group-hover:text-brand-600 transition">INT8 Energy Overhead Discussion with Tim Dettmers</h3>
+          <p class="mt-1 text-xs text-slate-500">Discussion with the bitsandbytes core author on the energy implications of mixed-precision decomposition.</p>
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-slate-400 text-center">Our research is recognized by industry leaders — from Hugging Face official documentation to open-source maintainer engagement.</p>
+    </div>
+  </section>
+
+  <!-- ===================== CITE ===================== -->
+  <section class="py-12 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-6">
+        <h2 class="text-2xl font-extrabold">Cite This Benchmark</h2>
+      </div>
+      <div class="card p-5">
+        <pre class="text-xs font-mono text-slate-600 overflow-x-auto leading-relaxed">@misc{zhang2026llmenergy,
+  author    = {Zhang, Hongping},
+  title     = {LLM Energy Benchmark: Real GPU Power Measurements for Quantized Inference},
+  year      = {2026},
+  url       = {https://github.com/hongping-zh/ecocompute-ai},
+  note      = {NVML power monitoring, 3 GPU architectures, includes perplexity data}
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="border-t border-slate-200 py-8 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2 text-sm text-slate-400">
+          <span class="text-lg">📊</span>
+          <span>LLM Energy Benchmark</span>
+          <span>&middot;</span>
+          <span>by <a href="https://github.com/hongping-zh" target="_blank" class="text-slate-600 hover:underline">Hongping Zhang</a></span>
+        </div>
+        <div class="flex items-center gap-5 text-sm text-slate-400">
+          <a href="https://github.com/hongping-zh/ecocompute-ai" target="_blank" class="hover:text-slate-700 transition">Repository</a>
+          <a href="https://github.com/hongping-zh/ecocompute-ai/tree/main/data" target="_blank" class="hover:text-slate-700 transition">Raw Data</a>
+          <a href="https://github.com/hongping-zh/ecocompute-ai/tree/main/benchmarks" target="_blank" class="hover:text-slate-700 transition">Scripts</a>
+          <a href="./privacy.html" class="hover:text-slate-700 transition">Privacy</a>
+        </div>
+      </div>
+      <p class="text-center text-xs text-slate-300 mt-6">
+        "Measure, don't assume. Reproduce, don't trust. Share, don't hoard."
+      </p>
+    </div>
+  </footer>
+
 </body>
 </html>
