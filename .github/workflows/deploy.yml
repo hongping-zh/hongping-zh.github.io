@@ -40,6 +40,9 @@ jobs:
           cp ./bot-landing/privacy.html ./dist/bot-landing/
           cp ./bot-landing/terms.html ./dist/bot-landing/
           cp ./compare.html ./dist/
+          if [ -d ./updates ]; then
+            cp -r ./updates ./dist/
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
