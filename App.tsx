@@ -14,7 +14,7 @@ import { EnergyAuditor } from './components/EnergyAuditor';
 import ExecutiveSummary from './components/ExecutiveSummary';
 import InteractiveCharts from './components/InteractiveCharts';
 import RecommendationEngine from './components/RecommendationEngine';
-import { LayoutGrid, Calculator as CalcIcon, Activity, Leaf, Settings, Github, BookOpen, Scale, Mail, Layers, Info, Bot, Zap, BarChart3, TrendingUp, Lightbulb, Award } from 'lucide-react';
+import { LayoutGrid, Calculator as CalcIcon, Activity, Leaf, Settings, Github, BookOpen, Scale, Mail, Layers, Info, Bot, Zap, BarChart3, TrendingUp, Lightbulb, Award, FileText } from 'lucide-react';
 
 const App: React.FC = () => {
   const [view, setView] = useState<AppView>(AppView.LEADERBOARD);
@@ -203,6 +203,16 @@ const App: React.FC = () => {
             >
               <Github className="w-5 h-5 flex-shrink-0" />
               <span className="hidden lg:block font-medium text-sm">GitHub ⭐</span>
+            </a>
+           <a
+              href="/EcoCompute_Practitioner_Report_v1.0.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl"
+              title="Download Practitioner Report PDF (free, 7 pages)"
+            >
+              <FileText className="w-5 h-5 flex-shrink-0" />
+              <span className="hidden lg:block font-medium text-sm">Report PDF 📄</span>
             </a>
            <a 
               href="https://clawhub.ai/hongping-zh/ecocompute" 
