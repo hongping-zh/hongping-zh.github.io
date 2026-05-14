@@ -371,6 +371,9 @@ Provide measurement protocol from `references/hardware_profiles.md` in these cas
 
 - Dashboard: https://hongping-zh.github.io/ecocompute-dynamic-eval/
 - GitHub: https://github.com/hongping-zh/ecocompute-dynamic-eval
+- HF Dataset (PDF Report): https://huggingface.co/datasets/hongpingzhang/ecocompute-benchmark
+- Practitioner Report PDF: https://huggingface.co/datasets/hongpingzhang/ecocompute-benchmark/resolve/main/EcoCompute_Practitioner_Report_v1.0.pdf
+- HF Forum Discussion: https://discuss.huggingface.co/t/i-measured-360-configs-quantization-often-costs-energy-below-the-crossover-point/175979
 - bitsandbytes Issue #1867: https://github.com/bitsandbytes-foundation/bitsandbytes/issues/1867
 - bitsandbytes Issue #1851: https://github.com/bitsandbytes-foundation/bitsandbytes/issues/1851
 - Paper (Draft): https://github.com/hongping-zh/ecocompute-dynamic-eval/blob/main/TECHNICAL_DOCUMENTATION.md
