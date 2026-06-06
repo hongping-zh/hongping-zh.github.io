@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import { AppView } from './types';
 import { Calculator } from './components/Calculator';
 import { Leaderboard } from './components/Leaderboard';
@@ -213,6 +213,16 @@ const App: React.FC = () => {
             >
               <FileText className="w-5 h-5 flex-shrink-0" />
               <span className="hidden lg:block font-medium text-sm">Report PDF 📄</span>
+            </a>
+           <a
+              href="/papers/ssrn-6854700.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-700 hover:to-teal-700 transition-all shadow-lg hover:shadow-xl"
+              title="Read the SSRN working paper"
+            >
+              <FileText className="w-5 h-5 flex-shrink-0" />
+              <span className="hidden lg:block font-medium text-sm">SSRN Paper 📄</span>
             </a>
            <a 
               href="https://clawhub.ai/hongping-zh/ecocompute" 
