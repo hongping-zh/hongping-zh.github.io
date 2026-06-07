@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Weight-Only Quantization Does Not Always Save Energy | SSRN Working Paper</title>
+  <meta name="description" content="Working paper by Hongping Zhang: Weight-Only Quantization Does Not Always Save Energy: An Empirical Study of LLM Inference Across NVIDIA GPU Platforms." />
+  <meta name="author" content="Hongping Zhang" />
+  <link rel="canonical" href="https://hongping-zh.github.io/paper/" />
+
+  <!-- Google Scholar citation metadata -->
+  <meta name="citation_title" content="Weight-Only Quantization Does Not Always Save Energy: An Empirical Study of LLM Inference Across NVIDIA GPU Platforms" />
+  <meta name="citation_author" content="Zhang, Hongping" />
+  <meta name="citation_publication_date" content="2026" />
+  <meta name="citation_date" content="2026" />
+  <meta name="citation_pdf_url" content="https://hongping-zh.github.io/papers/ssrn-6854700.pdf" />
+  <meta name="citation_online_date" content="2026" />
+  <meta name="citation_abstract_html_url" content="https://hongping-zh.github.io/paper/" />
+
+  <meta property="og:title" content="Weight-Only Quantization Does Not Always Save Energy" />
+  <meta property="og:description" content="An empirical study of LLM inference energy behavior across NVIDIA GPU platforms." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://hongping-zh.github.io/paper/" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(900px 420px at 10% -10%, rgba(16,185,129,0.16), transparent 60%),
+        radial-gradient(900px 420px at 90% -15%, rgba(15,23,42,0.10), transparent 60%),
+        #f8fafc;
+    }
+  </style>
+</head>
+<body class="text-slate-900">
+  <main class="max-w-5xl mx-auto px-6 py-10 sm:py-14">
+    <nav class="mb-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <a href="/" class="text-sm font-semibold text-emerald-700 hover:text-emerald-900">← Back to LLM Energy Benchmark</a>
+      <a href="https://doi.org/10.5281/zenodo.19647290" target="_blank" rel="noopener noreferrer">
+        <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.19647290.svg" alt="DOI: 10.5281/zenodo.19647290" />
+      </a>
+    </nav>
+
+    <section class="bg-white border border-slate-200 rounded-3xl shadow-xl shadow-slate-200/60 p-7 sm:p-10">
+      <div class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold mb-5">
+        SSRN Working Paper
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+        Weight-Only Quantization Does Not Always Save Energy
+      </h1>
+
+      <p class="mt-4 text-xl text-slate-600 leading-relaxed">
+        An Empirical Study of LLM Inference Across NVIDIA GPU Platforms
+      </p>
+
+      <div class="mt-5 text-sm text-slate-500">
+        <strong>Author:</strong> Hongping Zhang · <strong>Status:</strong> under review at <em>Sustainable Computing</em>
+      </div>
+
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <a href="/papers/ssrn-6854700.pdf" target="_blank" rel="noopener noreferrer"
+           class="inline-flex justify-center items-center px-6 py-3 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-700 transition">
+          Download PDF
+        </a>
+        <a href="https://ssrn.com/abstract=6854700" target="_blank" rel="noopener noreferrer"
+           class="inline-flex justify-center items-center px-6 py-3 rounded-xl border border-slate-300 text-slate-700 font-bold hover:border-slate-500 hover:text-slate-900 transition">
+          View on SSRN
+        </a>
+        <a href="https://doi.org/10.5281/zenodo.19647290" target="_blank" rel="noopener noreferrer"
+           class="inline-flex justify-center items-center px-6 py-3 rounded-xl border border-slate-300 text-slate-700 font-bold hover:border-slate-500 hover:text-slate-900 transition">
+          Dataset DOI
+        </a>
+      </div>
+    </section>
+
+    <section class="mt-8 grid lg:grid-cols-5 gap-8">
+      <article class="lg:col-span-3 bg-white border border-slate-200 rounded-3xl p-7 sm:p-8 shadow-lg shadow-slate-200/50">
+        <h2 class="text-2xl font-black mb-4">Abstract</h2>
+        <p class="text-slate-700 leading-relaxed">
+          Weight-only quantization is widely assumed to reduce the energy cost of large language model inference by lowering memory traffic and improving computational efficiency. This paper presents an empirical study of FP16, INT8, and NF4 inference across multiple NVIDIA GPU platforms and model scales. The results show that quantization does not universally reduce energy consumption. For smaller models and certain hardware-software stacks, quantized execution can reduce active power while increasing runtime enough to raise total energy. These findings highlight an energy crossover effect: quantization becomes beneficial only when model scale, batch size, and backend implementation allow bandwidth savings to dominate overheads.
+        </p>
+
+        <h2 class="text-2xl font-black mt-8 mb-4">Key findings</h2>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3">
+            <span class="mt-1 w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+            <span>Weight-only quantization does not always save energy; for small models, FP16 can be more energy-efficient than INT8 or NF4.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+            <span>Energy behavior is phase-dependent: prefill and decode can show different power-throughput trade-offs.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="mt-1 w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+            <span>Backend and architecture-specific quantized-path efficiency can determine whether theoretical bandwidth savings translate into real energy savings.</span>
+          </li>
+        </ul>
+      </article>
+
+      <aside class="lg:col-span-2 bg-white border border-slate-200 rounded-3xl p-7 sm:p-8 shadow-lg shadow-slate-200/50">
+        <h2 class="text-2xl font-black mb-4">Figure 1</h2>
+        <p class="text-sm text-slate-500 mb-5">Illustrative energy crossover pattern: quantization can be worse for small models and better once scale/backend efficiency makes memory savings dominant.</p>
+
+        <svg viewBox="0 0 520 340" role="img" aria-label="Illustrative quantization energy crossover chart" class="w-full rounded-2xl border border-slate-200 bg-slate-50">
+          <rect x="0" y="0" width="520" height="340" fill="#f8fafc"/>
+          <line x1="70" y1="270" x2="470" y2="270" stroke="#334155" stroke-width="2"/>
+          <line x1="70" y1="45" x2="70" y2="270" stroke="#334155" stroke-width="2"/>
+          <text x="250" y="318" text-anchor="middle" fill="#475569" font-size="15">Model scale / batch size</text>
+          <text x="18" y="170" text-anchor="middle" fill="#475569" font-size="15" transform="rotate(-90 18 170)">Energy per output token</text>
+
+          <path d="M85 120 C180 132, 290 160, 455 205" fill="none" stroke="#2563eb" stroke-width="4"/>
+          <path d="M85 225 C170 220, 260 170, 455 105" fill="none" stroke="#059669" stroke-width="4"/>
+
+          <line x1="255" y1="65" x2="255" y2="270" stroke="#f59e0b" stroke-width="2" stroke-dasharray="7 6"/>
+          <text x="265" y="82" fill="#92400e" font-size="13" font-weight="700">crossover</text>
+
+          <text x="365" y="214" fill="#2563eb" font-size="14" font-weight="700">FP16</text>
+          <text x="365" y="103" fill="#059669" font-size="14" font-weight="700">NF4 / INT8</text>
+
+          <text x="95" y="295" fill="#64748b" font-size="12">small</text>
+          <text x="430" y="295" fill="#64748b" font-size="12">large</text>
+        </svg>
+      </aside>
+    </section>
+
+    <section class="mt-8 bg-slate-900 text-white rounded-3xl p-7 sm:p-8">
+      <h2 class="text-xl font-black mb-3">Citation</h2>
+      <p class="text-slate-300 text-sm leading-relaxed">
+        Zhang, Hongping. <em>Weight-Only Quantization Does Not Always Save Energy: An Empirical Study of LLM Inference Across NVIDIA GPU Platforms</em>. SSRN working paper, 2026.
+      </p>
+      <div class="mt-4">
+        <a href="https://doi.org/10.5281/zenodo.19647290" target="_blank" rel="noopener noreferrer">
+          <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.19647290.svg" alt="DOI: 10.5281/zenodo.19647290" />
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
