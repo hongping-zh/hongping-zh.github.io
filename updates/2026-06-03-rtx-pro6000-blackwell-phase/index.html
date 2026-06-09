@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RTX PRO 6000 Blackwell: Phase-Separated Energy Profiling | LLM Energy Benchmark</title>
+  <meta name="description" content="Supplemental RTX PRO 6000 Blackwell phase-separated energy profiling data, highlighting prefill/decode behavior and backend-architecture interaction under bitsandbytes 0.49.2." />
+  <script src="/assets/js/analytics.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Sora', system-ui, sans-serif;
+      background:
+        radial-gradient(900px 450px at 8% -15%, rgba(44,159,144,0.14), transparent 60%),
+        radial-gradient(900px 450px at 98% -22%, rgba(245,158,11,0.1), transparent 60%),
+        #f3f7f6;
+      color: #0f172a;
+    }
+    .card {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #dbe8e3;
+      border-radius: 16px;
+      box-shadow: 0 14px 34px -26px rgba(15,23,42,0.9), 0 1px 0 rgba(255,255,255,0.85) inset;
+      backdrop-filter: blur(6px);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #166c62 0%, #2c9f90 55%, #f59e0b 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .num { font-family: 'JetBrains Mono', monospace; }
+    table { border-collapse: collapse; width: 100%; }
+    th { background: #f7faf9; text-align: left; padding: 10px 12px; border-bottom: 2px solid #dbe8e3; font-size: 12px; white-space: nowrap; }
+    td { padding: 10px 12px; border-bottom: 1px solid #e8f0ed; font-size: 13px; vertical-align: top; }
+  </style>
+</head>
+<body>
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="../../index.html" class="text-xl font-black gradient-text">LLM Energy Benchmark</a>
+      <a href="../../index.html" class="text-sm text-slate-600 hover:text-teal-700 transition">← Back to Homepage</a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-10 space-y-6">
+    <section class="card p-6">
+      <div class="flex flex-wrap items-center gap-3 mb-3">
+        <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-900 text-white">Supplementary Case Study</span>
+        <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">Not a main leaderboard entry</span>
+        <span class="text-xs text-slate-500">Published: 2026-06-03</span>
+      </div>
+      <h1 class="text-3xl font-extrabold mb-3">RTX PRO 6000 (Blackwell): Phase-Separated Energy Profiling &amp; Backend Compatibility Finding</h1>
+      <p class="text-sm text-slate-600 leading-relaxed max-w-4xl">
+        This update reports phase-separated prefill and decode measurements on an NVIDIA RTX PRO 6000 Blackwell GPU.
+        The data is presented as a supplementary backend-architecture case study rather than a standard leaderboard benchmark, because the measurement protocol and interpretation differ from the main end-to-end energy results.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href="../../data/rtx_pro6000_phase_results_with_yi15_6b_20260603.tar.gz" class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2.5 rounded-lg font-semibold text-sm">Download raw archive</a>
+        <a href="../../index.html#leaderboard" class="inline-flex items-center gap-2 border border-slate-300 text-slate-700 px-4 py-2.5 rounded-lg font-semibold text-sm hover:border-slate-400">Return to Leaderboard</a>
+      </div>
+    </section>
+
+    <section class="card p-6">
+      <h2 class="text-xl font-extrabold mb-4">Section 1: Experimental Overview</h2>
+      <div class="overflow-x-auto">
+        <table>
+          <tbody>
+            <tr><th>Item</th><th>Value</th></tr>
+            <tr><td>GPU</td><td>RTX PRO 6000 Blackwell Server Edition, 96GB</td></tr>
+            <tr><td>Software stack</td><td>bitsandbytes 0.49.2, PyTorch 2.11.0, CUDA 12.8</td></tr>
+            <tr><td>Power sampling rate</td><td>100 Hz (vs. 10 Hz in the main benchmark)</td></tr>
+            <tr><td>Models</td><td>Qwen2-1.5B, Qwen2.5-3B, Yi-1.5-6B</td></tr>
+            <tr><td>Configuration coverage</td><td>15 measured rows across 5 model/batch settings and 3 precisions; 11 non-FP16 quantized or anchor configurations are used for interpretation.</td></tr>
+            <tr><td>Measurement protocol</td><td>Phase-separated prefill energy per call and decode energy per 32 generated tokens.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card p-6">
+      <h2 class="text-xl font-extrabold mb-4">Section 2: Phase-Separated Data Table</h2>
+      <p class="text-sm text-slate-600 mb-4">
+        Ratios are computed relative to the FP16 baseline for the same model and batch size. Values above 1.0 indicate higher energy or lower speed than FP16.
+      </p>
+      <div class="overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Batch</th>
+              <th>Precision</th>
+              <th>Prefill Energy / Call (J)</th>
+              <th>Decode Energy / 32 tok (J)</th>
+              <th>Decode tok/s</th>
+              <th>Prefill Energy Ratio</th>
+              <th>Decode Energy Ratio</th>
+              <th>Decode Speed Ratio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Qwen2-1.5B</td><td class="num">1</td><td>FP16</td><td class="num">0.924</td><td class="num">42.737</td><td class="num">105.26</td><td class="num">1.00x</td><td class="num">1.00x</td><td class="num">1.00x</td></tr>
+            <tr><td>Qwen2-1.5B</td><td class="num">1</td><td>INT8</td><td class="num">4.736</td><td class="num">135.724</td><td class="num">15.79</td><td class="num text-rose-600">5.12x</td><td class="num text-rose-600">3.18x</td><td class="num">0.15x</td></tr>
+            <tr><td>Qwen2-1.5B</td><td class="num">1</td><td>NF4</td><td class="num">3.569</td><td class="num">71.281</td><td class="num">41.10</td><td class="num text-rose-600">3.86x</td><td class="num text-rose-600">1.67x</td><td class="num">0.39x</td></tr>
+            <tr><td>Qwen2-1.5B</td><td class="num">8</td><td>FP16</td><td class="num">1.326</td><td class="num">48.156</td><td class="num">789.97</td><td class="num">1.00x</td><td class="num">1.00x</td><td class="num">1.00x</td></tr>
+            <tr><td>Qwen2-1.5B</td><td class="num">8</td><td>INT8</td><td class="num">5.829</td><td class="num">154.507</td><td class="num">112.77</td><td class="num text-rose-600">4.39x</td><td class="num text-rose-600">3.21x</td><td class="num">0.14x</td></tr>
+            <tr><td>Qwen2-1.5B</td><td class="num">8</td><td>NF4</td><td class="num">4.511</td><td class="num">133.460</td><td class="num">244.35</td><td class="num text-rose-600">3.40x</td><td class="num text-rose-600">2.77x</td><td class="num">0.31x</td></tr>
+            <tr><td>Qwen2.5-3B</td><td class="num">1</td><td>FP16</td><td class="num">1.575</td><td class="num">73.191</td><td class="num">80.74</td><td class="num">1.00x</td><td class="num">1.00x</td><td class="num">1.00x</td></tr>
+            <tr><td>Qwen2.5-3B</td><td class="num">1</td><td>INT8</td><td class="num">6.620</td><td class="num">186.035</td><td class="num">12.30</td><td class="num text-rose-600">4.20x</td><td class="num text-rose-600">2.54x</td><td class="num">0.15x</td></tr>
+            <tr><td>Qwen2.5-3B</td><td class="num">1</td><td>NF4</td><td class="num">6.412</td><td class="num">108.622</td><td class="num">31.71</td><td class="num text-rose-600">4.07x</td><td class="num text-rose-600">1.48x</td><td class="num">0.39x</td></tr>
+            <tr><td>Qwen2.5-3B</td><td class="num">8</td><td>FP16</td><td class="num">2.423</td><td class="num">81.280</td><td class="num">636.22</td><td class="num">1.00x</td><td class="num">1.00x</td><td class="num">1.00x</td></tr>
+            <tr><td>Qwen2.5-3B</td><td class="num">8</td><td>INT8</td><td class="num">8.364</td><td class="num">212.776</td><td class="num">86.55</td><td class="num text-rose-600">3.45x</td><td class="num text-rose-600">2.62x</td><td class="num">0.14x</td></tr>
+            <tr><td>Qwen2.5-3B</td><td class="num">8</td><td>NF4</td><td class="num">7.886</td><td class="num">234.826</td><td class="num">188.79</td><td class="num text-rose-600">3.25x</td><td class="num text-rose-600">2.89x</td><td class="num">0.30x</td></tr>
+            <tr><td>Yi-1.5-6B</td><td class="num">8</td><td>FP16</td><td class="num">3.645</td><td class="num">116.080</td><td class="num">617.32</td><td class="num">1.00x</td><td class="num">1.00x</td><td class="num">1.00x</td></tr>
+            <tr><td>Yi-1.5-6B</td><td class="num">8</td><td>INT8</td><td class="num">9.124</td><td class="num">218.745</td><td class="num">99.99</td><td class="num text-rose-600">2.50x</td><td class="num text-rose-600">1.88x</td><td class="num">0.16x</td></tr>
+            <tr><td>Yi-1.5-6B</td><td class="num">8</td><td>NF4</td><td class="num">12.126</td><td class="num">365.331</td><td class="num">222.80</td><td class="num text-rose-600">3.33x</td><td class="num text-rose-600">3.15x</td><td class="num">0.36x</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-4">
+      <div class="card p-6">
+        <h2 class="text-xl font-extrabold mb-3">Section 3A: Finding 1 — Observed Phase-Separated Pattern</h2>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Across the measured quantized configurations, the observed quantization energy overhead is consistently larger in the prefill phase than in the decode phase. Prefill energy ratios range from approximately <strong>2.5x to 5.1x</strong>, while decode energy ratios range from approximately <strong>1.5x to 3.2x</strong>. This observed pattern suggests that dequantization overhead may be amplified during compute-intensive parallel token processing.
+        </p>
+        <p class="mt-3 text-xs text-slate-500 leading-relaxed">
+          This is reported as an observed pattern under this backend and hardware stack, not as a demonstrated universal prefill/decode mechanism.
+        </p>
+      </div>
+      <div class="card p-6">
+        <h2 class="text-xl font-extrabold mb-3">Section 3B: Finding 2 — Backend-Architecture Interaction</h2>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          On this Blackwell GPU with bitsandbytes 0.49.2, no energy crossover was observed. All tested models, including Yi-1.5-6B at batch size 8, showed substantial quantized-path energy penalties relative to FP16. INT8 decode speed was only about <strong>14% to 16%</strong> of FP16 across the measured settings, consistent with architecture-specific quantized-path inefficiency under the evaluated backend.
+        </p>
+        <p class="mt-3 text-xs text-slate-500 leading-relaxed">
+          This reinforces that quantization energy behavior is implementation-specific and should not be interpreted solely from nominal bit width.
+        </p>
+      </div>
+    </section>
+
+    <section class="card p-6 border-l-4 border-amber-400">
+      <h2 class="text-xl font-extrabold mb-3">Section 4: Relationship to the Main Leaderboard</h2>
+      <p class="text-sm text-slate-600 leading-relaxed">
+        These measurements are not directly comparable to the main leaderboard for three reasons: (1) the phase-separated measurement protocol differs from the end-to-end energy protocol; (2) bitsandbytes quantized execution paths show architecture-specific inefficiency on this Blackwell GPU; and (3) generation length is 32 tokens in the decode phase, compared with 256/512-token settings in the main benchmark. This data is therefore presented as a supplementary case study rather than a standard benchmark entry.
+      </p>
+      <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+        In particular, the RTX PRO 6000 values should not be read as a normal leaderboard claim that quantization is inherently 2-3x more energy-intensive on Blackwell. They document the measured behavior of the evaluated bitsandbytes backend under this specific hardware-software stack.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
