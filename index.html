@@ -263,21 +263,20 @@
   <!-- ===================== LATEST UPDATE ===================== -->
   <section class="py-4 sm:py-6">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="card p-5 sm:p-6 border-l-4 border-slate-700">
+      <div class="card p-5 sm:p-6 border-l-4 border-teal-500">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div class="inline-flex items-center gap-2 text-[11px] font-semibold px-2 py-1 rounded-full bg-slate-900 text-white mb-2">LATEST UPDATE · 2026-06-03</div>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">RTX PRO 6000 (Blackwell): Phase-Separated Energy Data &amp; Backend Compatibility</h2>
+            <div class="inline-flex items-center gap-2 text-[11px] font-semibold px-2 py-1 rounded-full bg-teal-100 text-teal-800 mb-2">LATEST UPDATE · 2026-06-08</div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">RTX PRO 6000 Blackwell: FP16 End-to-End Baseline Added</h2>
             <p class="mt-2 text-sm text-slate-600 max-w-3xl">
-              First phase-separated measurements on Blackwell architecture. Quantization overhead is consistently larger in prefill.
-              No energy crossover was observed under bitsandbytes 0.49.2, highlighting backend-architecture interaction effects.
+              Added Qwen2.5-3B FP16 end-to-end reference results on RTX PRO 6000 Blackwell for 256 and 512 generated tokens.
+              Energy is <strong>2,660.83</strong> and <strong>2,709.67 J/1k tok</strong>, with throughput around <strong>83 tok/s</strong>.
             </p>
             <p class="mt-2 text-xs text-slate-500 max-w-3xl">
-              Supplementary case study only: this phase-separated protocol is not directly comparable to the main end-to-end leaderboard.
-              Previous update: <a href="updates/2026-04-18-qwen25-3b-t4/" class="text-teal-700 hover:text-teal-900 font-semibold">Qwen2.5-3B on Tesla T4</a>.
+              This is a standard FP16 end-to-end reference point, distinct from the previous <a href="updates/2026-06-03-rtx-pro6000-blackwell-phase/" class="text-teal-700 hover:text-teal-900 font-semibold">Blackwell phase-separated backend compatibility case study</a>.
             </p>
           </div>
-          <a href="updates/2026-06-03-rtx-pro6000-blackwell-phase/" class="inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-900 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors whitespace-nowrap">
+          <a href="updates/2026-06-08-rtx-pro6000-fp16-e2e/" class="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-colors whitespace-nowrap">
             <span>View Update Page</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
           </a>

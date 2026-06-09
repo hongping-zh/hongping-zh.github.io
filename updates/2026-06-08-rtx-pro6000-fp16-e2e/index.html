@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RTX PRO 6000 Blackwell FP16 End-to-End Baseline | LLM Energy Benchmark</title>
+  <meta name="description" content="RTX PRO 6000 Blackwell FP16 end-to-end baseline for Qwen2.5-3B at 256 and 512 generated tokens, reported in J/1k tokens with throughput and power." />
+  <script src="/assets/js/analytics.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Sora', system-ui, sans-serif;
+      background:
+        radial-gradient(900px 450px at 8% -15%, rgba(44,159,144,0.14), transparent 60%),
+        radial-gradient(900px 450px at 98% -22%, rgba(245,158,11,0.1), transparent 60%),
+        #f3f7f6;
+      color: #0f172a;
+    }
+    .card {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #dbe8e3;
+      border-radius: 16px;
+      box-shadow: 0 14px 34px -26px rgba(15,23,42,0.9), 0 1px 0 rgba(255,255,255,0.85) inset;
+      backdrop-filter: blur(6px);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #166c62 0%, #2c9f90 55%, #f59e0b 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .num { font-family: 'JetBrains Mono', monospace; }
+    table { border-collapse: collapse; width: 100%; }
+    th { background: #f7faf9; text-align: left; padding: 10px 12px; border-bottom: 2px solid #dbe8e3; font-size: 12px; white-space: nowrap; }
+    td { padding: 10px 12px; border-bottom: 1px solid #e8f0ed; font-size: 13px; vertical-align: top; }
+  </style>
+</head>
+<body>
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="../../index.html" class="text-xl font-black gradient-text">LLM Energy Benchmark</a>
+      <a href="../../index.html" class="text-sm text-slate-600 hover:text-teal-700 transition">← Back to Homepage</a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-10 space-y-6">
+    <section class="card p-6">
+      <div class="flex flex-wrap items-center gap-3 mb-3">
+        <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-100 text-teal-800">End-to-End Baseline</span>
+        <span class="inline-flex px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">FP16 Reference Point</span>
+        <span class="text-xs text-slate-500">Published: 2026-06-08</span>
+      </div>
+      <h1 class="text-3xl font-extrabold mb-3">RTX PRO 6000 Blackwell: FP16 End-to-End Baseline for Qwen2.5-3B</h1>
+      <p class="text-sm text-slate-600 leading-relaxed max-w-4xl">
+        This update adds a standard FP16 end-to-end reference measurement for Qwen2.5-3B on the NVIDIA RTX PRO 6000 Blackwell Server Edition. Unlike the earlier phase-separated backend-compatibility case study, these measurements use the main leaderboard unit of Joules per 1,000 generated tokens.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href="../../data/blackwell_rtxpro6000_fp16_e2e_20260608_124459.tar.gz" class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2.5 rounded-lg font-semibold text-sm">Download raw archive</a>
+        <a href="../../updates/2026-06-03-rtx-pro6000-blackwell-phase/" class="inline-flex items-center gap-2 border border-slate-300 text-slate-700 px-4 py-2.5 rounded-lg font-semibold text-sm hover:border-slate-400">Related phase-separated case study</a>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-4 gap-4">
+      <div class="card p-5">
+        <div class="text-xs text-slate-500 mb-1">GPU</div>
+        <div class="text-lg font-black text-slate-900">RTX PRO 6000</div>
+        <div class="text-xs text-slate-500 mt-1">Blackwell Server Edition, 96GB</div>
+      </div>
+      <div class="card p-5">
+        <div class="text-xs text-slate-500 mb-1">Model</div>
+        <div class="text-lg font-black text-slate-900">Qwen2.5-3B</div>
+        <div class="text-xs text-slate-500 mt-1">FP16, batch size 1</div>
+      </div>
+      <div class="card p-5">
+        <div class="text-xs text-slate-500 mb-1">Protocol</div>
+        <div class="text-lg font-black text-slate-900">End-to-End</div>
+        <div class="text-xs text-slate-500 mt-1">256 and 512 generated tokens</div>
+      </div>
+      <div class="card p-5">
+        <div class="text-xs text-slate-500 mb-1">Runs</div>
+        <div class="text-lg font-black text-slate-900">n=10</div>
+        <div class="text-xs text-slate-500 mt-1">2 warmup runs</div>
+      </div>
+    </section>
+
+    <section class="card p-6">
+      <h2 class="text-xl font-extrabold mb-4">Experimental Setup</h2>
+      <div class="overflow-x-auto">
+        <table>
+          <tbody>
+            <tr><th>Item</th><th>Value</th></tr>
+            <tr><td>GPU</td><td>NVIDIA RTX PRO 6000 Blackwell Server Edition</td></tr>
+            <tr><td>CUDA capability</td><td class="num">12.0</td></tr>
+            <tr><td>Software stack</td><td>PyTorch 2.11.0+cu128, CUDA runtime 12.8</td></tr>
+            <tr><td>Model path used in run</td><td class="num">/root/autodl-tmp/models/Qwen2.5-3B</td></tr>
+            <tr><td>Precision</td><td>FP16</td></tr>
+            <tr><td>Batch size</td><td class="num">1</td></tr>
+            <tr><td>Prompt length</td><td class="num">128 tokens</td></tr>
+            <tr><td>Generated lengths</td><td class="num">256 and 512 tokens</td></tr>
+            <tr><td>Power measurement</td><td>NVML available during run</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card p-6">
+      <h2 class="text-xl font-extrabold mb-4">FP16 End-to-End Results</h2>
+      <div class="overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>GPU</th>
+              <th>Precision</th>
+              <th>Batch</th>
+              <th>Generated Tokens</th>
+              <th>Energy (J/1k tok)</th>
+              <th>Throughput (tok/s)</th>
+              <th>Average Power (W)</th>
+              <th>Runs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Qwen2.5-3B</td>
+              <td>RTX PRO 6000 Blackwell</td>
+              <td>FP16</td>
+              <td class="num">1</td>
+              <td class="num">256</td>
+              <td class="num font-semibold">2,660.83 ± 124.87</td>
+              <td class="num">83.05 ± 0.38</td>
+              <td class="num">221.58 ± 10.12</td>
+              <td class="num">10</td>
+            </tr>
+            <tr>
+              <td>Qwen2.5-3B</td>
+              <td>RTX PRO 6000 Blackwell</td>
+              <td>FP16</td>
+              <td class="num">1</td>
+              <td class="num">512</td>
+              <td class="num font-semibold">2,709.67 ± 38.22</td>
+              <td class="num">83.17 ± 0.26</td>
+              <td class="num">225.61 ± 2.90</td>
+              <td class="num">10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+        The two generation lengths produce similar throughput and energy per 1,000 tokens, providing a stable FP16 anchor point for RTX PRO 6000 Blackwell under this end-to-end protocol.
+      </p>
+    </section>
+
+    <section class="card p-6 border-l-4 border-teal-500">
+      <h2 class="text-xl font-extrabold mb-3">Interpretation and Relationship to the Blackwell Phase Study</h2>
+      <p class="text-sm text-slate-600 leading-relaxed">
+        This FP16 end-to-end result should be treated separately from the June 3 phase-separated measurements. The present update uses the standard leaderboard unit, J/1k generated tokens, and measures FP16 inference only. The June 3 update instead examined prefill/decode energy and quantized-path backend behavior under bitsandbytes 0.49.2.
+      </p>
+      <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+        Together, the two updates support a conservative interpretation: the RTX PRO 6000 Blackwell stack produced stable FP16 end-to-end inference, while the earlier quantized phase-separated results should be interpreted as backend-architecture interaction evidence rather than normal quantized leaderboard performance.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
