@@ -143,14 +143,46 @@
       </div>
     </section>
 
+    <section class="card p-6">
+      <h2 class="text-xl font-extrabold mb-4">Diagnostic Power Evidence: Low INT8 TDP Utilization</h2>
+      <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+        Average power ranges provide the key diagnostic context for the backend-architecture interpretation. INT8 runs were not only slow; they also drew only a small fraction of the 600W TDP, pointing to ineffective GPU utilization rather than simply higher algorithmic work.
+      </p>
+      <div class="overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Precision</th>
+              <th>Prefill Power (W)</th>
+              <th>% of 600W TDP</th>
+              <th>Decode Power (W)</th>
+              <th>% of 600W TDP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>FP16</td><td class="num">92-247</td><td class="num">15-41%</td><td class="num">141-280</td><td class="num">23-47%</td></tr>
+            <tr><td>NF4</td><td class="num">114-326</td><td class="num">19-54%</td><td class="num">92-318</td><td class="num">15-53%</td></tr>
+            <tr><td>INT8</td><td class="num text-rose-600">67-109</td><td class="num text-rose-600">11-18%</td><td class="num text-rose-600">67-85</td><td class="num text-rose-600">11-14%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-xs text-slate-500 leading-relaxed">
+        This low-power / low-throughput signature is consistent with quantized kernels failing to utilize the Blackwell GPU effectively under the evaluated bitsandbytes backend.
+      </p>
+    </section>
+
     <section class="card p-6 border-l-4 border-amber-400">
       <h2 class="text-xl font-extrabold mb-3">Section 4: Relationship to the Main Leaderboard</h2>
       <p class="text-sm text-slate-600 leading-relaxed">
         These measurements are not directly comparable to the main leaderboard for three reasons: (1) the phase-separated measurement protocol differs from the end-to-end energy protocol; (2) bitsandbytes quantized execution paths show architecture-specific inefficiency on this Blackwell GPU; and (3) generation length is 32 tokens in the decode phase, compared with 256/512-token settings in the main benchmark. This data is therefore presented as a supplementary case study rather than a standard benchmark entry.
       </p>
       <p class="mt-3 text-sm text-slate-600 leading-relaxed">
-        In particular, the RTX PRO 6000 values should not be read as a normal leaderboard claim that quantization is inherently 2-3x more energy-intensive on Blackwell. They document the measured behavior of the evaluated bitsandbytes backend under this specific hardware-software stack.
+        In particular, the RTX PRO 6000 values should not be read as a normal leaderboard claim that quantization is inherently 2-3x more energy-intensive on Blackwell. They document the measured behavior of the evaluated bitsandbytes backend under this specific hardware-software stack. The 15 measured phase-separated rows in this update are not counted in the homepage's main benchmark configuration total.
       </p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href="../../updates/2026-04-18-qwen25-3b-t4/" class="inline-flex items-center gap-2 border border-slate-300 text-slate-700 px-4 py-2.5 rounded-lg font-semibold text-sm hover:border-slate-400">Previous update: Qwen2.5-3B on Tesla T4</a>
+        <a href="../../index.html" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white px-4 py-2.5 rounded-lg font-semibold text-sm">Return to Homepage</a>
+      </div>
     </section>
   </main>
 </body>
