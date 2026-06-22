@@ -35,6 +35,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://hongping-zh.github.io/updates/</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://hongping-zh.github.io/updates/2026-06-08-rtx-pro6000-fp16-e2e/</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
