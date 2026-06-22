@@ -7,16 +7,63 @@
   <meta name="description" content="Open benchmark: GPU power measurements for INT8, NF4, FP16 LLM inference. RTX 5090/4090D/A800/T4 data. Energy efficiency vs accuracy trade-offs. 1B-14B models." />
   <meta property="og:title" content="LLM Energy Benchmark — Quantization Energy-Accuracy Trade-offs" />
   <meta property="og:description" content="Open dataset: real GPU power measurements for INT8, NF4, and FP16 inference across 4 NVIDIA architectures (1B-14B models). Includes perplexity data." />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="article" />
   <meta property="og:url" content="https://hongping-zh.github.io/" />
+  <meta property="og:site_name" content="LLM Energy Benchmark" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" content="https://hongping-zh.github.io/og-image.png" />
+  <meta property="og:image:secure_url" content="https://hongping-zh.github.io/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="LLM Energy Benchmark — How much energy does LLM quantization actually cost? SSRN working paper by Hongping Zhang." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="LLM Energy Benchmark — Real GPU Power Data" />
   <meta name="twitter:description" content="Open benchmark: energy cost of INT8/NF4/FP16 quantization across RTX 5090, 4090D, T4. NVML measurements, perplexity included." />
+  <meta name="twitter:image" content="https://hongping-zh.github.io/og-image.png" />
+  <meta name="twitter:image:alt" content="LLM Energy Benchmark — SSRN working paper preview card." />
   <meta name="keywords" content="LLM energy benchmark, GPU power measurement, quantization energy consumption, INT8 vs NF4 energy, LLM quantization efficiency, quantized LLM power consumption comparison, best quantization method, NF4 vs FP16 energy, INT8 energy cost, bitsandbytes, NVML, perplexity, RTX 5090, RTX 4090D, A800, green AI, inference efficiency, LLM inference energy cost" />
   <meta name="author" content="Hongping Zhang" />
   <meta name="robots" content="index, follow" />
+  <!-- Google Scholar / Highwire citation metadata (for academic indexing) -->
+  <meta name="citation_title" content="Weight-Only Quantization Does Not Always Save Energy: An Empirical Study of LLM Inference Across NVIDIA GPU Platforms" />
+  <meta name="citation_author" content="Zhang, Hongping" />
+  <meta name="citation_publication_date" content="2026" />
+  <meta name="citation_online_date" content="2026" />
+  <meta name="citation_doi" content="10.5281/zenodo.19647290" />
+  <meta name="citation_pdf_url" content="https://hongping-zh.github.io/papers/ssrn-6854700.pdf" />
+  <meta name="citation_abstract_html_url" content="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6854700" />
+  <meta name="citation_technical_report_institution" content="SSRN Working Paper Series" />
+  <meta name="citation_keywords" content="LLM energy efficiency; quantization; INT8; NF4; FP16; GPU power measurement; perplexity; green AI" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
   <link rel="canonical" href="https://hongping-zh.github.io/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Weight-Only Quantization Does Not Always Save Energy: An Empirical Study of LLM Inference Across NVIDIA GPU Platforms",
+    "name": "Weight-Only Quantization Does Not Always Save Energy: An Empirical Study of LLM Inference Across NVIDIA GPU Platforms",
+    "author": {
+      "@type": "Person",
+      "name": "Hongping Zhang",
+      "url": "https://github.com/hongping-zh"
+    },
+    "datePublished": "2026",
+    "publisher": { "@type": "Organization", "name": "SSRN" },
+    "identifier": [
+      { "@type": "PropertyValue", "propertyID": "DOI", "value": "10.5281/zenodo.19647290" },
+      { "@type": "PropertyValue", "propertyID": "SSRN", "value": "6854700" }
+    ],
+    "sameAs": [
+      "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6854700",
+      "https://doi.org/10.5281/zenodo.19647290"
+    ],
+    "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6854700",
+    "image": "https://hongping-zh.github.io/og-image.png",
+    "abstract": "Real GPU power measurements for INT8, NF4, and FP16 LLM inference across four NVIDIA architectures (RTX 5090, RTX 4090D, T4, A800), with perplexity accuracy data, covering models from 1.1B to 14B parameters.",
+    "keywords": "LLM energy efficiency, quantization power consumption, INT8 vs NF4, GPU benchmark, inference energy cost"
+  }
+  </script>
   <script src="/assets/js/analytics.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -88,6 +135,7 @@
   }
   </script>
 
+  <link rel="alternate" type="application/rss+xml" title="LLM Energy Benchmark — Updates" href="https://hongping-zh.github.io/feed.xml" />
   <!-- FAQPage Structured Data -->
   <script type="application/ld+json">
   {
@@ -116,6 +164,46 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "RTX 5090 shows the best energy efficiency for 7B models with NF4 quantization. T4 is most efficient for smaller models (1B-3B). A800 provides good energy efficiency for large models (14B+) with NF4."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does quantization always reduce LLM inference energy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Weight-only quantization does not universally reduce energy. For small models (1B-3B) and some hardware/software stacks, FP16 can use less total energy than INT8 or NF4 because lower active power is offset by longer runtime. This energy-crossover effect means quantization only saves energy once model scale, batch size, and backend efficiency let memory-bandwidth savings dominate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the energy crossover effect in LLM quantization?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is the point at which quantization switches from costing more energy to saving energy. Below the crossover (small models, small batches, less optimized backends) quantized inference can raise total energy; above it (larger models and batches with efficient quantized kernels) bandwidth savings dominate and energy per token drops."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is LLM inference energy measured in this benchmark?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GPU power is sampled directly via NVIDIA NVML (10 Hz in the main benchmark, up to 100 Hz in supplementary runs) and integrated over the inference run to compute energy per token and per 1,000 generated tokens, across multiple repeated runs with the reported coefficient of variation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is NF4 or FP16 better for small LLMs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For small models (about 1B-3B), FP16 is frequently more energy efficient than NF4 or INT8 because the throughput penalty of the quantized path outweighs the reduced memory traffic. NF4 generally becomes advantageous at 7B+ scale."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does INT8 or NF4 quantization hurt LLM accuracy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Accuracy impact is modest for larger models: NF4 keeps perplexity degradation small (often under 0.3 PPL) for 7B+ models, while INT8 Pure can degrade accuracy more on some small models. The benchmark reports perplexity alongside energy so accuracy-energy trade-offs are explicit."
         }
       }
     ]
@@ -230,7 +318,7 @@
         <span class="badge bg-blue-50 text-blue-700">Open Data</span>
         <span class="badge bg-green-50 text-green-700">Reproducible</span>
         <span class="badge bg-teal-50 text-teal-700">NVML 10Hz Sampling</span>
-        <span class="badge bg-amber-50 text-amber-700">Main leaderboard updated: Apr 18, 2026</span>
+        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6854700" target="_blank" rel="noopener" class="badge bg-brand-50 text-brand-700 hover:bg-brand-100 transition">SSRN Working Paper ↗</a>
       </div>
 
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
@@ -244,19 +332,25 @@
       </p>
 
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-        <a href="#leaderboard" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 transition">
-          View Leaderboard
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6854700" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 transition shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          Read the Paper on SSRN
         </a>
         <a href="/papers/ssrn-6854700.pdf" target="_blank"
            class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition">
-          Read SSRN Paper
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Download PDF
         </a>
-        <a href="https://github.com/hongping-zh/ecocompute-ai/tree/main/data" target="_blank"
+        <a href="#leaderboard"
            class="inline-flex items-center gap-2 px-6 py-3 text-slate-600 font-medium hover:text-slate-900 border border-slate-300 rounded-lg hover:border-slate-400 transition">
-          Download CSV / JSON
+          View Data &amp; Leaderboard
         </a>
       </div>
+      <p class="mt-3 text-sm text-slate-500">
+        Prefer a quick read?
+        <a href="/paper/" class="text-brand-700 font-semibold hover:underline">See the abstract &amp; key findings →</a>
+      </p>
     </div>
   </section>
 
@@ -1212,13 +1306,41 @@
   <!-- ===================== CITE ===================== -->
   <section class="py-12 bg-white">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="mb-6">
-        <h2 class="text-2xl font-extrabold">Cite This Benchmark</h2>
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-2xl font-extrabold">Cite &amp; Share This Paper</h2>
+          <p class="mt-1 text-sm text-slate-500">If this benchmark helps your work, a citation or a share goes a long way.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6854700" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border border-slate-300 text-slate-700 hover:border-slate-400 hover:text-slate-900 transition">
+            View on SSRN ↗
+          </a>
+          <a href="https://doi.org/10.5281/zenodo.19647290" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border border-slate-300 text-slate-700 hover:border-slate-400 hover:text-slate-900 transition">
+            DOI
+          </a>
+          <a href="https://twitter.com/intent/tweet?text=How%20much%20energy%20does%20LLM%20quantization%20actually%20cost%3F%20Real%20GPU%20power%20measurements%20(INT8%2FNF4%2FFP16)%20across%204%20NVIDIA%20GPUs%20%E2%80%94%20open%20SSRN%20working%20paper%3A&url=https%3A%2F%2Fhongping-zh.github.io%2F"
+             target="_blank" rel="noopener"
+             class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg bg-slate-900 text-white hover:bg-slate-700 transition">
+            Share on X
+          </a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fhongping-zh.github.io%2F"
+             target="_blank" rel="noopener"
+             class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg bg-[#0a66c2] text-white hover:opacity-90 transition">
+            Share on LinkedIn
+          </a>
+        </div>
       </div>
-      <div class="card p-5">
-        <pre class="text-xs font-mono text-slate-600 overflow-x-auto leading-relaxed">@misc{zhang2026llmenergy,
+      <div class="card p-5 relative">
+        <button id="copy-bibtex" type="button"
+                class="absolute top-3 right-3 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-md bg-brand-600 text-white hover:bg-brand-700 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          <span id="copy-bibtex-label">Copy BibTeX</span>
+        </button>
+        <pre id="bibtex" class="text-xs font-mono text-slate-600 overflow-x-auto leading-relaxed pr-28">@misc{zhang2026llmenergy,
   author    = {Zhang, Hongping},
-  title     = {LLM Energy Benchmark: Real GPU Power Measurements for Quantized Inference},
+  title     = {Weight-Only Quantization Does Not Always Save Energy: An Empirical Study of LLM Inference Across NVIDIA GPU Platforms},
   year      = {2026},
   doi       = {10.5281/zenodo.19647290},
   url       = {https://doi.org/10.5281/zenodo.19647290},
@@ -1227,6 +1349,29 @@
       </div>
     </div>
   </section>
+  <script>
+    (function () {
+      var btn = document.getElementById('copy-bibtex');
+      var pre = document.getElementById('bibtex');
+      var label = document.getElementById('copy-bibtex-label');
+      if (!btn || !pre || !label) return;
+      btn.addEventListener('click', function () {
+        var text = pre.textContent;
+        var done = function () {
+          label.textContent = 'Copied!';
+          setTimeout(function () { label.textContent = 'Copy BibTeX'; }, 1800);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(done);
+        } else {
+          var ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          document.body.removeChild(ta); done();
+        }
+      });
+    })();
+  </script>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="border-t border-slate-200 py-8 bg-slate-50">
