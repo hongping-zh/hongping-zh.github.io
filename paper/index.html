@@ -17,11 +17,57 @@
   <meta name="citation_pdf_url" content="https://hongping-zh.github.io/papers/ssrn-6854700.pdf" />
   <meta name="citation_online_date" content="2026" />
   <meta name="citation_abstract_html_url" content="https://hongping-zh.github.io/paper/" />
+  <meta name="citation_doi" content="10.5281/zenodo.19647290" />
+  <meta name="citation_keywords" content="LLM energy efficiency; weight-only quantization; INT8; NF4; FP16; GPU power measurement; inference energy; green AI" />
 
   <meta property="og:title" content="Weight-Only Quantization Does Not Always Save Energy" />
   <meta property="og:description" content="An empirical study of LLM inference energy behavior across NVIDIA GPU platforms." />
   <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="LLM Energy Benchmark" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:url" content="https://hongping-zh.github.io/paper/" />
+  <meta property="og:image" content="https://hongping-zh.github.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="LLM Energy Benchmark — SSRN working paper by Hongping Zhang." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Weight-Only Quantization Does Not Always Save Energy" />
+  <meta name="twitter:description" content="An empirical study of FP16/INT8/NF4 LLM inference energy across NVIDIA GPUs — SSRN working paper." />
+  <meta name="twitter:image" content="https://hongping-zh.github.io/og-image.png" />
+  <link rel="alternate" type="application/rss+xml" title="LLM Energy Benchmark — Updates" href="https://hongping-zh.github.io/feed.xml" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Weight-Only Quantization Does Not Always Save Energy: An Empirical Study of LLM Inference Across NVIDIA GPU Platforms",
+    "name": "Weight-Only Quantization Does Not Always Save Energy: An Empirical Study of LLM Inference Across NVIDIA GPU Platforms",
+    "author": { "@type": "Person", "name": "Hongping Zhang", "url": "https://github.com/hongping-zh" },
+    "datePublished": "2026",
+    "publisher": { "@type": "Organization", "name": "SSRN" },
+    "identifier": [
+      { "@type": "PropertyValue", "propertyID": "DOI", "value": "10.5281/zenodo.19647290" },
+      { "@type": "PropertyValue", "propertyID": "SSRN", "value": "6854700" }
+    ],
+    "sameAs": [
+      "https://ssrn.com/abstract=6854700",
+      "https://doi.org/10.5281/zenodo.19647290"
+    ],
+    "url": "https://hongping-zh.github.io/paper/",
+    "image": "https://hongping-zh.github.io/og-image.png",
+    "abstract": "Weight-only quantization is widely assumed to reduce the energy cost of LLM inference. This empirical study of FP16, INT8, and NF4 inference across multiple NVIDIA GPU platforms and model scales shows quantization does not universally reduce energy: for smaller models and certain stacks, quantized execution can raise total energy via an energy-crossover effect."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hongping-zh.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Paper", "item": "https://hongping-zh.github.io/paper/" }
+    ]
+  }
+  </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -36,6 +82,11 @@
 </head>
 <body class="text-slate-900">
   <main class="max-w-5xl mx-auto px-6 py-10 sm:py-14">
+    <nav aria-label="Breadcrumb" class="mb-4 text-xs text-slate-500">
+      <a href="/" class="hover:text-slate-700">Home</a>
+      <span class="mx-1.5">/</span>
+      <span class="text-slate-700 font-medium">Paper</span>
+    </nav>
     <nav class="mb-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <a href="/" class="text-sm font-semibold text-emerald-700 hover:text-emerald-900">← Back to LLM Energy Benchmark</a>
       <a href="https://doi.org/10.5281/zenodo.19647290" target="_blank" rel="noopener noreferrer">

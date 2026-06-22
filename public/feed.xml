@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LLM Energy Benchmark — Updates</title>
+    <link>https://hongping-zh.github.io/</link>
+    <atom:link href="https://hongping-zh.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <description>New measurements and analyses on the energy cost of quantized LLM inference (INT8, NF4, FP16) across NVIDIA GPUs.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 08 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>RTX PRO 6000 Blackwell FP16 End-to-End Baseline</title>
+      <link>https://hongping-zh.github.io/updates/2026-06-08-rtx-pro6000-fp16-e2e/</link>
+      <guid>https://hongping-zh.github.io/updates/2026-06-08-rtx-pro6000-fp16-e2e/</guid>
+      <pubDate>Mon, 08 Jun 2026 00:00:00 GMT</pubDate>
+      <description>RTX PRO 6000 Blackwell FP16 end-to-end baseline for Qwen2.5-3B at 256 and 512 generated tokens, reported in J/1k tokens with throughput and power.</description>
+    </item>
+    <item>
+      <title>RTX PRO 6000 Blackwell: Phase-Separated Energy Profiling</title>
+      <link>https://hongping-zh.github.io/updates/2026-06-03-rtx-pro6000-blackwell-phase/</link>
+      <guid>https://hongping-zh.github.io/updates/2026-06-03-rtx-pro6000-blackwell-phase/</guid>
+      <pubDate>Wed, 03 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Supplemental RTX PRO 6000 Blackwell phase-separated energy profiling data, highlighting prefill/decode behavior and backend-architecture interaction under bitsandbytes 0.49.2.</description>
+    </item>
+    <item>
+      <title>Qwen2.5-3B on Tesla T4</title>
+      <link>https://hongping-zh.github.io/updates/2026-04-18-qwen25-3b-t4/</link>
+      <guid>https://hongping-zh.github.io/updates/2026-04-18-qwen25-3b-t4/</guid>
+      <pubDate>Sat, 18 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Supplemental update: Qwen2.5-3B on Tesla T4 measurements (FP16 vs NF4), including Figure 5 summary and Table 8 results.</description>
+    </item>
+  </channel>
+</rss>

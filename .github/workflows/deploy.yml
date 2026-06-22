@@ -43,6 +43,9 @@ jobs:
           if [ -d ./updates ]; then
             cp -r ./updates ./dist/
           fi
+          if [ -d ./paper ]; then
+            cp -r ./paper ./dist/
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
