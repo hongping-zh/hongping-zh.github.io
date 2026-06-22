@@ -135,6 +135,7 @@
   }
   </script>
 
+  <link rel="alternate" type="application/rss+xml" title="LLM Energy Benchmark — Updates" href="https://hongping-zh.github.io/feed.xml" />
   <!-- FAQPage Structured Data -->
   <script type="application/ld+json">
   {
@@ -163,6 +164,46 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "RTX 5090 shows the best energy efficiency for 7B models with NF4 quantization. T4 is most efficient for smaller models (1B-3B). A800 provides good energy efficiency for large models (14B+) with NF4."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does quantization always reduce LLM inference energy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Weight-only quantization does not universally reduce energy. For small models (1B-3B) and some hardware/software stacks, FP16 can use less total energy than INT8 or NF4 because lower active power is offset by longer runtime. This energy-crossover effect means quantization only saves energy once model scale, batch size, and backend efficiency let memory-bandwidth savings dominate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the energy crossover effect in LLM quantization?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is the point at which quantization switches from costing more energy to saving energy. Below the crossover (small models, small batches, less optimized backends) quantized inference can raise total energy; above it (larger models and batches with efficient quantized kernels) bandwidth savings dominate and energy per token drops."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is LLM inference energy measured in this benchmark?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GPU power is sampled directly via NVIDIA NVML (10 Hz in the main benchmark, up to 100 Hz in supplementary runs) and integrated over the inference run to compute energy per token and per 1,000 generated tokens, across multiple repeated runs with the reported coefficient of variation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is NF4 or FP16 better for small LLMs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For small models (about 1B-3B), FP16 is frequently more energy efficient than NF4 or INT8 because the throughput penalty of the quantized path outweighs the reduced memory traffic. NF4 generally becomes advantageous at 7B+ scale."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does INT8 or NF4 quantization hurt LLM accuracy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Accuracy impact is modest for larger models: NF4 keeps perplexity degradation small (often under 0.3 PPL) for 7B+ models, while INT8 Pure can degrade accuracy more on some small models. The benchmark reports perplexity alongside energy so accuracy-energy trade-offs are explicit."
         }
       }
     ]
