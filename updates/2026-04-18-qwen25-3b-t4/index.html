@@ -69,6 +69,25 @@
     </div>
   </header>
 
+  <nav aria-label="Breadcrumb" class="max-w-6xl mx-auto px-6 pt-4 text-xs text-slate-500">
+    <a href="../../" class="hover:text-slate-700">Home</a>
+    <span class="mx-1.5">/</span>
+    <span>Updates</span>
+    <span class="mx-1.5">/</span>
+    <span class="text-slate-700 font-medium">Qwen2.5-3B on Tesla T4</span>
+  </nav>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://hongping-zh.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Updates", "item": "https://hongping-zh.github.io/" },
+      { "@type": "ListItem", "position": 3, "name": "Qwen2.5-3B on Tesla T4", "item": "https://hongping-zh.github.io/updates/2026-04-18-qwen25-3b-t4/" }
+    ]
+  }
+  </script>
+
   <main class="max-w-6xl mx-auto px-6 py-10 space-y-6">
     <section class="card p-6">
       <div class="flex flex-wrap items-center gap-3 mb-3">
@@ -143,6 +162,15 @@
       <div class="mt-5 flex flex-wrap gap-3">
         <a href="https://github.com/hongping-zh/ecocompute-ai" target="_blank" class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2.5 rounded-lg font-semibold text-sm">Open Data Repository</a>
         <a href="../../index.html#leaderboard" class="inline-flex items-center gap-2 border border-slate-300 text-slate-700 px-4 py-2.5 rounded-lg font-semibold text-sm hover:border-slate-400">Return to Leaderboard</a>
+      </div>
+    </section>
+    <section class="card p-6">
+      <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wide mb-3">Related</h2>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <a href="/paper/" class="px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 hover:border-slate-500 transition">Read the paper</a>
+        <a href="../2026-06-08-rtx-pro6000-fp16-e2e/" class="px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 hover:border-slate-500 transition">RTX PRO 6000 FP16 E2E</a>
+        <a href="../2026-06-03-rtx-pro6000-blackwell-phase/" class="px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 hover:border-slate-500 transition">Blackwell phase profiling</a>
+        <a href="../../" class="px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 hover:border-slate-500 transition">Leaderboard &amp; data</a>
       </div>
     </section>
   </main>
