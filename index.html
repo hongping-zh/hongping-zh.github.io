@@ -287,6 +287,9 @@
       .data-table { font-size: 0.75rem; }
     }
   </style>
+  <!-- Interactive charts: Chart.js (UMD) + benchmark data source -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script defer src="/data/benchmarks.js"></script>
 </head>
 <body class="text-slate-900 antialiased">
 
@@ -299,6 +302,7 @@
       </a>
       <div class="flex items-center gap-6">
         <a href="#leaderboard" class="hidden sm:inline text-sm text-slate-500 hover:text-slate-900 transition">Leaderboard</a>
+        <a href="#charts" class="hidden sm:inline text-sm text-slate-500 hover:text-slate-900 transition">Charts</a>
         <a href="#accuracy" class="hidden sm:inline text-sm text-slate-500 hover:text-slate-900 transition">Accuracy</a>
         <a href="#findings" class="hidden sm:inline text-sm text-slate-500 hover:text-slate-900 transition">Key Findings</a>
         <a href="#methodology" class="hidden sm:inline text-sm text-slate-500 hover:text-slate-900 transition">Methodology</a>
@@ -1119,6 +1123,53 @@
     </div>
   </section>
 
+  <!-- ===================== INTERACTIVE CHARTS ===================== -->
+  <section id="charts" class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-8">
+        <h2 class="text-2xl font-extrabold">Interactive Charts: Visualizing the Energy-Accuracy Trade-off</h2>
+        <p class="mt-2 text-sm text-slate-500">Hover any point or bar for exact values. All charts are rendered from the same measurements shown in the tables above.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-5">
+        <!-- Chart 1: Energy by precision (RTX 4090D) -->
+        <div class="card">
+          <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
+            <span class="gpu-tag gpu-4090">RTX 4090D</span>
+            <span class="text-sm font-semibold text-slate-700">Energy by quantization method</span>
+          </div>
+          <div class="p-5">
+            <div style="position:relative;height:320px;"><canvas id="chartEnergy"></canvas></div>
+            <p class="mt-3 text-xs text-slate-500">Energy per 1,000 tokens (J/1k tok). Lower is better. Default <code>LLM.int8()</code> roughly doubles energy vs FP16.</p>
+          </div>
+        </div>
+
+        <!-- Chart 2: Energy vs accuracy trade-off (RTX 4090D) -->
+        <div class="card">
+          <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
+            <span class="gpu-tag gpu-4090">RTX 4090D</span>
+            <span class="text-sm font-semibold text-slate-700">Energy overhead vs accuracy cost</span>
+          </div>
+          <div class="p-5">
+            <div style="position:relative;height:320px;"><canvas id="chartTradeoff"></canvas></div>
+            <p class="mt-3 text-xs text-slate-500">Both axes are %Δ vs FP16. The closer to the bottom-left corner, the better the trade-off.</p>
+          </div>
+        </div>
+
+        <!-- Chart 3: NF4 crossover across GPUs -->
+        <div class="card lg:col-span-2">
+          <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center gap-3">
+            <span class="text-sm font-semibold text-slate-700">NF4 energy vs FP16 across model size &amp; GPU architecture</span>
+          </div>
+          <div class="p-5">
+            <div style="position:relative;height:340px;"><canvas id="chartCrossover"></canvas></div>
+            <p class="mt-3 text-xs text-slate-500">Below the zero line, NF4 <em>saves</em> energy. The crossover lands around 3-6B parameters depending on GPU.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== KEY FINDINGS ===================== -->
   <section id="findings" class="py-12">
     <div class="max-w-6xl mx-auto px-6">
@@ -1395,6 +1446,109 @@
       </p>
     </div>
   </footer>
+
+  <!-- ===================== CHART INITIALIZATION ===================== -->
+  <script>
+    (function () {
+      function ready(fn) {
+        if (document.readyState !== 'loading') { fn(); }
+        else { document.addEventListener('DOMContentLoaded', fn); }
+      }
+      ready(function () {
+        if (typeof Chart === 'undefined' || !window.ECO_DATA) {
+          console.warn('[charts] Chart.js or ECO_DATA not loaded; skipping charts.');
+          return;
+        }
+        var D = window.ECO_DATA;
+        var COLORS = {
+          'FP16': '#1f7f73',
+          'INT8 Default': '#dc2626',
+          'INT8 Pure': '#f59e0b',
+          'NF4': '#2563eb',
+          'NF4 DQ': '#7c3aed',
+        };
+        var GPU_COLORS = {
+          'RTX 5090': '#d97706',
+          'RTX 4090D': '#2563eb',
+          'T4': '#4f46e5',
+          'A800': '#059669',
+        };
+        Chart.defaults.font.family = "'Sora', system-ui, sans-serif";
+        Chart.defaults.color = '#475569';
+
+        // Chart 1: grouped bar - energy by precision (RTX 4090D)
+        var e = D.energy4090d;
+        new Chart(document.getElementById('chartEnergy'), {
+          type: 'bar',
+          data: {
+            labels: e.models,
+            datasets: Object.keys(e.series).map(function (k) {
+              return { label: k, data: e.series[k], backgroundColor: COLORS[k], borderRadius: 4 };
+            }),
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { boxWidth: 12, usePointStyle: true } },
+              tooltip: { callbacks: { label: function (c) { return c.dataset.label + ': ' + c.parsed.y.toLocaleString() + ' J/1k tok'; } } },
+            },
+            scales: { y: { title: { display: true, text: 'Energy (J/1k tok)' }, beginAtZero: true } },
+          },
+        });
+
+        // Chart 2: scatter - energy %Δ vs ppl %Δ (RTX 4090D), grouped by precision
+        var byPrec = {};
+        D.tradeoff4090d.forEach(function (r) {
+          (byPrec[r.prec] = byPrec[r.prec] || []).push({ x: r.energy, y: r.ppl, model: r.model });
+        });
+        new Chart(document.getElementById('chartTradeoff'), {
+          type: 'scatter',
+          data: {
+            datasets: Object.keys(byPrec).map(function (k) {
+              return { label: k, data: byPrec[k], backgroundColor: COLORS[k], pointRadius: 6, pointHoverRadius: 8 };
+            }),
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { boxWidth: 12, usePointStyle: true } },
+              tooltip: { callbacks: { label: function (c) { var d = c.raw; return d.model + ' ' + c.dataset.label + ': energy ' + d.x + '%, PPL ' + d.y + '%'; } } },
+            },
+            scales: {
+              x: { title: { display: true, text: 'Energy vs FP16 (%)' } },
+              y: { title: { display: true, text: 'Perplexity vs FP16 (%)' } },
+            },
+          },
+        });
+
+        // Chart 3: line - NF4 vs FP16 %Δ by params, per GPU
+        new Chart(document.getElementById('chartCrossover'), {
+          type: 'line',
+          data: {
+            datasets: Object.keys(D.nf4Crossover).map(function (gpu) {
+              return {
+                label: gpu,
+                data: D.nf4Crossover[gpu].map(function (pt) { return { x: pt.p, y: pt.d }; }),
+                borderColor: GPU_COLORS[gpu], backgroundColor: GPU_COLORS[gpu],
+                tension: 0.3, pointRadius: 5, pointHoverRadius: 7,
+              };
+            }),
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { boxWidth: 12, usePointStyle: true } },
+              tooltip: { callbacks: { label: function (c) { return c.dataset.label + ': ' + c.parsed.x + 'B → ' + (c.parsed.y > 0 ? '+' : '') + c.parsed.y + '% energy'; } } },
+            },
+            scales: {
+              x: { type: 'linear', title: { display: true, text: 'Model size (billion parameters)' } },
+              y: { title: { display: true, text: 'NF4 energy vs FP16 (%)' }, grid: { color: function (ctx) { return ctx.tick.value === 0 ? '#94a3b8' : '#e8f0ed'; } } },
+            },
+          },
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
