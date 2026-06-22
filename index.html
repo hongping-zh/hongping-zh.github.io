@@ -65,30 +65,10 @@
   }
   </script>
   <script src="/assets/js/analytics.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#ebf8f6', 100: '#d6f3ef', 200: '#aee5dd',
-              300: '#7dd3c8', 400: '#4bb9ab', 500: '#2c9f90',
-              600: '#1f7f73', 700: '#1a675d', 800: '#184f49', 900: '#163f3b',
-            }
-          },
-          fontFamily: {
-            sans: ['Sora', 'system-ui', '-apple-system', 'sans-serif'],
-            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="/src/tailwind.css" />
   <!-- Performance Optimization: Resource Hints -->
   <link rel="dns-prefetch" href="//fonts.googleapis.com" />
   <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-  <link rel="dns-prefetch" href="//cdn.tailwindcss.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style" />
