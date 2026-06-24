@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LLM Energy Benchmark — Real GPU Power Measurements for Quantized Inference</title>
-  <meta name="description" content="Open benchmark: GPU power measurements for INT8, NF4, FP16 LLM inference. RTX 5090/4090D/A800/T4 data. Energy efficiency vs accuracy trade-offs. 1B-14B models." />
-  <meta property="og:title" content="LLM Energy Benchmark — Quantization Energy-Accuracy Trade-offs" />
-  <meta property="og:description" content="Open dataset: real GPU power measurements for INT8, NF4, and FP16 inference across 4 NVIDIA architectures (1B-14B models). Includes perplexity data." />
+  <title>Weight-Only Quantization Does Not Always Save Energy — LLM Inference Energy Study</title>
+  <meta name="description" content="SSRN preprint and dataset: empirical GPU energy measurements for FP16, NF4, and INT8 LLM inference. Weight-only quantization can increase energy for small models while reducing energy for larger models under the evaluated backend." />
+  <meta property="og:title" content="Weight-Only Quantization Does Not Always Save Energy" />
+  <meta property="og:description" content="A reproducible evidence hub for quantization energy efficiency in LLM inference: SSRN preprint, dataset, key figures, methodology caveats, and citation." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://hongping-zh.github.io/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="LLM Energy Benchmark — Real GPU Power Data" />
-  <meta name="twitter:description" content="Open benchmark: energy cost of INT8/NF4/FP16 quantization across RTX 5090, 4090D, T4. NVML measurements, perplexity included." />
-  <meta name="keywords" content="LLM energy benchmark, GPU power measurement, quantization energy consumption, INT8 vs NF4 energy, LLM quantization efficiency, quantized LLM power consumption comparison, best quantization method, NF4 vs FP16 energy, INT8 energy cost, bitsandbytes, NVML, perplexity, RTX 5090, RTX 4090D, A800, green AI, inference efficiency, LLM inference energy cost" />
+  <meta name="twitter:title" content="Weight-Only Quantization Does Not Always Save Energy" />
+  <meta name="twitter:description" content="Empirical GPU energy measurements for FP16, NF4, and INT8 LLM inference across NVIDIA GPU platform records." />
+  <meta name="keywords" content="LLM energy measurement, quantization energy efficiency, weight-only quantization, NF4 energy, INT8 energy, FP16 baseline, GPU power measurement, NVML, bitsandbytes, sustainable AI, green AI, LLM inference energy, model-size crossover" />
   <meta name="author" content="Hongping Zhang" />
   <meta name="robots" content="index, follow" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>" />
@@ -52,8 +52,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Dataset",
-    "name": "LLM Energy Benchmark",
-    "description": "Open benchmark dataset measuring energy consumption of quantized LLM inference (INT8, NF4, FP16) across multiple NVIDIA GPU architectures, with perplexity accuracy measurements.",
+    "name": "Weight-Only Quantization Energy Study",
+    "description": "SSRN preprint and dataset for empirical GPU energy measurements of FP16, NF4, and INT8 LLM inference, emphasizing model-size-dependent quantization energy crossover and data provenance caveats.",
     "url": "https://hongping-zh.github.io/",
     "license": "https://opensource.org/licenses/MIT",
     "creator": {
@@ -74,7 +74,7 @@
       "Perplexity (PPL)"
     ],
     "temporalCoverage": "2026-02",
-    "keywords": ["LLM energy efficiency", "quantization power consumption", "INT8 vs NF4", "GPU benchmark", "inference energy cost"]
+    "keywords": ["LLM energy efficiency", "quantization power consumption", "INT8 vs NF4", "NF4 energy", "GPU inference energy", "model-size crossover"]
   }
   </script>
 
@@ -84,7 +84,7 @@
     "@context": "https://schema.org",
     "@type": "Table",
     "about": "LLM Quantization Energy Efficiency Comparison",
-    "description": "Energy consumption and perplexity measurements for INT8, NF4, and FP16 quantization methods across NVIDIA GPUs (RTX 5090, RTX 4090D, A800, T4)"
+    "description": "Energy measurements and provenance-aware summaries for FP16, NF4, and INT8 LLM inference records."
   }
   </script>
 

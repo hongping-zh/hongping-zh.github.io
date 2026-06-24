@@ -14,10 +14,11 @@ import { EnergyAuditor } from './components/EnergyAuditor';
 import ExecutiveSummary from './components/ExecutiveSummary';
 import InteractiveCharts from './components/InteractiveCharts';
 import RecommendationEngine from './components/RecommendationEngine';
-import { LayoutGrid, Calculator as CalcIcon, Activity, Leaf, Settings, Github, BookOpen, Scale, Mail, Layers, Info, Bot, Zap, BarChart3, TrendingUp, Lightbulb, Award, FileText } from 'lucide-react';
+import ProjectHub from './components/ProjectHub';
+import { LayoutGrid, Calculator as CalcIcon, Activity, Leaf, Settings, Github, BookOpen, Scale, Mail, Layers, Info, Bot, Zap, BarChart3, TrendingUp, Lightbulb, Award, FileText, Home } from 'lucide-react';
 
 const App: React.FC = () => {
-  const [view, setView] = useState<AppView>(AppView.LEADERBOARD);
+  const [view, setView] = useState<AppView>(AppView.PROJECT_HUB);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [apiConfig, setApiConfig] = useState<ApiConfig>(loadApiConfig);
   const shouldSyncUrlRef = useRef(false);
@@ -85,6 +86,14 @@ const App: React.FC = () => {
         </div>
 
         <nav className="flex-1 py-6 px-3 space-y-2 overflow-y-auto">
+          <button 
+            onClick={() => navigateToView(AppView.PROJECT_HUB)}
+            className={`w-full flex items-center gap-3 p-3 rounded-lg transition-colors ${view === AppView.PROJECT_HUB ? 'bg-eco-600 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-800 hover:text-white'}`}
+          >
+            <Home className="w-5 h-5 flex-shrink-0" />
+            <span className="hidden lg:block font-medium">Project Hub</span>
+          </button>
+
           <button 
             onClick={() => navigateToView(AppView.LEADERBOARD)}
             className={`w-full flex items-center gap-3 p-3 rounded-lg transition-colors ${view === AppView.LEADERBOARD ? 'bg-eco-600 text-white shadow-lg' : 'text-slate-400 hover:bg-slate-800 hover:text-white'}`}
@@ -242,6 +251,7 @@ const App: React.FC = () => {
         <header className="mb-6 flex justify-between items-center">
             <div>
                  <h1 className="text-2xl font-bold text-slate-800">
+                    {view === AppView.PROJECT_HUB && 'Weight-Only Quantization Energy Study'}
                     {view === AppView.LEADERBOARD && 'Model Evaluations'}
                     {view === AppView.MONITOR && 'System Monitor'}
                     {view === AppView.CALCULATOR && 'Emissions Calculator'}
@@ -256,6 +266,7 @@ const App: React.FC = () => {
                     {view === AppView.IMPACT_RECOGNITION && 'Impact & Recognition'}
                 </h1>
                 <p className="text-slate-500 text-sm">
+                    {view === AppView.PROJECT_HUB && 'A reproducible evidence hub for quantization energy efficiency in LLM inference.'}
                     {view === AppView.LEADERBOARD && 'Compare dynamic performance metrics across models.'}
                     {view === AppView.MONITOR && 'Real-time energy and audio processing visualization.'}
                     {view === AppView.CALCULATOR && 'Estimate carbon footprint for training runs.'}
@@ -288,6 +299,7 @@ const App: React.FC = () => {
 
         {/* Dynamic View Content */}
         <div className="flex-1 overflow-auto animate-fade-in-up">
+            {view === AppView.PROJECT_HUB && <ProjectHub />}
             {view === AppView.LEADERBOARD && <Leaderboard apiConfig={apiConfig} onOpenTemplate={(id) => openCalculatorTemplate(id)} />}
             {view === AppView.MONITOR && <AudioMonitor />}
             {view === AppView.CALCULATOR && <Calculator />}

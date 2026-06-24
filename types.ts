@@ -1,4 +1,4 @@
-export type DataConfidence = 'measured' | 'estimated' | 'research';
+﻿export type DataConfidence = 'measured' | 'estimated' | 'research';
 
 export interface DataProvenance {
   source: string;           // e.g. "RTX 5090 Benchmark Jan 2026", "Provider API docs"
@@ -33,6 +33,7 @@ export type SortField = 'accuracy' | 'executionTime' | 'cost' | 'carbonImpact' |
 export type SortDirection = 'asc' | 'desc';
 
 export enum AppView {
+  PROJECT_HUB = 'PROJECT_HUB',
   CALCULATOR = 'CALCULATOR',
   LEADERBOARD = 'LEADERBOARD',
   MONITOR = 'MONITOR',

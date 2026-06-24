@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Key Figures — Weight-Only Quantization Energy Study</title>
+  <meta name="description" content="Key figures for the weight-only quantization energy study: crossover, analytical fit, batch size effects, bandwidth provenance, and fleet-scale impact." />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <main class="max-w-6xl mx-auto px-6 py-10 space-y-8">
+    <nav class="text-sm"><a class="text-emerald-700 font-semibold" href="/">← Back to Project Hub</a></nav>
+    <header class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
+      <p class="text-sm font-bold text-emerald-700 uppercase tracking-wide">Key Figures</p>
+      <h1 class="text-4xl font-extrabold mt-3">Key Figures</h1>
+      <p class="mt-4 text-lg text-slate-600 leading-8">The figures communicate the core result: weight-only quantization can increase energy for small models while reducing energy for larger models.</p>
+    </header>
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <figure class="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm"><img src="/figures/Figure_1_Crossover_Analysis_v2.png" alt="Model-size-dependent energy crossover" class="w-full rounded-xl"><figcaption class="mt-4 text-sm text-slate-700"><strong>Figure 1.</strong> Relative energy change versus model size shows a sign reversal.</figcaption></figure>
+      <figure class="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm"><img src="/figures/Figure_3_Analytical_Fit.png" alt="Analytical fit" class="w-full rounded-xl"><figcaption class="mt-4 text-sm text-slate-700"><strong>Analytical fit.</strong> ΔE%(N)=a+b/N summarizes the measured trend as an exploratory descriptor.</figcaption></figure>
+      <figure class="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm"><img src="/figures/Figure_3_Batch_Size_Optimized.png" alt="Batch size effects" class="w-full rounded-xl"><figcaption class="mt-4 text-sm text-slate-700"><strong>Batch size.</strong> Evaluated batch sizes are 1, 2, 4, 8, and 16.</figcaption></figure>
+      <figure class="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm"><img src="/figures/Figure_4_Bandwidth_Regression.png" alt="Bandwidth context and provenance" class="w-full rounded-xl"><figcaption class="mt-4 text-sm text-slate-700"><strong>Bandwidth context.</strong> No regression or precise threshold estimate is fit because records differ in provenance, batch size, and coverage.</figcaption></figure>
+    </section>
+  </main>
+</body>
+</html>

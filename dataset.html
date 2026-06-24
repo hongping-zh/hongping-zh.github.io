@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dataset and Reproducibility — Weight-Only Quantization Energy Study</title>
+  <meta name="description" content="Dataset hierarchy, provenance notes, and reproducibility guidance for the weight-only quantization energy study." />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <main class="max-w-5xl mx-auto px-6 py-10 space-y-8">
+    <nav class="text-sm"><a class="text-emerald-700 font-semibold" href="/">← Back to Project Hub</a></nav>
+    <header class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
+      <p class="text-sm font-bold text-emerald-700 uppercase tracking-wide">Dataset & Reproducibility</p>
+      <h1 class="text-4xl font-extrabold mt-3">Dataset and Reproducibility</h1>
+      <p class="mt-4 text-lg text-slate-600 leading-8">This page summarizes the public dataset, metadata, and reproducibility materials for the SSRN preprint on FP16, NF4, and INT8 LLM inference energy.</p>
+    </header>
+    <section class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
+      <h2 class="text-2xl font-bold mb-4">Data hierarchy</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
+          <thead><tr class="bg-slate-100"><th class="border p-3 text-left">Source</th><th class="border p-3 text-left">Role</th><th class="border p-3 text-left">Notes</th></tr></thead>
+          <tbody>
+            <tr><td class="border p-3 font-semibold">RTX 4090D batch-size-8</td><td class="border p-3">Primary calibration dataset</td><td class="border p-3">Used for main model-size scaling analysis.</td></tr>
+            <tr><td class="border p-3 font-semibold">A800 records</td><td class="border p-3">Limited validation evidence</td><td class="border p-3">Batch-size validation subset, not used for two-parameter calibration.</td></tr>
+            <tr><td class="border p-3 font-semibold">RTX 5090 records</td><td class="border p-3">Secondary metadata</td><td class="border p-3">Protocol-distinct external consistency evidence.</td></tr>
+            <tr><td class="border p-3 font-semibold">Tesla T4 measurements</td><td class="border p-3">Supplementary qualitative evidence</td><td class="border p-3">Used to probe the intermediate 3B region.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
+      <h2 class="text-2xl font-bold mb-4">Model-size crossover</h2>
+      <p class="text-slate-700 leading-7">The primary measured sign-change bracket is <strong>1.5B--6.0B</strong>. Analytical zero crossings are exploratory interpolation descriptors, not independently validated hardware constants.</p>
+      <ul class="list-disc pl-6 mt-4 space-y-2 text-slate-700">
+        <li>RTX 4090D NF4, batch size 8: analytical N* = 2.54B.</li>
+        <li>RTX 4090D INT8, batch size 8: analytical N* = 3.45B.</li>
+        <li>RTX 5090 NF4, batch size 1 metadata: analytical N* = 4.42B.</li>
+      </ul>
+    </section>
+    <section class="bg-amber-50 border border-amber-200 rounded-3xl p-8">
+      <h2 class="text-2xl font-bold mb-4 text-amber-950">Cloud GPU measurement caveat</h2>
+      <p class="text-amber-950 leading-7">Cloud GPU measurements may be affected by virtualization, vGPU/container isolation, power caps, thermal state, shared-infrastructure noise, and possible physical-GPU-level NVML telemetry. The analysis therefore emphasizes within-platform relative changes against FP16 baselines.</p>
+    </section>
+  </main>
+</body>
+</html>
