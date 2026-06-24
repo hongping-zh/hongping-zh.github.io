@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    font-family: 'Sora', system-ui, sans-serif;
+    background: radial-gradient(1200px 600px at 80% -10%, #1f7f73 0%, #15514a 45%, #0f3b36 100%);
+    color: #f8fafc;
+    padding: 64px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(900px 500px at 75% 0%, #000 0%, transparent 70%);
+  }
+  .top { display: flex; align-items: center; gap: 14px; position: relative; }
+  .logo { font-size: 30px; }
+  .brand { font-size: 26px; font-weight: 700; letter-spacing: -.01em; }
+  .badge {
+    margin-left: auto; font-size: 18px; font-weight: 600;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+    padding: 8px 16px; border-radius: 999px; backdrop-filter: blur(4px);
+  }
+  h1 {
+    position: relative;
+    font-size: 66px; font-weight: 800; line-height: 1.05; letter-spacing: -.02em;
+    max-width: 1000px;
+  }
+  h1 .accent { color: #7dd3c8; }
+  .sub { position: relative; font-size: 27px; font-weight: 400; color: #cbece6; max-width: 940px; margin-top: 22px; line-height: 1.4; }
+  .stats { position: relative; display: flex; gap: 56px; }
+  .stat .n { font-size: 44px; font-weight: 800; letter-spacing: -.02em; }
+  .stat .l { font-size: 18px; color: #a7d8d0; margin-top: 4px; font-weight: 500; }
+  .foot { position: relative; display: flex; align-items: center; gap: 18px; font-size: 22px; }
+  .foot .author { font-weight: 600; }
+  .foot .dot { opacity: .5; }
+  .foot .url { font-family: 'JetBrains Mono', monospace; font-size: 20px; color: #9fd2ca; margin-left: auto; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+
+  <div class="top">
+    <span class="logo">📊</span>
+    <span class="brand">LLM Energy Benchmark</span>
+    <span class="badge">SSRN Working Paper</span>
+  </div>
+
+  <div>
+    <h1>How Much Energy Does<br><span class="accent">LLM Quantization</span> Actually Cost?</h1>
+    <div class="sub">Real GPU power measurements for INT8, NF4 &amp; FP16 inference — with perplexity accuracy across 4 NVIDIA architectures.</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">4</div><div class="l">GPU architectures</div></div>
+    <div class="stat"><div class="n">360+</div><div class="l">configurations</div></div>
+    <div class="stat"><div class="n">1.1–14B</div><div class="l">model sizes</div></div>
+    <div class="stat"><div class="n">NVML</div><div class="l">10&nbsp;Hz sampling</div></div>
+  </div>
+
+  <div class="foot">
+    <span class="author">Hongping Zhang</span>
+    <span class="dot">•</span>
+    <span>Open data, scripts &amp; methodology</span>
+    <span class="url">hongping-zh.github.io</span>
+  </div>
+</body>
+</html>
