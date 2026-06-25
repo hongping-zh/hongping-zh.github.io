@@ -40,11 +40,21 @@ jobs:
           cp ./bot-landing/privacy.html ./dist/bot-landing/
           cp ./bot-landing/terms.html ./dist/bot-landing/
           cp ./compare.html ./dist/
+          cp ./dataset.html ./dist/
+          cp ./figures.html ./dist/
+          cp ./takeaways.html ./dist/
+          cp ./methodology.html ./dist/
+          cp ./citation.html ./dist/
+          cp ./contact.html ./dist/
           if [ -d ./updates ]; then
             cp -r ./updates ./dist/
           fi
           if [ -d ./paper ]; then
             cp -r ./paper ./dist/
+          fi
+          if [ -d ./public/figures ]; then
+            mkdir -p ./dist/figures
+            cp -r ./public/figures/* ./dist/figures/
           fi
 
       - name: Setup Pages
